@@ -1,0 +1,153 @@
+{
+  "host": {
+    "machine": "x86_64",
+    "system": "Linux",
+    "python": "3.12.3",
+    "timestamp": "2026-09-26T01:01:09",
+    "cpu_model": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+    "hypervisor": true,
+    "iree_compile_version": "IREE (https://iree.dev):\n  IREE compiler version 3.11.0rc20260316 @ e4a3b0405d7d23554da26403658d0e8c3c5ecf25\n  LLVM version 23.0.0git\n  Optimized build"
+  },
+  "availability": {
+    "available": false,
+    "perf": "/usr/lib/linux-tools/6.8.0-142-generic/perf",
+    "reason": "hardware events not supported (no PMU exposed - typical of VMs). [    0.526191] Performance Events: unsupported CPU family 6 model 207 no PMU driver, software events only."
+  },
+  "rows": [
+    {
+      "shape": "128x128x128",
+      "variant": "scalar_naive",
+      "counters": {
+        "status": "software-events-only",
+        "reason": "hardware events not supported (no PMU exposed - typical of VMs). [    0.526191] Performance Events: unsupported CPU family 6 model 207 no PMU driver, software events only.",
+        "method": "per-invocation = (count[120x] - count[20x]) / 100",
+        "per_invocation": {
+          "task-clock": 2.2606,
+          "page-faults": -0.03,
+          "context-switches": -0.01
+        },
+        "notes": [],
+        "derived": {}
+      },
+      "static_asm": {
+        "instructions": 1029,
+        "vec_load": 36,
+        "fma_scalar": 14,
+        "vec_store": 12,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "widest_vector_bits": 128,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 0,
+        "vectorized": false
+      },
+      "analytic": {
+        "flops": 4194304,
+        "compulsory_bytes": 196608
+      }
+    },
+    {
+      "shape": "128x128x128",
+      "variant": "vec_heuristic",
+      "counters": {
+        "status": "software-events-only",
+        "reason": "hardware events not supported (no PMU exposed - typical of VMs). [    0.526191] Performance Events: unsupported CPU family 6 model 207 no PMU driver, software events only.",
+        "method": "per-invocation = (count[120x] - count[20x]) / 100",
+        "per_invocation": {
+          "task-clock": 0.033199999999999966,
+          "page-faults": -0.05,
+          "context-switches": 0.02
+        },
+        "notes": [],
+        "derived": {}
+      },
+      "static_asm": {
+        "instructions": 1206,
+        "vec_load": 50,
+        "fma_packed_512": 128,
+        "vec_store": 19,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 128,
+        "vectorized": true
+      },
+      "analytic": {
+        "flops": 4194304,
+        "compulsory_bytes": 196608
+      }
+    },
+    {
+      "shape": "128x128x128",
+      "variant": "vec_autotuned",
+      "counters": {
+        "status": "software-events-only",
+        "reason": "hardware events not supported (no PMU exposed - typical of VMs). [    0.526191] Performance Events: unsupported CPU family 6 model 207 no PMU driver, software events only.",
+        "method": "per-invocation = (count[120x] - count[20x]) / 100",
+        "per_invocation": {
+          "task-clock": 0.01620000000000001,
+          "page-faults": 0.0,
+          "context-switches": -0.1
+        },
+        "notes": [],
+        "derived": {}
+      },
+      "static_asm": {
+        "instructions": 1448,
+        "vec_load": 162,
+        "fma_packed_512": 256,
+        "vec_store": 27,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 256,
+        "vectorized": true
+      },
+      "analytic": {
+        "flops": 4194304,
+        "compulsory_bytes": 196608
+      }
+    },
+    {
+      "shape": "128x128x128",
+      "variant": "packed_late",
+      "counters": {
+        "status": "software-events-only",
+        "reason": "hardware events not supported (no PMU exposed - typical of VMs). [    0.526191] Performance Events: unsupported CPU family 6 model 207 no PMU driver, software events only.",
+        "method": "per-invocation = (count[120x] - count[20x]) / 100",
+        "per_invocation": {
+          "task-clock": 0.06619999999999998,
+          "page-faults": 16.01,
+          "context-switches": 0.08
+        },
+        "notes": [],
+        "derived": {}
+      },
+      "static_asm": {
+        "instructions": 1245,
+        "vec_load": 52,
+        "fma_packed_512": 16,
+        "vec_store": 60,
+        "vec_stack_access": 38,
+        "fp_scalar": 71,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 16,
+        "vectorized": true
+      },
+      "analytic": {
+        "flops": 4194304,
+        "compulsory_bytes": 196608
+      }
+    }
+  ]
+}

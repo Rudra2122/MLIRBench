@@ -1,0 +1,4229 @@
+{
+  "host": {
+    "machine": "x86_64",
+    "system": "Linux",
+    "python": "3.12.3",
+    "timestamp": "2026-09-26T00:59:54",
+    "cpu_model": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+    "hypervisor": true,
+    "iree_compile_version": "IREE (https://iree.dev):\n  IREE compiler version 3.11.0rc20260316 @ e4a3b0405d7d23554da26403658d0e8c3c5ecf25\n  LLVM version 23.0.0git\n  Optimized build"
+  },
+  "invocation_floor_ms": 0.0023231863689405835,
+  "rows": [
+    {
+      "shape": "128x128x128",
+      "label": "square",
+      "variant": "v1_generic_isa",
+      "title": "v1 build (generic ISA)",
+      "tile": "heuristic",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/128x128x128/v1_generic_isa_3b3714cb24/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/128x128x128/v1_generic_isa_3b3714cb24/dispatches",
+        "compile_seconds": 0.8,
+        "vmfb_bytes": 12907,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=generic",
+          "--iree-global-opt-data-tiling"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 4.281014312016832e-07,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 101,
+        "median_ms": 1.3323142079267056,
+        "p95_ms": 1.3650652356392752,
+        "min_ms": 1.2560259900940558,
+        "mean_ms": 1.3133474376229404,
+        "stdev_ms": 0.04485502478552501,
+        "cv_pct": 3.4153205389968413,
+        "gflops": 3.148134257704126,
+        "samples_ms": [
+          1.3323142079267056,
+          1.342058495046475,
+          1.26552157425999,
+          1.2560259900940558,
+          1.3708169207874752
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1222,
+        "fp_scalar": 97,
+        "widest_vector_bits": 128,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 0,
+        "vectorized": false
+      },
+      "roofline": {
+        "oi_flops_per_byte": 21.333333333333332,
+        "governing_level": "L2",
+        "governing_bw_gbs": 135.346,
+        "ridge_flops_per_byte": 1.2643225510912772,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 1.8397124009935226,
+        "roof_regime": "compute-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 1.8397124009935226,
+        "invocation_floor_ms": 0.002329240038614856,
+        "floor_share_pct": 0.17482663059185766
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "128x128x128",
+      "label": "square",
+      "variant": "scalar_naive",
+      "title": "Scalar, untiled",
+      "tile": "d0x0_v0x0x0",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/128x128x128/scalar_naive_ac41d96337/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/128x128x128/scalar_naive_ac41d96337/dispatches",
+        "compile_seconds": 0.425,
+        "vmfb_bytes": 10535,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-opt-data-tiling=false"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 5.347217170479745e-07,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 63,
+        "median_ms": 2.2575694603191883,
+        "p95_ms": 2.261721822219803,
+        "min_ms": 2.2075743015882776,
+        "mean_ms": 2.241046726985876,
+        "stdev_ms": 0.023160100947495516,
+        "cv_pct": 1.03345015829478,
+        "gflops": 1.8578848065241744,
+        "samples_ms": [
+          2.2075743015882776,
+          2.218557571434339,
+          2.262358936503814,
+          2.25917336508376,
+          2.2575694603191883
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1029,
+        "vec_load": 36,
+        "fma_scalar": 14,
+        "vec_store": 12,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "widest_vector_bits": 128,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 0,
+        "vectorized": false
+      },
+      "roofline": {
+        "oi_flops_per_byte": 21.333333333333332,
+        "governing_level": "L2",
+        "governing_bw_gbs": 135.346,
+        "ridge_flops_per_byte": 1.2643225510912772,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 1.0857140891674162,
+        "roof_regime": "compute-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 1.0857140891674162,
+        "invocation_floor_ms": 0.002329240038614856,
+        "floor_share_pct": 0.10317467876649672
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "128x128x128",
+      "label": "square",
+      "variant": "scalar_tiled",
+      "title": "Scalar, cache-tiled 64x64",
+      "tile": "d64x64_v0x0x0",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/128x128x128/scalar_tiled_bf1f5a157a/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/128x128x128/scalar_tiled_bf1f5a157a/dispatches",
+        "compile_seconds": 0.442,
+        "vmfb_bytes": 10639,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-opt-data-tiling=false"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 5.347217170479745e-07,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 62,
+        "median_ms": 2.2346825322554857,
+        "p95_ms": 2.2549216903272398,
+        "min_ms": 2.210489693549877,
+        "mean_ms": 2.2358293354856076,
+        "stdev_ms": 0.01552023834125386,
+        "cv_pct": 0.6941602426860978,
+        "gflops": 1.8769126886970608,
+        "samples_ms": [
+          2.2444945161275367,
+          2.2346825322554857,
+          2.210489693549877,
+          2.2319514516179733,
+          2.2575284838771656
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1057,
+        "vec_load": 36,
+        "fma_scalar": 14,
+        "vec_store": 12,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "widest_vector_bits": 128,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 0,
+        "vectorized": false
+      },
+      "roofline": {
+        "oi_flops_per_byte": 21.333333333333332,
+        "governing_level": "L2",
+        "governing_bw_gbs": 135.346,
+        "ridge_flops_per_byte": 1.2643225510912772,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 1.096833637424431,
+        "roof_regime": "compute-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 1.096833637424431,
+        "invocation_floor_ms": 0.002329240038614856,
+        "floor_share_pct": 0.10423136194938314
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "128x128x128",
+      "label": "square",
+      "variant": "vec_heuristic",
+      "title": "Tiled + vectorized (IREE heuristic)",
+      "tile": "heuristic",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/128x128x128/vec_heuristic_4c76e981d2/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/128x128x128/vec_heuristic_4c76e981d2/dispatches",
+        "compile_seconds": 0.0,
+        "vmfb_bytes": 12127,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-opt-data-tiling=false"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 5.347217170479745e-07,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 3435,
+        "median_ms": 0.039723327219505944,
+        "p95_ms": 0.04000792751022641,
+        "min_ms": 0.039349946725883024,
+        "mean_ms": 0.03973687033486773,
+        "stdev_ms": 0.00023302681005034524,
+        "cv_pct": 0.5864246682906787,
+        "gflops": 105.58793267298132,
+        "samples_ms": [
+          0.03990881368239705,
+          0.03966955807936889,
+          0.039349946725883024,
+          0.040032705967183745,
+          0.039723327219505944
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1206,
+        "vec_load": 50,
+        "fma_packed_512": 128,
+        "vec_store": 19,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 128,
+        "vectorized": true
+      },
+      "roofline": {
+        "oi_flops_per_byte": 21.333333333333332,
+        "governing_level": "L2",
+        "governing_bw_gbs": 135.346,
+        "ridge_flops_per_byte": 1.2643225510912772,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 61.70366738914647,
+        "roof_regime": "compute-roof",
+        "verdict": "near the compute roof",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 61.70366738914647,
+        "invocation_floor_ms": 0.002329240038614856,
+        "floor_share_pct": 5.863657960330912
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "128x128x128",
+      "label": "square",
+      "variant": "vec_autotuned",
+      "title": "Tiled + vectorized (autotuned tiles)",
+      "tile": "d16x64_v4x64x16",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/128x128x128/vec_autotuned_a8d8e17b57/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/128x128x128/vec_autotuned_a8d8e17b57/dispatches",
+        "compile_seconds": 0.486,
+        "vmfb_bytes": 13967,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-opt-data-tiling=false"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 5.347217170479745e-07,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 4757,
+        "median_ms": 0.030773584402375147,
+        "p95_ms": 0.03089905141834663,
+        "min_ms": 0.029912956905441757,
+        "mean_ms": 0.030615069834029528,
+        "stdev_ms": 0.0003623425444903169,
+        "cv_pct": 1.183543093171595,
+        "gflops": 136.29559511683917,
+        "samples_ms": [
+          0.029912956905441757,
+          0.030832785789087058,
+          0.03091561782566152,
+          0.030773584402375147,
+          0.03064040424758216
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1448,
+        "vec_load": 162,
+        "fma_packed_512": 256,
+        "vec_store": 27,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 256,
+        "vectorized": true
+      },
+      "roofline": {
+        "oi_flops_per_byte": 21.333333333333332,
+        "governing_level": "L2",
+        "governing_bw_gbs": 135.346,
+        "ridge_flops_per_byte": 1.2643225510912772,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 79.64866680117528,
+        "roof_regime": "compute-roof",
+        "verdict": "near the compute roof",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 79.64866680117528,
+        "invocation_floor_ms": 0.002329240038614856,
+        "floor_share_pct": 7.568959170174152
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "128x128x128",
+      "label": "square",
+      "variant": "packed_mmt4d",
+      "title": "+ packed layout (mmt4d, codegen)",
+      "tile": "heuristic",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/128x128x128/packed_mmt4d_1af5aad1c4/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/128x128x128/packed_mmt4d_1af5aad1c4/dispatches",
+        "compile_seconds": 0.588,
+        "vmfb_bytes": 14635,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-global-opt-data-tiling",
+          "--iree-llvmcpu-enable-ukernels=none"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 5.347217170479745e-07,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 2931,
+        "median_ms": 0.04758092153025521,
+        "p95_ms": 0.04769486578051527,
+        "min_ms": 0.04692014500197763,
+        "mean_ms": 0.04747390924678399,
+        "stdev_ms": 0.0002827841477413438,
+        "cv_pct": 0.595662232640975,
+        "gflops": 88.15096187939474,
+        "samples_ms": [
+          0.04758092153025521,
+          0.04772276799813852,
+          0.047562454793526325,
+          0.04758325691002226,
+          0.04692014500197763
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1274,
+        "vec_load": 68,
+        "vec_store": 60,
+        "fma_packed_512": 16,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 16,
+        "vectorized": true
+      },
+      "roofline": {
+        "oi_flops_per_byte": 21.333333333333332,
+        "governing_level": "L2",
+        "governing_bw_gbs": 135.346,
+        "ridge_flops_per_byte": 1.2643225510912772,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 51.513818806221764,
+        "roof_regime": "compute-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 51.513818806221764,
+        "invocation_floor_ms": 0.002329240038614856,
+        "floor_share_pct": 4.89532351140733
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "128x128x128",
+      "label": "square",
+      "variant": "packed_mmt4d_ukernel",
+      "title": "+ packed layout (mmt4d ukernel)",
+      "tile": "heuristic",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/128x128x128/packed_mmt4d_ukernel_31811d5882/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/128x128x128/packed_mmt4d_ukernel_31811d5882/dispatches",
+        "compile_seconds": 0.811,
+        "vmfb_bytes": 14763,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-global-opt-data-tiling",
+          "--iree-llvmcpu-enable-ukernels=mmt4d"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 5.347217170479745e-07,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 2844,
+        "median_ms": 0.04807002250529611,
+        "p95_ms": 0.049232509634604016,
+        "min_ms": 0.047190228550079205,
+        "mean_ms": 0.04817387376917661,
+        "stdev_ms": 0.0007445585380525674,
+        "cv_pct": 1.5455650123137137,
+        "gflops": 87.25404693825332,
+        "samples_ms": [
+          0.04948074894569005,
+          0.048239552390259885,
+          0.04788881645455781,
+          0.047190228550079205,
+          0.04807002250529611
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1289,
+        "vec_load": 68,
+        "vec_store": 60,
+        "fma_packed_512": 16,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 16,
+        "vectorized": true
+      },
+      "roofline": {
+        "oi_flops_per_byte": 21.333333333333332,
+        "governing_level": "L2",
+        "governing_bw_gbs": 135.346,
+        "ridge_flops_per_byte": 1.2643225510912772,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 50.9896780279763,
+        "roof_regime": "compute-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 50.9896780279763,
+        "invocation_floor_ms": 0.002329240038614856,
+        "floor_share_pct": 4.845514766210547
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "128x128x128",
+      "label": "square",
+      "variant": "packed_late",
+      "title": "+ packed layout (late materialization)",
+      "tile": "heuristic",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/128x128x128/packed_late_4fba6c00ef/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/128x128x128/packed_late_4fba6c00ef/dispatches",
+        "compile_seconds": 0.777,
+        "vmfb_bytes": 13691,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-dispatch-creation-data-tiling"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 5.347217170479745e-07,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 2061,
+        "median_ms": 0.06811094953787186,
+        "p95_ms": 0.06941972683176258,
+        "min_ms": 0.06727707423536834,
+        "mean_ms": 0.06833421736993558,
+        "stdev_ms": 0.0007750616291990469,
+        "cv_pct": 1.1342218569697764,
+        "gflops": 61.58046582022518,
+        "samples_ms": [
+          0.06801280446317606,
+          0.06811094953787186,
+          0.06727707423536834,
+          0.0686608000980779,
+          0.06960945851518374
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1245,
+        "vec_load": 52,
+        "fma_packed_512": 16,
+        "vec_store": 60,
+        "vec_stack_access": 38,
+        "fp_scalar": 71,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 16,
+        "vectorized": true
+      },
+      "roofline": {
+        "oi_flops_per_byte": 21.333333333333332,
+        "governing_level": "L2",
+        "governing_bw_gbs": 135.346,
+        "ridge_flops_per_byte": 1.2643225510912772,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 35.98650418138345,
+        "roof_regime": "compute-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 35.98650418138345,
+        "invocation_floor_ms": 0.002329240038614856,
+        "floor_share_pct": 3.419773258805802
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "512x512x512",
+      "label": "square",
+      "variant": "v1_generic_isa",
+      "title": "v1 build (generic ISA)",
+      "tile": "heuristic",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/512x512x512/v1_generic_isa_1021de470e/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/512x512x512/v1_generic_isa_1021de470e/dispatches",
+        "compile_seconds": 0.802,
+        "vmfb_bytes": 12971,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=generic",
+          "--iree-global-opt-data-tiling"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.0364641304357212e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 2,
+        "median_ms": 84.66068849992325,
+        "p95_ms": 85.54410049999888,
+        "min_ms": 84.24892250002358,
+        "mean_ms": 84.73352279999062,
+        "stdev_ms": 0.542345740941501,
+        "cv_pct": 0.6400604188517948,
+        "gflops": 3.170721390958725,
+        "samples_ms": [
+          85.75411900000063,
+          84.24892250002358,
+          84.29985750001379,
+          84.66068849992325,
+          84.70402649999187
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1242,
+        "fp_scalar": 97,
+        "widest_vector_bits": 128,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 0,
+        "vectorized": false
+      },
+      "roofline": {
+        "oi_flops_per_byte": 85.33333333333333,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 1.8529119108459655,
+        "roof_regime": "compute-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 1.8529119108459655,
+        "invocation_floor_ms": 0.002329240038614856,
+        "floor_share_pct": 0.002751265173820276
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "512x512x512",
+      "label": "square",
+      "variant": "scalar_naive",
+      "title": "Scalar, untiled",
+      "tile": "d0x0_v0x0x0",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/512x512x512/scalar_naive_45c014acc0/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/512x512x512/scalar_naive_45c014acc0/dispatches",
+        "compile_seconds": 0.43,
+        "vmfb_bytes": 10535,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-opt-data-tiling=false"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.0364641304357212e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 1,
+        "median_ms": 180.95225100012158,
+        "p95_ms": 182.7318384000364,
+        "min_ms": 180.21387500004948,
+        "mean_ms": 181.2737072000573,
+        "stdev_ms": 0.9733105479116323,
+        "cv_pct": 0.5369286936011449,
+        "gflops": 1.4834601643050003,
+        "samples_ms": [
+          183.066947000043,
+          180.21387500004948,
+          180.7440590000624,
+          181.39140400000997,
+          180.95225100012158
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1029,
+        "vec_load": 36,
+        "fma_scalar": 14,
+        "vec_store": 12,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "widest_vector_bits": 128,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 0,
+        "vectorized": false
+      },
+      "roofline": {
+        "oi_flops_per_byte": 85.33333333333333,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 0.8669071384020665,
+        "roof_regime": "compute-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 0.8669071384020665,
+        "invocation_floor_ms": 0.002329240038614856,
+        "floor_share_pct": 0.0012872125247081292
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "512x512x512",
+      "label": "square",
+      "variant": "scalar_tiled",
+      "title": "Scalar, cache-tiled 64x64",
+      "tile": "d64x64_v0x0x0",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/512x512x512/scalar_tiled_8e79407eed/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/512x512x512/scalar_tiled_8e79407eed/dispatches",
+        "compile_seconds": 0.441,
+        "vmfb_bytes": 10639,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-opt-data-tiling=false"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.0364641304357212e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 1,
+        "median_ms": 182.66030500001307,
+        "p95_ms": 183.75115820003884,
+        "min_ms": 181.2841579999258,
+        "mean_ms": 182.5848993999898,
+        "stdev_ms": 0.8780743275064762,
+        "cv_pct": 0.48091289607848325,
+        "gflops": 1.469588348710908,
+        "samples_ms": [
+          184.01737600004253,
+          182.6862870000241,
+          182.27637099994354,
+          182.66030500001307,
+          181.2841579999258
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1055,
+        "vec_load": 36,
+        "fma_scalar": 14,
+        "vec_store": 12,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "widest_vector_bits": 128,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 0,
+        "vectorized": false
+      },
+      "roofline": {
+        "oi_flops_per_byte": 85.33333333333333,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 0.8588007016736157,
+        "roof_regime": "compute-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 0.8588007016736157,
+        "invocation_floor_ms": 0.002329240038614856,
+        "floor_share_pct": 0.0012751758180928742
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "512x512x512",
+      "label": "square",
+      "variant": "vec_heuristic",
+      "title": "Tiled + vectorized (IREE heuristic)",
+      "tile": "heuristic",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/512x512x512/vec_heuristic_a936e7e920/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/512x512x512/vec_heuristic_a936e7e920/dispatches",
+        "compile_seconds": 0.0,
+        "vmfb_bytes": 12367,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-opt-data-tiling=false"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.0364641304357212e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 46,
+        "median_ms": 2.8382115434698356,
+        "p95_ms": 2.856596908700636,
+        "min_ms": 2.7943813043481462,
+        "mean_ms": 2.833603439129369,
+        "stdev_ms": 0.023365836967278796,
+        "cv_pct": 0.8245979887170803,
+        "gflops": 94.57908682586292,
+        "samples_ms": [
+          2.8562727173825015,
+          2.8224736739161926,
+          2.8566779565301696,
+          2.8382115434698356,
+          2.7943813043481462
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1250,
+        "vec_load": 50,
+        "fma_packed_512": 128,
+        "vec_store": 19,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 128,
+        "vectorized": true
+      },
+      "roofline": {
+        "oi_flops_per_byte": 85.33333333333333,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 55.270298108275966,
+        "roof_regime": "compute-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 55.270298108275966,
+        "invocation_floor_ms": 0.002329240038614856,
+        "floor_share_pct": 0.08206717515380337
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "512x512x512",
+      "label": "square",
+      "variant": "vec_autotuned",
+      "title": "Tiled + vectorized (autotuned tiles)",
+      "tile": "d16x128_v8x32x4",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/512x512x512/vec_autotuned_f05785a535/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/512x512x512/vec_autotuned_f05785a535/dispatches",
+        "compile_seconds": 0.468,
+        "vmfb_bytes": 11615,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-opt-data-tiling=false"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.0364641304357212e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 79,
+        "median_ms": 1.728579227857798,
+        "p95_ms": 1.747485043033003,
+        "min_ms": 1.72069553165001,
+        "mean_ms": 1.7321127341796156,
+        "stdev_ms": 0.011086970507275294,
+        "cv_pct": 0.6400836555552744,
+        "gflops": 155.29253833083948,
+        "samples_ms": [
+          1.728579227857798,
+          1.7403726582274373,
+          1.7492631392343942,
+          1.721653113928438,
+          1.72069553165001
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1181,
+        "vec_load": 74,
+        "fma_packed_512": 64,
+        "vec_store": 27,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 64,
+        "vectorized": true
+      },
+      "roofline": {
+        "oi_flops_per_byte": 85.33333333333333,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 90.75013489334417,
+        "roof_regime": "compute-roof",
+        "verdict": "near the compute roof",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 90.75013489334417,
+        "invocation_floor_ms": 0.002329240038614856,
+        "floor_share_pct": 0.13474881573704017
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "512x512x512",
+      "label": "square",
+      "variant": "packed_mmt4d",
+      "title": "+ packed layout (mmt4d, codegen)",
+      "tile": "heuristic",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/512x512x512/packed_mmt4d_e058918398/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/512x512x512/packed_mmt4d_e058918398/dispatches",
+        "compile_seconds": 0.618,
+        "vmfb_bytes": 14883,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-global-opt-data-tiling",
+          "--iree-llvmcpu-enable-ukernels=none"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.0364641304357212e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 53,
+        "median_ms": 2.5563846981129865,
+        "p95_ms": 2.6406071849050763,
+        "min_ms": 2.544502660391186,
+        "mean_ms": 2.582638528302888,
+        "stdev_ms": 0.04032915770591637,
+        "cv_pct": 1.561548674502955,
+        "gflops": 105.00589218756765,
+        "samples_ms": [
+          2.544502660391186,
+          2.6478285471688103,
+          2.6117217358501397,
+          2.552754999991315,
+          2.5563846981129865
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1311,
+        "vec_load": 68,
+        "vec_store": 60,
+        "fma_packed_512": 16,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 16,
+        "vectorized": true
+      },
+      "roofline": {
+        "oi_flops_per_byte": 85.33333333333333,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 61.36353351579739,
+        "roof_regime": "compute-roof",
+        "verdict": "near the compute roof",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 61.36353351579739,
+        "invocation_floor_ms": 0.002329240038614856,
+        "floor_share_pct": 0.09111461355304626
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "512x512x512",
+      "label": "square",
+      "variant": "packed_mmt4d_ukernel",
+      "title": "+ packed layout (mmt4d ukernel)",
+      "tile": "heuristic",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/512x512x512/packed_mmt4d_ukernel_0b4aa21d5c/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/512x512x512/packed_mmt4d_ukernel_0b4aa21d5c/dispatches",
+        "compile_seconds": 0.844,
+        "vmfb_bytes": 15019,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-global-opt-data-tiling",
+          "--iree-llvmcpu-enable-ukernels=mmt4d"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.0364641304357212e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 52,
+        "median_ms": 2.568716980763296,
+        "p95_ms": 2.5753276115507946,
+        "min_ms": 2.551582230779559,
+        "mean_ms": 2.5674102653891415,
+        "stdev_ms": 0.008612382259290978,
+        "cv_pct": 0.335450176210369,
+        "gflops": 104.50176411425217,
+        "samples_ms": [
+          2.5746649038532827,
+          2.568716980763296,
+          2.566593923074396,
+          2.5754932884751724,
+          2.551582230779559
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1322,
+        "vec_load": 68,
+        "vec_store": 60,
+        "fma_packed_512": 16,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 16,
+        "vectorized": true
+      },
+      "roofline": {
+        "oi_flops_per_byte": 85.33333333333333,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 61.0689302389842,
+        "roof_regime": "compute-roof",
+        "verdict": "near the compute roof",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 61.0689302389842,
+        "invocation_floor_ms": 0.002329240038614856,
+        "floor_share_pct": 0.09067717681855011
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "512x512x512",
+      "label": "square",
+      "variant": "packed_late",
+      "title": "+ packed layout (late materialization)",
+      "tile": "heuristic",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/512x512x512/packed_late_e02a30c47b/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/512x512x512/packed_late_e02a30c47b/dispatches",
+        "compile_seconds": 0.789,
+        "vmfb_bytes": 13835,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-dispatch-creation-data-tiling"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.0364641304357212e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 56,
+        "median_ms": 2.437164946444779,
+        "p95_ms": 2.4512656678621982,
+        "min_ms": 2.4157960893031065,
+        "mean_ms": 2.433186028578201,
+        "stdev_ms": 0.014291874884496094,
+        "cv_pct": 0.5873728813430412,
+        "gflops": 110.1425065183138,
+        "samples_ms": [
+          2.437164946444779,
+          2.453930696434879,
+          2.440605553571475,
+          2.4184328571367684,
+          2.4157960893031065
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1268,
+        "vec_load": 52,
+        "fma_packed_512": 16,
+        "vec_store": 60,
+        "vec_stack_access": 38,
+        "fp_scalar": 71,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 16,
+        "vectorized": true
+      },
+      "roofline": {
+        "oi_flops_per_byte": 85.33333333333333,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 64.36527750440554,
+        "roof_regime": "compute-roof",
+        "verdict": "near the compute roof",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 64.36527750440554,
+        "invocation_floor_ms": 0.002329240038614856,
+        "floor_share_pct": 0.0955717027693444
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "1024x1024x1024",
+      "label": "square",
+      "variant": "v1_generic_isa",
+      "title": "v1 build (generic ISA)",
+      "tile": "heuristic",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/1024x1024x1024/v1_generic_isa_e8ff947b23/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/1024x1024x1024/v1_generic_isa_e8ff947b23/dispatches",
+        "compile_seconds": 0.795,
+        "vmfb_bytes": 12979,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=generic",
+          "--iree-global-opt-data-tiling"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.2942250627971193e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 1,
+        "median_ms": 723.1467310000426,
+        "p95_ms": 735.2163899999823,
+        "min_ms": 715.6233189999739,
+        "mean_ms": 725.569244999997,
+        "stdev_ms": 7.504819086385585,
+        "cv_pct": 1.0343353357522225,
+        "gflops": 2.969637496708636,
+        "samples_ms": [
+          732.39004200002,
+          735.9229769999729,
+          723.1467310000426,
+          720.7631559999754,
+          715.6233189999739
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1236,
+        "fp_scalar": 97,
+        "widest_vector_bits": 128,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 0,
+        "vectorized": false
+      },
+      "roofline": {
+        "oi_flops_per_byte": 170.66666666666666,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 1.7354021404203084,
+        "roof_regime": "compute-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 1.7354021404203084,
+        "invocation_floor_ms": 0.002293245715419767,
+        "floor_share_pct": 0.0003171203874832467
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "1024x1024x1024",
+      "label": "square",
+      "variant": "scalar_naive",
+      "title": "Scalar, untiled",
+      "tile": "d0x0_v0x0x0",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/1024x1024x1024/scalar_naive_04730aa9ae/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/1024x1024x1024/scalar_naive_04730aa9ae/dispatches",
+        "compile_seconds": 0.426,
+        "vmfb_bytes": 10559,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-opt-data-tiling=false"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.2808487894257928e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 1,
+        "median_ms": 3746.2855009999885,
+        "p95_ms": 4156.512928400025,
+        "min_ms": 3664.376071999982,
+        "mean_ms": 3830.134696999994,
+        "stdev_ms": 213.56223546964026,
+        "cv_pct": 5.5758413832525475,
+        "gflops": 0.5732301095116152,
+        "samples_ms": [
+          4249.86590900005,
+          3783.1010059999244,
+          3746.2855009999885,
+          3707.0449970000254,
+          3664.376071999982
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1029,
+        "vec_load": 36,
+        "fma_scalar": 14,
+        "vec_store": 12,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "widest_vector_bits": 128,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 0,
+        "vectorized": false
+      },
+      "roofline": {
+        "oi_flops_per_byte": 170.66666666666666,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 0.3349852499176695,
+        "roof_regime": "compute-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 0.3349852499176695,
+        "invocation_floor_ms": 0.002293245715419767,
+        "floor_share_pct": 6.121385342381501e-05
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "1024x1024x1024",
+      "label": "square",
+      "variant": "scalar_tiled",
+      "title": "Scalar, cache-tiled 64x64",
+      "tile": "d64x64_v0x0x0",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/1024x1024x1024/scalar_tiled_1df5152efd/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/1024x1024x1024/scalar_tiled_1df5152efd/dispatches",
+        "compile_seconds": 0.429,
+        "vmfb_bytes": 10647,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-opt-data-tiling=false"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.2808487894257928e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 1,
+        "median_ms": 4586.010031000001,
+        "p95_ms": 4634.070215999941,
+        "min_ms": 4531.212567000011,
+        "mean_ms": 4581.325171199956,
+        "stdev_ms": 38.82747576687201,
+        "cv_pct": 0.8475162603815392,
+        "gflops": 0.468268414914856,
+        "samples_ms": [
+          4644.0605279999545,
+          4551.233761999924,
+          4531.212567000011,
+          4594.108967999887,
+          4586.010031000001
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1055,
+        "vec_load": 36,
+        "fma_scalar": 14,
+        "vec_store": 12,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "widest_vector_bits": 128,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 0,
+        "vectorized": false
+      },
+      "roofline": {
+        "oi_flops_per_byte": 170.66666666666666,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 0.2736475446700615,
+        "roof_regime": "compute-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 0.2736475446700615,
+        "invocation_floor_ms": 0.002293245715419767,
+        "floor_share_pct": 5.000524856941305e-05
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "1024x1024x1024",
+      "label": "square",
+      "variant": "vec_heuristic",
+      "title": "Tiled + vectorized (IREE heuristic)",
+      "tile": "heuristic",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/1024x1024x1024/vec_heuristic_be92b704c8/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/1024x1024x1024/vec_heuristic_be92b704c8/dispatches",
+        "compile_seconds": 0.547,
+        "vmfb_bytes": 12415,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-opt-data-tiling=false"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.2808487894257928e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 2,
+        "median_ms": 54.15139299998373,
+        "p95_ms": 55.34331370002974,
+        "min_ms": 53.55404950000775,
+        "mean_ms": 54.39213930001188,
+        "stdev_ms": 0.6585385097965775,
+        "cv_pct": 1.2107236785894055,
+        "gflops": 39.657034270579985,
+        "samples_ms": [
+          54.122397500009356,
+          53.55404950000775,
+          54.15139299998373,
+          54.6049525000285,
+          55.52790400003005
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1250,
+        "vec_load": 50,
+        "fma_packed_512": 128,
+        "vec_store": 19,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 128,
+        "vectorized": true
+      },
+      "roofline": {
+        "oi_flops_per_byte": 170.66666666666666,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 23.174849533710056,
+        "roof_regime": "compute-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 23.174849533710056,
+        "invocation_floor_ms": 0.002293245715419767,
+        "floor_share_pct": 0.004234878529201375
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "1024x1024x1024",
+      "label": "square",
+      "variant": "packed_mmt4d",
+      "title": "+ packed layout (mmt4d, codegen)",
+      "tile": "heuristic",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/1024x1024x1024/packed_mmt4d_6ad7fa5dd0/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/1024x1024x1024/packed_mmt4d_6ad7fa5dd0/dispatches",
+        "compile_seconds": 0.617,
+        "vmfb_bytes": 14819,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-global-opt-data-tiling",
+          "--iree-llvmcpu-enable-ukernels=none"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.2808487894257928e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 5,
+        "median_ms": 21.30683319999207,
+        "p95_ms": 22.02419515998372,
+        "min_ms": 21.11321299996689,
+        "mean_ms": 21.481100639985016,
+        "stdev_ms": 0.38381174574869054,
+        "cv_pct": 1.7867415277328094,
+        "gflops": 100.78849483839761,
+        "samples_ms": [
+          22.08948199997849,
+          21.11321299996689,
+          21.132927199982987,
+          21.30683319999207,
+          21.763047800004642
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1288,
+        "vec_load": 68,
+        "vec_store": 60,
+        "fma_packed_512": 16,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 16,
+        "vectorized": true
+      },
+      "roofline": {
+        "oi_flops_per_byte": 170.66666666666666,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 58.89896321222855,
+        "roof_regime": "compute-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 58.89896321222855,
+        "invocation_floor_ms": 0.002293245715419767,
+        "floor_share_pct": 0.010762958971399937
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "1024x1024x1024",
+      "label": "square",
+      "variant": "packed_mmt4d_ukernel",
+      "title": "+ packed layout (mmt4d ukernel)",
+      "tile": "heuristic",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/1024x1024x1024/packed_mmt4d_ukernel_51558b1fec/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/1024x1024x1024/packed_mmt4d_ukernel_51558b1fec/dispatches",
+        "compile_seconds": 0.856,
+        "vmfb_bytes": 14931,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-global-opt-data-tiling",
+          "--iree-llvmcpu-enable-ukernels=mmt4d"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.2808487894257928e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 5,
+        "median_ms": 21.204618600017966,
+        "p95_ms": 21.91641784001149,
+        "min_ms": 21.0546653999927,
+        "mean_ms": 21.3766672400061,
+        "stdev_ms": 0.35226862098800743,
+        "cv_pct": 1.6479117957580507,
+        "gflops": 101.27433501672039,
+        "samples_ms": [
+          22.04720540000835,
+          21.204618600017966,
+          21.183579199987435,
+          21.0546653999927,
+          21.393267600024046
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1301,
+        "vec_load": 68,
+        "vec_store": 60,
+        "fma_packed_512": 16,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 16,
+        "vectorized": true
+      },
+      "roofline": {
+        "oi_flops_per_byte": 170.66666666666666,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 59.18287937583369,
+        "roof_regime": "compute-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 59.18287937583369,
+        "invocation_floor_ms": 0.002293245715419767,
+        "floor_share_pct": 0.01081484066597559
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "1024x1024x1024",
+      "label": "square",
+      "variant": "packed_late",
+      "title": "+ packed layout (late materialization)",
+      "tile": "heuristic",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/1024x1024x1024/packed_late_c78d0974c0/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/1024x1024x1024/packed_late_c78d0974c0/dispatches",
+        "compile_seconds": 0.793,
+        "vmfb_bytes": 13843,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-dispatch-creation-data-tiling"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.2808487894257928e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 5,
+        "median_ms": 20.632334000015362,
+        "p95_ms": 20.82316392001303,
+        "min_ms": 20.11777519999214,
+        "mean_ms": 20.500784880009633,
+        "stdev_ms": 0.2892640977882903,
+        "cv_pct": 1.41099035710751,
+        "gflops": 104.0834084984472,
+        "samples_ms": [
+          20.854179800016936,
+          20.11777519999214,
+          20.20053500002632,
+          20.632334000015362,
+          20.699100399997405
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1249,
+        "vec_load": 52,
+        "fma_packed_512": 16,
+        "vec_store": 60,
+        "vec_stack_access": 38,
+        "fp_scalar": 71,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 16,
+        "vectorized": true
+      },
+      "roofline": {
+        "oi_flops_per_byte": 170.66666666666666,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 60.82445082628503,
+        "roof_regime": "compute-roof",
+        "verdict": "near the compute roof",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 60.82445082628503,
+        "invocation_floor_ms": 0.002293245715419767,
+        "floor_share_pct": 0.011114814811635268
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "1024x1024x1024",
+      "label": "square",
+      "variant": "vec_autotuned",
+      "title": "Tiled + vectorized (autotuned tiles)",
+      "tile": "d256x256_v16x32x4",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/1024x1024x1024/vec_autotuned_e9d7f77a85/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/1024x1024x1024/vec_autotuned_e9d7f77a85/dispatches",
+        "compile_seconds": 0.517,
+        "vmfb_bytes": 13839,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-opt-data-tiling=false"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.2808487894257928e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 5,
+        "median_ms": 25.057697399984136,
+        "p95_ms": 25.327206759993715,
+        "min_ms": 24.72921200003384,
+        "mean_ms": 25.022850359996482,
+        "stdev_ms": 0.22405003571680548,
+        "cv_pct": 0.8953817510533879,
+        "gflops": 85.70155564259306,
+        "samples_ms": [
+          25.057697399984136,
+          24.862083199968765,
+          24.72921200003384,
+          25.075001000004704,
+          25.390258199990967
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1508,
+        "vec_store": 68,
+        "vec_stack_access": 72,
+        "vec_load": 131,
+        "fma_packed_512": 128,
+        "fp_scalar": 71,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 128,
+        "vectorized": true
+      },
+      "roofline": {
+        "oi_flops_per_byte": 170.66666666666666,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 50.08243035196911,
+        "roof_regime": "compute-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 50.08243035196911,
+        "invocation_floor_ms": 0.0022908839345821895,
+        "floor_share_pct": 0.009142435946982263
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "128x768x3072",
+      "label": "FFN up, 128 tok",
+      "variant": "v1_generic_isa",
+      "title": "v1 build (generic ISA)",
+      "tile": "heuristic",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/128x768x3072/v1_generic_isa_598c112e31/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/128x768x3072/v1_generic_isa_598c112e31/dispatches",
+        "compile_seconds": 0.795,
+        "vmfb_bytes": 13179,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=generic",
+          "--iree-global-opt-data-tiling"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.2366519228064228e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 1,
+        "median_ms": 211.10656100006508,
+        "p95_ms": 214.99020639992068,
+        "min_ms": 207.6360889999478,
+        "mean_ms": 211.84926979997272,
+        "stdev_ms": 2.792676300257309,
+        "cv_pct": 1.3182373972278232,
+        "gflops": 2.8610184976667483,
+        "samples_ms": [
+          214.86769199998434,
+          210.6151719999616,
+          207.6360889999478,
+          211.10656100006508,
+          215.02083499990476
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1264,
+        "fp_scalar": 97,
+        "widest_vector_bits": 128,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 0,
+        "vectorized": false
+      },
+      "roofline": {
+        "oi_flops_per_byte": 52.96551724137931,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 1.671927172975116,
+        "roof_regime": "compute-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 1.671927172975116,
+        "invocation_floor_ms": 0.0024205664124319244,
+        "floor_share_pct": 0.0011466088031395565
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "128x768x3072",
+      "label": "FFN up, 128 tok",
+      "variant": "scalar_naive",
+      "title": "Scalar, untiled",
+      "tile": "d0x0_v0x0x0",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/128x768x3072/scalar_naive_8348c32a4d/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/128x768x3072/scalar_naive_8348c32a4d/dispatches",
+        "compile_seconds": 0.426,
+        "vmfb_bytes": 10639,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-opt-data-tiling=false"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.1733574978266704e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 1,
+        "median_ms": 1136.645260000023,
+        "p95_ms": 1151.6191587999856,
+        "min_ms": 1121.2187239999594,
+        "mean_ms": 1134.5118917999798,
+        "stdev_ms": 12.390382798122353,
+        "cv_pct": 1.092133355998955,
+        "gflops": 0.5313705139631584,
+        "samples_ms": [
+          1155.218235999996,
+          1137.2228499999437,
+          1136.645260000023,
+          1121.2187239999594,
+          1122.254388999977
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1029,
+        "vec_load": 36,
+        "fma_scalar": 14,
+        "vec_store": 12,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "widest_vector_bits": 128,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 0,
+        "vectorized": false
+      },
+      "roofline": {
+        "oi_flops_per_byte": 52.96551724137931,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 0.3105232636340124,
+        "roof_regime": "compute-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 0.3105232636340124,
+        "invocation_floor_ms": 0.0024205664124319244,
+        "floor_share_pct": 0.0002129570673995399
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "128x768x3072",
+      "label": "FFN up, 128 tok",
+      "variant": "scalar_tiled",
+      "title": "Scalar, cache-tiled 64x64",
+      "tile": "d64x64_v0x0x0",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/128x768x3072/scalar_tiled_7095eba57c/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/128x768x3072/scalar_tiled_7095eba57c/dispatches",
+        "compile_seconds": 0.433,
+        "vmfb_bytes": 10719,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-opt-data-tiling=false"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.1733574978266704e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 1,
+        "median_ms": 1178.932414999963,
+        "p95_ms": 1188.7113286000385,
+        "min_ms": 1158.873547999974,
+        "mean_ms": 1176.556206999976,
+        "stdev_ms": 10.574602936854493,
+        "cv_pct": 0.8987758403670306,
+        "gflops": 0.5123107722846174,
+        "samples_ms": [
+          1178.932414999963,
+          1182.3829429999932,
+          1190.2934250000499,
+          1158.873547999974,
+          1172.2987039998998
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1058,
+        "vec_load": 36,
+        "fma_scalar": 14,
+        "vec_store": 12,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "widest_vector_bits": 128,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 0,
+        "vectorized": false
+      },
+      "roofline": {
+        "oi_flops_per_byte": 52.96551724137931,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 0.29938509726136325,
+        "roof_regime": "compute-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 0.29938509726136325,
+        "invocation_floor_ms": 0.0024205664124319244,
+        "floor_share_pct": 0.00020531850525392503
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "128x768x3072",
+      "label": "FFN up, 128 tok",
+      "variant": "vec_heuristic",
+      "title": "Tiled + vectorized (IREE heuristic)",
+      "tile": "heuristic",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/128x768x3072/vec_heuristic_39d83a050d/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/128x768x3072/vec_heuristic_39d83a050d/dispatches",
+        "compile_seconds": 0.0,
+        "vmfb_bytes": 12487,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-opt-data-tiling=false"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.1733574978266704e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 7,
+        "median_ms": 14.64136014286461,
+        "p95_ms": 14.65101197144187,
+        "min_ms": 14.444810285713825,
+        "mean_ms": 14.581511000009025,
+        "stdev_ms": 0.08327079966140159,
+        "cv_pct": 0.5710711301548246,
+        "gflops": 41.25161666037881,
+        "samples_ms": [
+          14.652506285723835,
+          14.523843571428838,
+          14.64136014286461,
+          14.645034714314013,
+          14.444810285713825
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1260,
+        "vec_load": 50,
+        "fma_packed_512": 128,
+        "vec_store": 19,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 128,
+        "vectorized": true
+      },
+      "roofline": {
+        "oi_flops_per_byte": 52.96551724137931,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 24.10669447956639,
+        "roof_regime": "compute-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 24.10669447956639,
+        "invocation_floor_ms": 0.0024205664124319244,
+        "floor_share_pct": 0.01653238762528203
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "128x768x3072",
+      "label": "FFN up, 128 tok",
+      "variant": "vec_autotuned",
+      "title": "Tiled + vectorized (autotuned tiles)",
+      "tile": "d32x256_v8x64x2",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/128x768x3072/vec_autotuned_03a18a7501/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/128x768x3072/vec_autotuned_03a18a7501/dispatches",
+        "compile_seconds": 0.462,
+        "vmfb_bytes": 12351,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-opt-data-tiling=false"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.1733574978266704e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 13,
+        "median_ms": 8.082006615381943,
+        "p95_ms": 8.140016984624218,
+        "min_ms": 8.04167746154095,
+        "mean_ms": 8.083464584620533,
+        "stdev_ms": 0.038716892997167844,
+        "cv_pct": 0.47896409505931364,
+        "gflops": 74.73141321741629,
+        "samples_ms": [
+          8.082639692317501,
+          8.04167746154095,
+          8.154361307700897,
+          8.082006615381943,
+          8.05663784616137
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1292,
+        "vec_store": 66,
+        "vec_stack_access": 68,
+        "vec_load": 81,
+        "fma_packed_512": 64,
+        "fp_scalar": 71,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 64,
+        "vectorized": true
+      },
+      "roofline": {
+        "oi_flops_per_byte": 52.96551724137931,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 43.67167864693187,
+        "roof_regime": "compute-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 43.67167864693187,
+        "invocation_floor_ms": 0.0024205664124319244,
+        "floor_share_pct": 0.029950067200205235
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "128x768x3072",
+      "label": "FFN up, 128 tok",
+      "variant": "packed_mmt4d",
+      "title": "+ packed layout (mmt4d, codegen)",
+      "tile": "heuristic",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/128x768x3072/packed_mmt4d_1b96e37684/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/128x768x3072/packed_mmt4d_1b96e37684/dispatches",
+        "compile_seconds": 0.616,
+        "vmfb_bytes": 15011,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-global-opt-data-tiling",
+          "--iree-llvmcpu-enable-ukernels=none"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.1733574978266704e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 20,
+        "median_ms": 6.674093250001079,
+        "p95_ms": 6.743948939993061,
+        "min_ms": 6.501847449982279,
+        "mean_ms": 6.6465853099953165,
+        "stdev_ms": 0.08603600305123371,
+        "cv_pct": 1.294439159937516,
+        "gflops": 90.4961548147237,
+        "samples_ms": [
+          6.674093250001079,
+          6.501847449982279,
+          6.611730900004886,
+          6.687091699996017,
+          6.758163249992322
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1323,
+        "vec_load": 68,
+        "vec_store": 60,
+        "fma_packed_512": 16,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 16,
+        "vectorized": true
+      },
+      "roofline": {
+        "oi_flops_per_byte": 52.96551724137931,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 52.884306902556496,
+        "roof_regime": "compute-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 52.884306902556496,
+        "invocation_floor_ms": 0.0024205664124319244,
+        "floor_share_pct": 0.03626809398312697
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "128x768x3072",
+      "label": "FFN up, 128 tok",
+      "variant": "packed_mmt4d_ukernel",
+      "title": "+ packed layout (mmt4d ukernel)",
+      "tile": "heuristic",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/128x768x3072/packed_mmt4d_ukernel_6997203056/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/128x768x3072/packed_mmt4d_ukernel_6997203056/dispatches",
+        "compile_seconds": 0.839,
+        "vmfb_bytes": 15115,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-global-opt-data-tiling",
+          "--iree-llvmcpu-enable-ukernels=mmt4d"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.1733574978266704e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 20,
+        "median_ms": 6.640384999991511,
+        "p95_ms": 6.653713589995505,
+        "min_ms": 6.526690050003481,
+        "mean_ms": 6.61439196999595,
+        "stdev_ms": 0.04674465437606305,
+        "cv_pct": 0.7067112833364739,
+        "gflops": 90.95553586136528,
+        "samples_ms": [
+          6.640384999991511,
+          6.526690050003481,
+          6.640743549979788,
+          6.656956099999434,
+          6.6071851500055345
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1341,
+        "vec_load": 68,
+        "vec_store": 60,
+        "fma_packed_512": 16,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 16,
+        "vectorized": true
+      },
+      "roofline": {
+        "oi_flops_per_byte": 52.96551724137931,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 53.152760830853765,
+        "roof_regime": "compute-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 53.152760830853765,
+        "invocation_floor_ms": 0.0024205664124319244,
+        "floor_share_pct": 0.036452199871468575
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "128x768x3072",
+      "label": "FFN up, 128 tok",
+      "variant": "packed_late",
+      "title": "+ packed layout (late materialization)",
+      "tile": "heuristic",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/128x768x3072/packed_late_0d9d182931/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/128x768x3072/packed_late_0d9d182931/dispatches",
+        "compile_seconds": 0.786,
+        "vmfb_bytes": 14075,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-dispatch-creation-data-tiling"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.1733574978266704e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 21,
+        "median_ms": 6.554473571430295,
+        "p95_ms": 6.641875352364054,
+        "min_ms": 6.480573047616374,
+        "mean_ms": 6.557660266661341,
+        "stdev_ms": 0.05948954450116935,
+        "cv_pct": 0.9071763720912743,
+        "gflops": 92.14771703903622,
+        "samples_ms": [
+          6.660106857122541,
+          6.554473571430295,
+          6.524198523807389,
+          6.568949333330108,
+          6.480573047616374
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1293,
+        "vec_load": 52,
+        "fma_packed_512": 16,
+        "vec_store": 60,
+        "vec_stack_access": 38,
+        "fp_scalar": 71,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 16,
+        "vectorized": true
+      },
+      "roofline": {
+        "oi_flops_per_byte": 52.96551724137931,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 171.121,
+        "pct_of_roof": 53.849449827336336,
+        "roof_regime": "compute-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 171.121,
+        "pct_of_peak": 53.849449827336336,
+        "invocation_floor_ms": 0.0024205664124319244,
+        "floor_share_pct": 0.036929989663589666
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "1x4096x4096",
+      "label": "decode GEMV, batch 1",
+      "variant": "v1_generic_isa",
+      "title": "v1 build (generic ISA)",
+      "tile": "heuristic",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/1x4096x4096/v1_generic_isa_39835283fd/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/1x4096x4096/v1_generic_isa_39835283fd/dispatches",
+        "compile_seconds": 0.702,
+        "vmfb_bytes": 10707,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=generic",
+          "--iree-global-opt-data-tiling"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.9751591407822927e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 3,
+        "median_ms": 41.11234866665351,
+        "p95_ms": 45.21592966659682,
+        "min_ms": 38.697081666668964,
+        "mean_ms": 41.397584466646244,
+        "stdev_ms": 2.582088482619396,
+        "cv_pct": 6.237292624403648,
+        "gflops": 0.8161643177349344,
+        "samples_ms": [
+          46.19022499991843,
+          41.318748333310396,
+          39.66951866667993,
+          38.697081666668964,
+          41.11234866665351
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1097,
+        "fp_scalar": 97,
+        "widest_vector_bits": 128,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 0,
+        "vectorized": false
+      },
+      "roofline": {
+        "oi_flops_per_byte": 0.4997559785261103,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 14.679582235236701,
+        "pct_of_roof": 5.5598606599023155,
+        "roof_regime": "L3-bandwidth-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 8.971119570522207,
+        "pct_of_peak": 0.4769515826432374,
+        "invocation_floor_ms": 0.0024205664124319244,
+        "floor_share_pct": 0.005887687011166213
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "1x4096x4096",
+      "label": "decode GEMV, batch 1",
+      "variant": "scalar_naive",
+      "title": "Scalar, untiled",
+      "tile": "d0x0_v0x0x0",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/1x4096x4096/scalar_naive_2037d57661/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/1x4096x4096/scalar_naive_2037d57661/dispatches",
+        "compile_seconds": 0.424,
+        "vmfb_bytes": 10471,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-opt-data-tiling=false"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 2.173296962269603e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 1,
+        "median_ms": 131.89234699996177,
+        "p95_ms": 135.5503574000295,
+        "min_ms": 130.1596600000039,
+        "mean_ms": 132.61530839999978,
+        "stdev_ms": 2.0091410880509275,
+        "cv_pct": 1.5150144521708406,
+        "gflops": 0.2544077254157114,
+        "samples_ms": [
+          131.6713129999698,
+          130.1596600000039,
+          131.89234699996177,
+          136.13285500002803,
+          133.22036700003537
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1014,
+        "vec_load": 36,
+        "fma_scalar": 14,
+        "vec_store": 12,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "widest_vector_bits": 128,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 0,
+        "vectorized": false
+      },
+      "roofline": {
+        "oi_flops_per_byte": 0.4997559785261103,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 14.679582235236701,
+        "pct_of_roof": 1.7330719726140025,
+        "roof_regime": "L3-bandwidth-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 8.971119570522207,
+        "pct_of_peak": 0.14867124748903487,
+        "invocation_floor_ms": 0.0024205664124319244,
+        "floor_share_pct": 0.0018352591848506765
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "1x4096x4096",
+      "label": "decode GEMV, batch 1",
+      "variant": "scalar_tiled",
+      "title": "Scalar, cache-tiled 64x64",
+      "tile": "d1x64_v0x0x0",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/1x4096x4096/scalar_tiled_3b38dc23a9/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/1x4096x4096/scalar_tiled_3b38dc23a9/dispatches",
+        "compile_seconds": 0.419,
+        "vmfb_bytes": 10551,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-opt-data-tiling=false"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 2.173296962269603e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 1,
+        "median_ms": 130.14291300009972,
+        "p95_ms": 133.20751819992438,
+        "min_ms": 124.50386800003344,
+        "mean_ms": 129.05578260001676,
+        "stdev_ms": 3.698505239761799,
+        "cv_pct": 2.865819078579838,
+        "gflops": 0.25782757759521097,
+        "samples_ms": [
+          132.2528030000285,
+          133.44619699989835,
+          124.50386800003344,
+          124.93313200002376,
+          130.14291300009972
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1021,
+        "vec_load": 36,
+        "fma_scalar": 14,
+        "vec_store": 12,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "widest_vector_bits": 128,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 0,
+        "vectorized": false
+      },
+      "roofline": {
+        "oi_flops_per_byte": 0.4997559785261103,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 14.679582235236701,
+        "pct_of_roof": 1.7563686313655753,
+        "roof_regime": "L3-bandwidth-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 8.971119570522207,
+        "pct_of_peak": 0.15066974690143872,
+        "invocation_floor_ms": 0.0024205664124319244,
+        "floor_share_pct": 0.001859929485695521
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "1x4096x4096",
+      "label": "decode GEMV, batch 1",
+      "variant": "vec_heuristic",
+      "title": "Tiled + vectorized (IREE heuristic)",
+      "tile": "heuristic",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/1x4096x4096/vec_heuristic_4709f7e453/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/1x4096x4096/vec_heuristic_4709f7e453/dispatches",
+        "compile_seconds": 0.456,
+        "vmfb_bytes": 10839,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-opt-data-tiling=false"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 2.173296962269603e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 10,
+        "median_ms": 11.299935400018057,
+        "p95_ms": 11.451560880000216,
+        "min_ms": 11.087376099999346,
+        "mean_ms": 11.294104420001077,
+        "stdev_ms": 0.13637987228502121,
+        "cv_pct": 1.2075315333857009,
+        "gflops": 2.969435736769467,
+        "samples_ms": [
+          11.087376099999346,
+          11.299935400018057,
+          11.206585200000063,
+          11.460393000004387,
+          11.416232399983528
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1047,
+        "vec_load": 50,
+        "fma_packed_512": 16,
+        "vec_store": 12,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 16,
+        "vectorized": true
+      },
+      "roofline": {
+        "oi_flops_per_byte": 0.4997559785261103,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 14.679582235236701,
+        "pct_of_roof": 20.22833953436132,
+        "roof_regime": "L3-bandwidth-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 8.971119570522207,
+        "pct_of_peak": 1.7352842355815281,
+        "invocation_floor_ms": 0.0024205664124319244,
+        "floor_share_pct": 0.021421064163146066
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "1x4096x4096",
+      "label": "decode GEMV, batch 1",
+      "variant": "packed_mmt4d",
+      "title": "+ packed layout (mmt4d, codegen)",
+      "tile": "heuristic",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/1x4096x4096/packed_mmt4d_b214969c99/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/1x4096x4096/packed_mmt4d_b214969c99/dispatches",
+        "compile_seconds": 0.471,
+        "vmfb_bytes": 11555,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-global-opt-data-tiling",
+          "--iree-llvmcpu-enable-ukernels=none"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 2.173296962269603e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 4,
+        "median_ms": 29.472561749997794,
+        "p95_ms": 32.85041885000055,
+        "min_ms": 28.912604250024287,
+        "mean_ms": 30.384403100003965,
+        "stdev_ms": 1.6759124327027515,
+        "cv_pct": 5.515699706809554,
+        "gflops": 1.1384973007988526,
+        "samples_ms": [
+          33.2239912499972,
+          29.472561749997794,
+          31.356129250013964,
+          28.95672899998658,
+          28.912604250024287
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1043,
+        "vec_load": 36,
+        "vec_store": 13,
+        "fma_packed_512": 1,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 1,
+        "vectorized": true
+      },
+      "roofline": {
+        "oi_flops_per_byte": 0.4997559785261103,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 14.679582235236701,
+        "pct_of_roof": 7.755651915393183,
+        "roof_regime": "L3-bandwidth-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 8.971119570522207,
+        "pct_of_peak": 0.6653171152569541,
+        "invocation_floor_ms": 0.0024205664124319244,
+        "floor_share_pct": 0.00821294881987008
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "1x4096x4096",
+      "label": "decode GEMV, batch 1",
+      "variant": "packed_mmt4d_ukernel",
+      "title": "+ packed layout (mmt4d ukernel)",
+      "tile": "heuristic",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/1x4096x4096/packed_mmt4d_ukernel_f5be5b2a49/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/1x4096x4096/packed_mmt4d_ukernel_f5be5b2a49/dispatches",
+        "compile_seconds": 0.704,
+        "vmfb_bytes": 11643,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-global-opt-data-tiling",
+          "--iree-llvmcpu-enable-ukernels=mmt4d"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 2.173296962269603e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 3,
+        "median_ms": 31.099329999998798,
+        "p95_ms": 34.76112233333879,
+        "min_ms": 27.64572333334551,
+        "mean_ms": 31.15710953334201,
+        "stdev_ms": 2.591011878400265,
+        "cv_pct": 8.315957151376825,
+        "gflops": 1.0789438872156183,
+        "samples_ms": [
+          35.51517800000662,
+          31.744899666667454,
+          31.099329999998798,
+          29.78041666669166,
+          27.64572333334551
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1054,
+        "vec_load": 39,
+        "vec_store": 13,
+        "fma_packed_512": 4,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 4,
+        "vectorized": true
+      },
+      "roofline": {
+        "oi_flops_per_byte": 0.4997559785261103,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 14.679582235236701,
+        "pct_of_roof": 7.349963166020718,
+        "roof_regime": "L3-bandwidth-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 8.971119570522207,
+        "pct_of_peak": 0.630515183534235,
+        "invocation_floor_ms": 0.0024205664124319244,
+        "floor_share_pct": 0.007783339423814011
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "1x4096x4096",
+      "label": "decode GEMV, batch 1",
+      "variant": "packed_late",
+      "title": "+ packed layout (late materialization)",
+      "tile": "heuristic",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/1x4096x4096/packed_late_9998964aa6/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/1x4096x4096/packed_late_9998964aa6/dispatches",
+        "compile_seconds": 0.725,
+        "vmfb_bytes": 12611,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-dispatch-creation-data-tiling"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 2.173296962269603e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 4,
+        "median_ms": 28.46990999998411,
+        "p95_ms": 34.77339024996127,
+        "min_ms": 26.081650500032083,
+        "mean_ms": 29.643637099997022,
+        "stdev_ms": 3.4626358706562734,
+        "cv_pct": 11.680873905505413,
+        "gflops": 1.1785928371399392,
+        "samples_ms": [
+          35.72318074995451,
+          30.9742282499883,
+          28.46990999998411,
+          26.96921600002611,
+          26.081650500032083
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1074,
+        "vec_load": 40,
+        "fma_packed_512": 4,
+        "vec_store": 14,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 4,
+        "vectorized": true
+      },
+      "roofline": {
+        "oi_flops_per_byte": 0.4997559785261103,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 14.679582235236701,
+        "pct_of_roof": 8.028790044929606,
+        "roof_regime": "L3-bandwidth-roof",
+        "verdict": "far below both roofs: limited by codegen/latency, not by the roofline resources",
+        "dram_roof_gflops": 8.971119570522207,
+        "pct_of_peak": 0.6887482174250613,
+        "invocation_floor_ms": 0.0024205664124319244,
+        "floor_share_pct": 0.0085021920070463
+      },
+      "status": "ok"
+    },
+    {
+      "shape": "1x4096x4096",
+      "label": "decode GEMV, batch 1",
+      "variant": "vec_autotuned",
+      "title": "Tiled + vectorized (autotuned tiles)",
+      "tile": "d1x64_v1x64x4",
+      "compile": {
+        "ok": true,
+        "vmfb": "/home/claude/mlirbench2/build/1x4096x4096/vec_autotuned_7a838dc79d/kernel.vmfb",
+        "dump_dir": "/home/claude/mlirbench2/build/1x4096x4096/vec_autotuned_7a838dc79d/dispatches",
+        "compile_seconds": 0.435,
+        "vmfb_bytes": 10711,
+        "error": "",
+        "flags": [
+          "--iree-hal-target-device=local",
+          "--iree-hal-local-target-device-backends=llvm-cpu",
+          "--iree-llvmcpu-target-cpu=host",
+          "--iree-opt-data-tiling=false"
+        ]
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 2.173296962269603e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 39,
+        "median_ms": 3.254851000006872,
+        "p95_ms": 3.3146423640853473,
+        "min_ms": 3.230013256422983,
+        "mean_ms": 3.2645718307729767,
+        "stdev_ms": 0.034870656032167546,
+        "cv_pct": 1.0681540440760027,
+        "gflops": 10.309053164009399,
+        "samples_ms": [
+          3.2839932564223626,
+          3.254851000006872,
+          3.2316970000115712,
+          3.230013256422983,
+          3.3223046410010935
+        ],
+        "context": {
+          "num_cpus": 1,
+          "mhz_per_cpu": 2100,
+          "caches": [
+            {
+              "type": "Data",
+              "level": 1,
+              "size": 49152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Instruction",
+              "level": 1,
+              "size": 32768,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 2,
+              "size": 2097152,
+              "num_sharing": 1
+            },
+            {
+              "type": "Unified",
+              "level": 3,
+              "size": 272629760,
+              "num_sharing": 1
+            }
+          ],
+          "cpu_scaling_enabled": false
+        }
+      },
+      "asm": {
+        "instructions": 1033,
+        "vec_load": 38,
+        "fma_packed_512": 16,
+        "vec_store": 15,
+        "fp_scalar": 71,
+        "vec_stack_access": 22,
+        "fma_scalar": 13,
+        "widest_vector_bits": 512,
+        "isa": "x86_64",
+        "dispatch_files": 1,
+        "fma_vector_total": 16,
+        "vectorized": true
+      },
+      "roofline": {
+        "oi_flops_per_byte": 0.4997559785261103,
+        "governing_level": "L3",
+        "governing_bw_gbs": 29.3735,
+        "ridge_flops_per_byte": 5.825693226888182,
+        "roof_gflops": 14.679582235236701,
+        "pct_of_roof": 70.2271563237247,
+        "roof_regime": "L3-bandwidth-roof",
+        "verdict": "near the L3 bandwidth roof",
+        "dram_roof_gflops": 8.971119570522207,
+        "pct_of_peak": 6.024423164900508,
+        "invocation_floor_ms": 0.0023231863689405835,
+        "floor_share_pct": 0.07137612041029462
+      },
+      "status": "ok"
+    }
+  ]
+}

@@ -1,0 +1,180 @@
+{
+  "tools": {
+    "riscv64-linux-gnu-gcc": "/usr/bin/riscv64-linux-gnu-gcc",
+    "qemu-riscv64": "/usr/bin/qemu-riscv64"
+  },
+  "results": [
+    {
+      "target": "rv64gcv",
+      "features": "+m,+a,+f,+d,+c,+v",
+      "shape": "128x128x128",
+      "vmfb_bytes": 10337,
+      "asm": {
+        "instructions": 1335,
+        "vsetvl": 1,
+        "vec_load": 2,
+        "fma_vector": 9,
+        "vec_store": 9,
+        "fp_scalar": 76,
+        "fma_scalar": 13,
+        "widest_vector_bits": 0,
+        "isa": "riscv64",
+        "dispatch_files": 1,
+        "fma_vector_total": 9,
+        "vectorized": true
+      },
+      "workgroups": [
+        16,
+        1,
+        1
+      ],
+      "execution": {
+        "status": "ran",
+        "runs": [
+          {
+            "qemu_cpu": "rv64,v=true,vext_spec=v1.0,vlen=128",
+            "returncode": 0,
+            "result": "{\"status\": \"PASS\", \"library\": \"matmul_dispatch_0\", \"exports\": 1, \"bindings\": 3, \"M\": 128, \"K\": 128, \"N\": 128, \"workgroups\": [16, 1, 1], \"max_abs_err\": 6.016e-06, \"max_rel_err\": 3.670e-07}",
+            "signal": null
+          },
+          {
+            "qemu_cpu": "rv64,v=true,vext_spec=v1.0,vlen=256",
+            "returncode": 0,
+            "result": "{\"status\": \"PASS\", \"library\": \"matmul_dispatch_0\", \"exports\": 1, \"bindings\": 3, \"M\": 128, \"K\": 128, \"N\": 128, \"workgroups\": [16, 1, 1], \"max_abs_err\": 6.016e-06, \"max_rel_err\": 3.670e-07}",
+            "signal": null
+          },
+          {
+            "qemu_cpu": "rv64,v=true,vext_spec=v1.0,vlen=512",
+            "returncode": 0,
+            "result": "{\"status\": \"PASS\", \"library\": \"matmul_dispatch_0\", \"exports\": 1, \"bindings\": 3, \"M\": 128, \"K\": 128, \"N\": 128, \"workgroups\": [16, 1, 1], \"max_abs_err\": 6.016e-06, \"max_rel_err\": 3.670e-07}",
+            "signal": null
+          },
+          {
+            "qemu_cpu": "rv64,v=false",
+            "returncode": -4,
+            "result": null,
+            "signal": "SIGILL"
+          }
+        ]
+      }
+    },
+    {
+      "target": "rv64gc",
+      "features": "+m,+a,+f,+d,+c",
+      "shape": "128x128x128",
+      "vmfb_bytes": 16449,
+      "asm": {
+        "instructions": 2858,
+        "fma_scalar": 269,
+        "fp_scalar": 76,
+        "widest_vector_bits": 0,
+        "isa": "riscv64",
+        "dispatch_files": 1,
+        "fma_vector_total": 0,
+        "vectorized": false
+      },
+      "workgroups": [
+        16,
+        1,
+        1
+      ],
+      "execution": {
+        "status": "ran",
+        "runs": [
+          {
+            "qemu_cpu": "rv64,v=false",
+            "returncode": 0,
+            "result": "{\"status\": \"PASS\", \"library\": \"matmul_dispatch_0\", \"exports\": 1, \"bindings\": 3, \"M\": 128, \"K\": 128, \"N\": 128, \"workgroups\": [16, 1, 1], \"max_abs_err\": 6.016e-06, \"max_rel_err\": 3.670e-07}",
+            "signal": null
+          }
+        ]
+      }
+    },
+    {
+      "target": "rv64gcv",
+      "features": "+m,+a,+f,+d,+c,+v",
+      "shape": "64x96x80",
+      "vmfb_bytes": 10369,
+      "asm": {
+        "instructions": 1342,
+        "vsetvl": 1,
+        "vec_load": 2,
+        "fma_vector": 11,
+        "vec_store": 11,
+        "fp_scalar": 76,
+        "fma_scalar": 13,
+        "widest_vector_bits": 0,
+        "isa": "riscv64",
+        "dispatch_files": 1,
+        "fma_vector_total": 11,
+        "vectorized": true
+      },
+      "workgroups": [
+        10,
+        1,
+        1
+      ],
+      "execution": {
+        "status": "ran",
+        "runs": [
+          {
+            "qemu_cpu": "rv64,v=true,vext_spec=v1.0,vlen=128",
+            "returncode": 0,
+            "result": "{\"status\": \"PASS\", \"library\": \"matmul_dispatch_0\", \"exports\": 1, \"bindings\": 3, \"M\": 64, \"K\": 96, \"N\": 80, \"workgroups\": [10, 1, 1], \"max_abs_err\": 5.208e-06, \"max_rel_err\": 4.250e-07}",
+            "signal": null
+          },
+          {
+            "qemu_cpu": "rv64,v=true,vext_spec=v1.0,vlen=256",
+            "returncode": 0,
+            "result": "{\"status\": \"PASS\", \"library\": \"matmul_dispatch_0\", \"exports\": 1, \"bindings\": 3, \"M\": 64, \"K\": 96, \"N\": 80, \"workgroups\": [10, 1, 1], \"max_abs_err\": 5.208e-06, \"max_rel_err\": 4.250e-07}",
+            "signal": null
+          },
+          {
+            "qemu_cpu": "rv64,v=true,vext_spec=v1.0,vlen=512",
+            "returncode": 0,
+            "result": "{\"status\": \"PASS\", \"library\": \"matmul_dispatch_0\", \"exports\": 1, \"bindings\": 3, \"M\": 64, \"K\": 96, \"N\": 80, \"workgroups\": [10, 1, 1], \"max_abs_err\": 5.208e-06, \"max_rel_err\": 4.250e-07}",
+            "signal": null
+          },
+          {
+            "qemu_cpu": "rv64,v=false",
+            "returncode": -4,
+            "result": null,
+            "signal": "SIGILL"
+          }
+        ]
+      }
+    },
+    {
+      "target": "rv64gc",
+      "features": "+m,+a,+f,+d,+c",
+      "shape": "64x96x80",
+      "vmfb_bytes": 18465,
+      "asm": {
+        "instructions": 3345,
+        "fma_scalar": 333,
+        "fp_scalar": 76,
+        "widest_vector_bits": 0,
+        "isa": "riscv64",
+        "dispatch_files": 1,
+        "fma_vector_total": 0,
+        "vectorized": false
+      },
+      "workgroups": [
+        16,
+        1,
+        1
+      ],
+      "execution": {
+        "status": "ran",
+        "runs": [
+          {
+            "qemu_cpu": "rv64,v=false",
+            "returncode": 0,
+            "result": "{\"status\": \"PASS\", \"library\": \"matmul_dispatch_0\", \"exports\": 1, \"bindings\": 3, \"M\": 64, \"K\": 96, \"N\": 80, \"workgroups\": [16, 1, 1], \"max_abs_err\": 5.208e-06, \"max_rel_err\": 4.250e-07}",
+            "signal": null
+          }
+        ]
+      }
+    }
+  ]
+}

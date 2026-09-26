@@ -1,0 +1,283 @@
+{
+  "probes": [
+    {
+      "t": "2026-09-26T05:54:21",
+      "label": "schedule 128x128x128",
+      "phase": "before",
+      "peak_gflops": 167.62,
+      "baseline_gflops": 167.6,
+      "ratio": 1.0001193317422434,
+      "waited_s": 0.0,
+      "os_thermal": null,
+      "throttled": false
+    },
+    {
+      "t": "2026-09-26T05:54:35",
+      "label": "schedule 128x128x128",
+      "phase": "after",
+      "peak_gflops": 168.034,
+      "baseline_gflops": 167.6,
+      "ratio": 1.0025894988066826,
+      "waited_s": 0.0,
+      "os_thermal": null,
+      "throttled": false
+    },
+    {
+      "t": "2026-09-26T05:54:42",
+      "label": "schedule 128x128x128",
+      "phase": "before",
+      "peak_gflops": 165.517,
+      "baseline_gflops": 167.6,
+      "ratio": 0.9875715990453461,
+      "waited_s": 0.0,
+      "os_thermal": null,
+      "throttled": false
+    },
+    {
+      "t": "2026-09-26T05:54:54",
+      "label": "schedule 128x128x128",
+      "phase": "after",
+      "peak_gflops": 164.646,
+      "baseline_gflops": 167.6,
+      "ratio": 0.9823747016706443,
+      "waited_s": 0.0,
+      "os_thermal": null,
+      "throttled": false
+    },
+    {
+      "t": "2026-09-26T05:54:54",
+      "label": "schedule 512x512x512",
+      "phase": "before",
+      "peak_gflops": 164.462,
+      "baseline_gflops": 167.6,
+      "ratio": 0.9812768496420048,
+      "waited_s": 0.0,
+      "os_thermal": null,
+      "throttled": false
+    },
+    {
+      "t": "2026-09-26T05:55:08",
+      "label": "schedule 512x512x512",
+      "phase": "after",
+      "peak_gflops": 167.971,
+      "baseline_gflops": 167.6,
+      "ratio": 1.0022136038186158,
+      "waited_s": 0.0,
+      "os_thermal": null,
+      "throttled": false
+    },
+    {
+      "t": "2026-09-26T05:55:47",
+      "label": "schedule 1024x1024x1024",
+      "phase": "before",
+      "peak_gflops": 167.102,
+      "baseline_gflops": 167.6,
+      "ratio": 0.9970286396181385,
+      "waited_s": 0.0,
+      "os_thermal": null,
+      "throttled": false
+    },
+    {
+      "t": "2026-09-26T05:56:01",
+      "label": "schedule 1024x1024x1024",
+      "phase": "after",
+      "peak_gflops": 166.612,
+      "baseline_gflops": 167.6,
+      "ratio": 0.9941050119331742,
+      "waited_s": 0.0,
+      "os_thermal": null,
+      "throttled": false
+    },
+    {
+      "t": "2026-09-26T05:56:24",
+      "label": "schedule 512x512x512",
+      "phase": "before",
+      "peak_gflops": 169.421,
+      "baseline_gflops": 167.6,
+      "ratio": 1.0108651551312648,
+      "waited_s": 0.0,
+      "os_thermal": null,
+      "throttled": false
+    },
+    {
+      "t": "2026-09-26T05:56:49",
+      "label": "schedule 512x512x512",
+      "phase": "after",
+      "peak_gflops": 166.426,
+      "baseline_gflops": 167.6,
+      "ratio": 0.9929952267303103,
+      "waited_s": 0.0,
+      "os_thermal": null,
+      "throttled": false
+    },
+    {
+      "t": "2026-09-26T05:57:02",
+      "label": "schedule 128x128x128",
+      "phase": "before",
+      "peak_gflops": 166.811,
+      "baseline_gflops": 167.6,
+      "ratio": 0.9952923627684965,
+      "waited_s": 0.0,
+      "os_thermal": null,
+      "throttled": false
+    },
+    {
+      "t": "2026-09-26T05:57:26",
+      "label": "schedule 128x128x128",
+      "phase": "after",
+      "peak_gflops": 165.889,
+      "baseline_gflops": 167.6,
+      "ratio": 0.989791169451074,
+      "waited_s": 0.0,
+      "os_thermal": null,
+      "throttled": false
+    },
+    {
+      "t": "2026-09-26T05:57:27",
+      "label": "schedule 512x512x512",
+      "phase": "before",
+      "peak_gflops": 165.972,
+      "baseline_gflops": 167.6,
+      "ratio": 0.9902863961813844,
+      "waited_s": 0.0,
+      "os_thermal": null,
+      "throttled": false
+    },
+    {
+      "t": "2026-09-26T05:57:52",
+      "label": "schedule 512x512x512",
+      "phase": "after",
+      "peak_gflops": 166.789,
+      "baseline_gflops": 167.6,
+      "ratio": 0.9951610978520286,
+      "waited_s": 0.0,
+      "os_thermal": null,
+      "throttled": false
+    },
+    {
+      "t": "2026-09-26T05:57:55",
+      "label": "schedule 1024x1024x1024",
+      "phase": "before",
+      "peak_gflops": 165.801,
+      "baseline_gflops": 167.6,
+      "ratio": 0.9892661097852028,
+      "waited_s": 0.0,
+      "os_thermal": null,
+      "throttled": false
+    },
+    {
+      "t": "2026-09-26T05:58:18",
+      "label": "schedule 1024x1024x1024",
+      "phase": "after",
+      "peak_gflops": 165.106,
+      "baseline_gflops": 167.6,
+      "ratio": 0.9851193317422434,
+      "waited_s": 0.0,
+      "os_thermal": null,
+      "throttled": false
+    },
+    {
+      "t": "2026-09-26T05:59:42",
+      "label": "schedule 1024x1024x1024",
+      "phase": "before",
+      "peak_gflops": 166.88,
+      "baseline_gflops": 167.6,
+      "ratio": 0.9957040572792363,
+      "waited_s": 0.0,
+      "os_thermal": null,
+      "throttled": false
+    },
+    {
+      "t": "2026-09-26T06:00:15",
+      "label": "schedule 1024x1024x1024",
+      "phase": "after",
+      "peak_gflops": 163.539,
+      "baseline_gflops": 167.6,
+      "ratio": 0.9757696897374701,
+      "waited_s": 0.0,
+      "os_thermal": null,
+      "throttled": false
+    },
+    {
+      "t": "2026-09-26T06:00:51",
+      "label": "schedule 128x128x128",
+      "phase": "before",
+      "peak_gflops": 167.268,
+      "baseline_gflops": 167.6,
+      "ratio": 0.998019093078759,
+      "waited_s": 0.0,
+      "os_thermal": null,
+      "throttled": false
+    },
+    {
+      "t": "2026-09-26T06:01:33",
+      "label": "schedule 128x128x128",
+      "phase": "after",
+      "peak_gflops": 167.562,
+      "baseline_gflops": 167.6,
+      "ratio": 0.9997732696897376,
+      "waited_s": 0.0,
+      "os_thermal": null,
+      "throttled": false
+    },
+    {
+      "t": "2026-09-26T06:01:34",
+      "label": "schedule 512x512x512",
+      "phase": "before",
+      "peak_gflops": 166.769,
+      "baseline_gflops": 167.6,
+      "ratio": 0.9950417661097852,
+      "waited_s": 0.0,
+      "os_thermal": null,
+      "throttled": false
+    },
+    {
+      "t": "2026-09-26T06:02:18",
+      "label": "schedule 512x512x512",
+      "phase": "after",
+      "peak_gflops": 164.192,
+      "baseline_gflops": 167.6,
+      "ratio": 0.9796658711217184,
+      "waited_s": 0.0,
+      "os_thermal": null,
+      "throttled": false
+    },
+    {
+      "t": "2026-09-26T06:05:58",
+      "label": "schedule 1024x1024x1024",
+      "phase": "before",
+      "peak_gflops": 166.126,
+      "baseline_gflops": 167.6,
+      "ratio": 0.9912052505966588,
+      "waited_s": 0.0,
+      "os_thermal": null,
+      "throttled": false
+    },
+    {
+      "t": "2026-09-26T06:06:35",
+      "label": "schedule 1024x1024x1024",
+      "phase": "after",
+      "peak_gflops": 167.017,
+      "baseline_gflops": 167.6,
+      "ratio": 0.9965214797136038,
+      "waited_s": 0.0,
+      "os_thermal": null,
+      "throttled": false
+    }
+  ],
+  "note": "baseline reset: probe configuration changed",
+  "baseline_gflops": 167.6,
+  "calibration_probes": [
+    167.318,
+    167.387,
+    167.6,
+    167.602,
+    167.701
+  ],
+  "probe_config": {
+    "vector_bytes": 64,
+    "accumulators": 16
+  },
+  "probe_noise": 0.0022852028639617026,
+  "effective_threshold": 0.05
+}

@@ -1,0 +1,1166 @@
+{
+  "host": {
+    "machine": "arm64",
+    "system": "Darwin",
+    "python": "3.12.7",
+    "timestamp": "2026-09-26T02:40:22",
+    "cpu_model": "Apple M3",
+    "iree_compile_version": "IREE (https://iree.dev):\n  IREE compiler version 3.11.0rc20260316 @ e4a3b0405d7d23554da26403658d0e8c3c5ecf25\n  LLVM version 23.0.0git\n  Optimized build"
+  },
+  "backend": "kperf",
+  "availability": {
+    "perf": {
+      "available": false,
+      "reason": "perf not found (Linux only; set MLIRBENCH_PERF)"
+    },
+    "kperf": {
+      "available": true,
+      "backend": "kperf"
+    },
+    "xctrace": {
+      "available": false,
+      "reason": "xctrace not available: install full Xcode and run `sudo xcode-select -s /Applications/Xcode.app`"
+    }
+  },
+  "rows": [
+    {
+      "shape": "128x128x128",
+      "variant": "v1_generic_isa",
+      "counters": {
+        "backend": "kperf",
+        "status": "ok",
+        "events": {
+          "cycles": "FIXED_CYCLES",
+          "instructions": "FIXED_INSTRUCTIONS",
+          "l1d_miss_ld": "L1D_CACHE_MISS_LD_NONSPEC",
+          "l1d_miss_st": "L1D_CACHE_MISS_ST_NONSPEC",
+          "simd_alu": "INST_SIMD_ALU",
+          "simd_ld": "INST_SIMD_LD",
+          "simd_st": "INST_SIMD_ST",
+          "l1d_tlb_miss": "L1D_TLB_MISS",
+          "branch_mispred": "BRANCH_MISPRED_NONSPEC",
+          "ldst": "INST_LDST"
+        },
+        "skipped_events": [],
+        "per_invocation": {
+          "cycles": 214799.142,
+          "instructions": 1077738.492,
+          "simd_alu": 528546.0,
+          "simd_ld": 100636.5825,
+          "simd_st": 39906.5825,
+          "branch_mispred": 374.077,
+          "ldst": 163324.0685
+        },
+        "derived": {
+          "ipc": 5.017424566807628,
+          "flops_per_cycle": 19.526632932267486,
+          "simd_alu_per_analytic_fma_vec": 1.0081214904785156,
+          "flops_upper_bound_from_simd": 4228368.0,
+          "simd_share_of_instructions": 0.4904213813679023
+        },
+        "scope": "calling thread only (local-sync executes the kernel on it)",
+        "method": "per-invocation = (C[2400] - C[400]) / 2000",
+        "iterations": [
+          400,
+          2400
+        ],
+        "latency_ms_estimate": 0.05656932868684331,
+        "invalid_events": [
+          "l1d_tlb_miss=-9.22e+15",
+          "l1d_miss_ld=9.22e+15",
+          "l1d_miss_st=9.22e+15"
+        ]
+      },
+      "static_asm": {
+        "instructions": 1258,
+        "vec_load": 3,
+        "vec_store": 17,
+        "fma_packed_128": 16,
+        "fp_scalar": 67,
+        "fma_scalar": 13,
+        "widest_vector_bits": 0,
+        "isa": "aarch64",
+        "dispatch_files": 1,
+        "fma_vector_total": 16,
+        "vectorized": true
+      },
+      "analytic": {
+        "flops": 4194304,
+        "compulsory_bytes": 196608
+      },
+      "thermal": {
+        "before_ratio": 0.9989667350369352,
+        "after_ratio": 0.9327760899403174,
+        "thermal_suspect": true
+      }
+    },
+    {
+      "shape": "128x128x128",
+      "variant": "scalar_naive",
+      "counters": {
+        "backend": "kperf",
+        "status": "ok",
+        "events": {
+          "cycles": "FIXED_CYCLES",
+          "instructions": "FIXED_INSTRUCTIONS",
+          "l1d_miss_ld": "L1D_CACHE_MISS_LD_NONSPEC",
+          "l1d_miss_st": "L1D_CACHE_MISS_ST_NONSPEC",
+          "simd_alu": "INST_SIMD_ALU",
+          "simd_ld": "INST_SIMD_LD",
+          "simd_st": "INST_SIMD_ST",
+          "l1d_tlb_miss": "L1D_TLB_MISS",
+          "branch_mispred": "BRANCH_MISPRED_NONSPEC",
+          "ldst": "INST_LDST"
+        },
+        "skipped_events": [],
+        "per_invocation": {
+          "cycles": 4734010.066822067,
+          "instructions": 17019886.105672106,
+          "l1d_miss_ld": 11581.071484071485,
+          "l1d_miss_st": 21950.79875679876,
+          "simd_alu": 2097279.0124320122,
+          "simd_ld": 4210884.202020202,
+          "simd_st": 2097983.1996891997,
+          "l1d_tlb_miss": 293.2696192696193,
+          "branch_mispred": 16653.299145299145,
+          "ldst": 6342092.978243979
+        },
+        "derived": {
+          "ipc": 3.59523656803238,
+          "flops_per_cycle": 0.885993891182329,
+          "l1_refill_bytes_est": 4292079.390831391,
+          "l1_refill_bytes_vs_compulsory": 21.830644688066567,
+          "l1_line_bytes_assumed": 128,
+          "simd_alu_per_analytic_fma_vec": 4.000242256988549,
+          "flops_upper_bound_from_simd": 16778232.099456098,
+          "simd_share_of_instructions": 0.12322520840683333
+        },
+        "scope": "calling thread only (local-sync executes the kernel on it)",
+        "method": "per-invocation = (C[1544] - C[257]) / 1287",
+        "iterations": [
+          257,
+          1544
+        ],
+        "latency_ms_estimate": 1.1652916631040473
+      },
+      "static_asm": {
+        "instructions": 1081,
+        "fma_scalar": 14,
+        "fp_scalar": 65,
+        "widest_vector_bits": 0,
+        "isa": "aarch64",
+        "dispatch_files": 1,
+        "fma_vector_total": 0,
+        "vectorized": false
+      },
+      "analytic": {
+        "flops": 4194304,
+        "compulsory_bytes": 196608
+      },
+      "thermal": {
+        "before_ratio": 0.9989667350369352,
+        "after_ratio": 0.9327760899403174,
+        "thermal_suspect": true
+      }
+    },
+    {
+      "shape": "128x128x128",
+      "variant": "scalar_tiled",
+      "counters": {
+        "backend": "kperf",
+        "status": "ok",
+        "events": {
+          "cycles": "FIXED_CYCLES",
+          "instructions": "FIXED_INSTRUCTIONS",
+          "l1d_miss_ld": "L1D_CACHE_MISS_LD_NONSPEC",
+          "l1d_miss_st": "L1D_CACHE_MISS_ST_NONSPEC",
+          "simd_alu": "INST_SIMD_ALU",
+          "simd_ld": "INST_SIMD_LD",
+          "simd_st": "INST_SIMD_ST",
+          "l1d_tlb_miss": "L1D_TLB_MISS",
+          "branch_mispred": "BRANCH_MISPRED_NONSPEC",
+          "ldst": "INST_LDST"
+        },
+        "skipped_events": [],
+        "per_invocation": {
+          "cycles": 4686608.203732504,
+          "instructions": 17034497.158631414,
+          "l1d_miss_ld": 12174.589424572318,
+          "l1d_miss_st": 8435.670295489892,
+          "simd_alu": 2097279.0,
+          "simd_ld": 4210885.797822706,
+          "simd_st": 2097984.797822706,
+          "l1d_tlb_miss": 296.6656298600311,
+          "branch_mispred": 16661.601866251945,
+          "ldst": 6342275.895800933
+        },
+        "derived": {
+          "ipc": 3.6347175650537245,
+          "flops_per_cycle": 0.8949551184286275,
+          "l1_refill_bytes_est": 2638113.244167963,
+          "l1_refill_bytes_vs_compulsory": 13.418137838582169,
+          "l1_line_bytes_assumed": 128,
+          "simd_alu_per_analytic_fma_vec": 4.000242233276367,
+          "flops_upper_bound_from_simd": 16778232.0,
+          "simd_share_of_instructions": 0.12311951333047154
+        },
+        "scope": "calling thread only (local-sync executes the kernel on it)",
+        "method": "per-invocation = (C[1543] - C[257]) / 1286",
+        "iterations": [
+          257,
+          1543
+        ],
+        "latency_ms_estimate": 1.1655416650076706
+      },
+      "static_asm": {
+        "instructions": 1094,
+        "fma_scalar": 14,
+        "fp_scalar": 65,
+        "widest_vector_bits": 0,
+        "isa": "aarch64",
+        "dispatch_files": 1,
+        "fma_vector_total": 0,
+        "vectorized": false
+      },
+      "analytic": {
+        "flops": 4194304,
+        "compulsory_bytes": 196608
+      },
+      "thermal": {
+        "before_ratio": 0.9989667350369352,
+        "after_ratio": 0.9327760899403174,
+        "thermal_suspect": true
+      }
+    },
+    {
+      "shape": "128x128x128",
+      "variant": "vec_heuristic",
+      "counters": {
+        "backend": "kperf",
+        "status": "ok",
+        "events": {
+          "cycles": "FIXED_CYCLES",
+          "instructions": "FIXED_INSTRUCTIONS",
+          "l1d_miss_ld": "L1D_CACHE_MISS_LD_NONSPEC",
+          "l1d_miss_st": "L1D_CACHE_MISS_ST_NONSPEC",
+          "simd_alu": "INST_SIMD_ALU",
+          "simd_ld": "INST_SIMD_LD",
+          "simd_st": "INST_SIMD_ST",
+          "l1d_tlb_miss": "L1D_TLB_MISS",
+          "branch_mispred": "BRANCH_MISPRED_NONSPEC",
+          "ldst": "INST_LDST"
+        },
+        "skipped_events": [],
+        "per_invocation": {
+          "cycles": 159899.796,
+          "instructions": 976717.3775,
+          "l1d_miss_ld": 5207.1545,
+          "l1d_miss_st": 4001.2545,
+          "simd_alu": 528511.0,
+          "simd_ld": 303315.0325,
+          "simd_st": 2894.0325,
+          "l1d_tlb_miss": 205.9725,
+          "branch_mispred": 55.2735,
+          "ldst": 323369.0065
+        },
+        "derived": {
+          "ipc": 6.108309090650747,
+          "flops_per_cycle": 26.230827711625096,
+          "l1_refill_bytes_est": 1178676.352,
+          "l1_refill_bytes_vs_compulsory": 5.995057942708333,
+          "l1_line_bytes_assumed": 128,
+          "simd_alu_per_analytic_fma_vec": 1.0080547332763672,
+          "flops_upper_bound_from_simd": 4228088.0,
+          "simd_share_of_instructions": 0.5411094469853436
+        },
+        "scope": "calling thread only (local-sync executes the kernel on it)",
+        "method": "per-invocation = (C[2400] - C[400]) / 2000",
+        "iterations": [
+          400,
+          2400
+        ],
+        "latency_ms_estimate": 0.04052766598761082
+      },
+      "static_asm": {
+        "instructions": 1232,
+        "vec_load": 6,
+        "fma_packed_128": 64,
+        "vec_store": 8,
+        "fp_scalar": 65,
+        "fma_scalar": 13,
+        "widest_vector_bits": 0,
+        "isa": "aarch64",
+        "dispatch_files": 1,
+        "fma_vector_total": 64,
+        "vectorized": true
+      },
+      "analytic": {
+        "flops": 4194304,
+        "compulsory_bytes": 196608
+      },
+      "thermal": {
+        "before_ratio": 0.9989667350369352,
+        "after_ratio": 0.9327760899403174,
+        "thermal_suspect": true
+      }
+    },
+    {
+      "shape": "128x128x128",
+      "variant": "vec_autotuned",
+      "counters": {
+        "backend": "kperf",
+        "status": "ok",
+        "events": {
+          "cycles": "FIXED_CYCLES",
+          "instructions": "FIXED_INSTRUCTIONS",
+          "l1d_miss_ld": "L1D_CACHE_MISS_LD_NONSPEC",
+          "l1d_miss_st": "L1D_CACHE_MISS_ST_NONSPEC",
+          "simd_alu": "INST_SIMD_ALU",
+          "simd_ld": "INST_SIMD_LD",
+          "simd_st": "INST_SIMD_ST",
+          "l1d_tlb_miss": "L1D_TLB_MISS",
+          "branch_mispred": "BRANCH_MISPRED_NONSPEC",
+          "ldst": "INST_LDST"
+        },
+        "skipped_events": [],
+        "per_invocation": {
+          "cycles": 153433.402,
+          "instructions": 884905.189,
+          "l1d_miss_ld": 11133.2425,
+          "l1d_miss_st": 5582.323,
+          "simd_alu": 528511.0,
+          "simd_ld": 196811.571,
+          "simd_st": 3910.571,
+          "l1d_tlb_miss": 263.9325,
+          "branch_mispred": 17.317,
+          "ldst": 217698.955
+        },
+        "derived": {
+          "ipc": 5.767356895338865,
+          "flops_per_cycle": 27.336316247488273,
+          "l1_refill_bytes_est": 2139592.384,
+          "l1_refill_bytes_vs_compulsory": 10.882529622395834,
+          "l1_line_bytes_assumed": 128,
+          "simd_alu_per_analytic_fma_vec": 1.0080547332763672,
+          "flops_upper_bound_from_simd": 4228088.0,
+          "simd_share_of_instructions": 0.5972515548216545
+        },
+        "scope": "calling thread only (local-sync executes the kernel on it)",
+        "method": "per-invocation = (C[2400] - C[400]) / 2000",
+        "iterations": [
+          400,
+          2400
+        ],
+        "latency_ms_estimate": 0.04023599710005025
+      },
+      "static_asm": {
+        "instructions": 1139,
+        "vec_load": 4,
+        "fma_packed_128": 32,
+        "vec_store": 12,
+        "fp_scalar": 65,
+        "fma_scalar": 13,
+        "widest_vector_bits": 0,
+        "isa": "aarch64",
+        "dispatch_files": 1,
+        "fma_vector_total": 32,
+        "vectorized": true
+      },
+      "analytic": {
+        "flops": 4194304,
+        "compulsory_bytes": 196608
+      },
+      "thermal": {
+        "before_ratio": 0.9989667350369352,
+        "after_ratio": 0.9327760899403174,
+        "thermal_suspect": true
+      }
+    },
+    {
+      "shape": "128x128x128",
+      "variant": "packed_mmt4d",
+      "counters": {
+        "backend": "kperf",
+        "status": "ok",
+        "events": {
+          "cycles": "FIXED_CYCLES",
+          "instructions": "FIXED_INSTRUCTIONS",
+          "l1d_miss_ld": "L1D_CACHE_MISS_LD_NONSPEC",
+          "l1d_miss_st": "L1D_CACHE_MISS_ST_NONSPEC",
+          "simd_alu": "INST_SIMD_ALU",
+          "simd_ld": "INST_SIMD_LD",
+          "simd_st": "INST_SIMD_ST",
+          "l1d_tlb_miss": "L1D_TLB_MISS",
+          "branch_mispred": "BRANCH_MISPRED_NONSPEC",
+          "ldst": "INST_LDST"
+        },
+        "skipped_events": [],
+        "per_invocation": {
+          "cycles": 223884.9465,
+          "instructions": 1239155.7685,
+          "l1d_miss_ld": 10778.709,
+          "l1d_miss_st": 22888.2695,
+          "simd_alu": 528546.0,
+          "simd_ld": 231708.922,
+          "simd_st": 37858.922,
+          "l1d_tlb_miss": 325.081,
+          "branch_mispred": 369.495,
+          "ldst": 292442.154
+        },
+        "derived": {
+          "ipc": 5.53478823776122,
+          "flops_per_cycle": 18.73419390436775,
+          "l1_refill_bytes_est": 4309373.248,
+          "l1_refill_bytes_vs_compulsory": 21.91860579427083,
+          "l1_line_bytes_assumed": 128,
+          "simd_alu_per_analytic_fma_vec": 1.0081214904785156,
+          "flops_upper_bound_from_simd": 4228368.0,
+          "simd_share_of_instructions": 0.4265371742890773
+        },
+        "scope": "calling thread only (local-sync executes the kernel on it)",
+        "method": "per-invocation = (C[2400] - C[400]) / 2000",
+        "iterations": [
+          400,
+          2400
+        ],
+        "latency_ms_estimate": 0.05936099720808367
+      },
+      "static_asm": {
+        "instructions": 1221,
+        "vec_load": 2,
+        "vec_store": 9,
+        "fma_packed_128": 16,
+        "fp_scalar": 65,
+        "fma_scalar": 13,
+        "widest_vector_bits": 0,
+        "isa": "aarch64",
+        "dispatch_files": 1,
+        "fma_vector_total": 16,
+        "vectorized": true
+      },
+      "analytic": {
+        "flops": 4194304,
+        "compulsory_bytes": 196608
+      },
+      "thermal": {
+        "before_ratio": 0.9989667350369352,
+        "after_ratio": 0.9327760899403174,
+        "thermal_suspect": true
+      }
+    },
+    {
+      "shape": "128x128x128",
+      "variant": "packed_mmt4d_ukernel",
+      "counters": {
+        "backend": "kperf",
+        "status": "ok",
+        "events": {
+          "cycles": "FIXED_CYCLES",
+          "instructions": "FIXED_INSTRUCTIONS",
+          "l1d_miss_ld": "L1D_CACHE_MISS_LD_NONSPEC",
+          "l1d_miss_st": "L1D_CACHE_MISS_ST_NONSPEC",
+          "simd_alu": "INST_SIMD_ALU",
+          "simd_ld": "INST_SIMD_LD",
+          "simd_st": "INST_SIMD_ST",
+          "l1d_tlb_miss": "L1D_TLB_MISS",
+          "branch_mispred": "BRANCH_MISPRED_NONSPEC",
+          "ldst": "INST_LDST"
+        },
+        "skipped_events": [],
+        "per_invocation": {
+          "cycles": 215424.3205,
+          "instructions": 1078231.8785,
+          "l1d_miss_ld": 10309.884,
+          "l1d_miss_st": 24186.882,
+          "simd_alu": 528546.0,
+          "simd_ld": 100635.0,
+          "simd_st": 39905.0,
+          "l1d_tlb_miss": 376.7765,
+          "branch_mispred": 372.2965,
+          "ldst": 163443.7785
+        },
+        "derived": {
+          "ipc": 5.005153902760019,
+          "flops_per_cycle": 19.46996509152271,
+          "l1_refill_bytes_est": 4415586.048,
+          "l1_refill_bytes_vs_compulsory": 22.45883203125,
+          "l1_line_bytes_assumed": 128,
+          "simd_alu_per_analytic_fma_vec": 1.0081214904785156,
+          "flops_upper_bound_from_simd": 4228368.0,
+          "simd_share_of_instructions": 0.4901969701872434
+        },
+        "scope": "calling thread only (local-sync executes the kernel on it)",
+        "method": "per-invocation = (C[2400] - C[400]) / 2000",
+        "iterations": [
+          400,
+          2400
+        ],
+        "latency_ms_estimate": 0.05412499497955044
+      },
+      "static_asm": {
+        "instructions": 1270,
+        "vec_load": 3,
+        "vec_store": 17,
+        "fma_packed_128": 16,
+        "fp_scalar": 65,
+        "fma_scalar": 13,
+        "widest_vector_bits": 0,
+        "isa": "aarch64",
+        "dispatch_files": 1,
+        "fma_vector_total": 16,
+        "vectorized": true
+      },
+      "analytic": {
+        "flops": 4194304,
+        "compulsory_bytes": 196608
+      },
+      "thermal": {
+        "before_ratio": 0.9989667350369352,
+        "after_ratio": 0.9327760899403174,
+        "thermal_suspect": true
+      }
+    },
+    {
+      "shape": "128x128x128",
+      "variant": "packed_late",
+      "counters": {
+        "backend": "kperf",
+        "status": "ok",
+        "events": {
+          "cycles": "FIXED_CYCLES",
+          "instructions": "FIXED_INSTRUCTIONS",
+          "l1d_miss_ld": "L1D_CACHE_MISS_LD_NONSPEC",
+          "l1d_miss_st": "L1D_CACHE_MISS_ST_NONSPEC",
+          "simd_alu": "INST_SIMD_ALU",
+          "simd_ld": "INST_SIMD_LD",
+          "simd_st": "INST_SIMD_ST",
+          "l1d_tlb_miss": "L1D_TLB_MISS",
+          "branch_mispred": "BRANCH_MISPRED_NONSPEC",
+          "ldst": "INST_LDST"
+        },
+        "skipped_events": [],
+        "per_invocation": {
+          "cycles": 214150.061,
+          "instructions": 1075089.907,
+          "l1d_miss_ld": 9604.314,
+          "l1d_miss_st": 22901.848,
+          "simd_alu": 528542.0,
+          "simd_ld": 100620.914,
+          "simd_st": 37834.914,
+          "l1d_tlb_miss": 263.2385,
+          "branch_mispred": 321.0815,
+          "ldst": 160757.4765
+        },
+        "derived": {
+          "ipc": 5.020264304290812,
+          "flops_per_cycle": 19.585817442284082,
+          "l1_refill_bytes_est": 4160788.7360000005,
+          "l1_refill_bytes_vs_compulsory": 21.162865885416668,
+          "l1_line_bytes_assumed": 128,
+          "simd_alu_per_analytic_fma_vec": 1.0081138610839844,
+          "flops_upper_bound_from_simd": 4228336.0,
+          "simd_share_of_instructions": 0.49162585990122226
+        },
+        "scope": "calling thread only (local-sync executes the kernel on it)",
+        "method": "per-invocation = (C[2400] - C[400]) / 2000",
+        "iterations": [
+          400,
+          2400
+        ],
+        "latency_ms_estimate": 0.05301399505697191
+      },
+      "static_asm": {
+        "instructions": 1197,
+        "vec_load": 3,
+        "fma_packed_128": 16,
+        "vec_store": 9,
+        "fp_scalar": 65,
+        "fma_scalar": 13,
+        "widest_vector_bits": 0,
+        "isa": "aarch64",
+        "dispatch_files": 1,
+        "fma_vector_total": 16,
+        "vectorized": true
+      },
+      "analytic": {
+        "flops": 4194304,
+        "compulsory_bytes": 196608
+      },
+      "thermal": {
+        "before_ratio": 0.9989667350369352,
+        "after_ratio": 0.9327760899403174,
+        "thermal_suspect": true
+      }
+    },
+    {
+      "shape": "1024x1024x1024",
+      "variant": "v1_generic_isa",
+      "counters": {
+        "backend": "kperf",
+        "status": "ok",
+        "events": {
+          "cycles": "FIXED_CYCLES",
+          "instructions": "FIXED_INSTRUCTIONS",
+          "l1d_miss_ld": "L1D_CACHE_MISS_LD_NONSPEC",
+          "l1d_miss_st": "L1D_CACHE_MISS_ST_NONSPEC",
+          "simd_alu": "INST_SIMD_ALU",
+          "simd_ld": "INST_SIMD_LD",
+          "simd_st": "INST_SIMD_ST",
+          "l1d_tlb_miss": "L1D_TLB_MISS",
+          "branch_mispred": "BRANCH_MISPRED_NONSPEC",
+          "ldst": "INST_LDST"
+        },
+        "skipped_events": [],
+        "per_invocation": {
+          "cycles": 74495705.84415585,
+          "instructions": 403802243.8961039,
+          "l1d_miss_ld": 3936832.4025974027,
+          "l1d_miss_st": 1399137.5974025973,
+          "simd_alu": 268697763.0,
+          "simd_ld": 35782942.0,
+          "simd_st": 2491364.0,
+          "l1d_tlb_miss": 195903.9090909091,
+          "branch_mispred": 27432.753246753247,
+          "ldst": 38372946.74025974
+        },
+        "derived": {
+          "ipc": 5.420476782122899,
+          "flops_per_cycle": 28.826945441560227,
+          "l1_refill_bytes_est": 683004160.0,
+          "l1_refill_bytes_vs_compulsory": 54.280293782552086,
+          "l1_line_bytes_assumed": 128,
+          "simd_alu_per_analytic_fma_vec": 1.0009771697223186,
+          "flops_upper_bound_from_simd": 2149582104.0,
+          "simd_share_of_instructions": 0.6654191923439
+        },
+        "scope": "calling thread only (local-sync executes the kernel on it)",
+        "method": "per-invocation = (C[92] - C[15]) / 77",
+        "iterations": [
+          15,
+          92
+        ],
+        "latency_ms_estimate": 19.38715299669032
+      },
+      "static_asm": {
+        "instructions": 1285,
+        "vec_load": 3,
+        "vec_store": 17,
+        "fma_packed_128": 16,
+        "fp_scalar": 67,
+        "fma_scalar": 13,
+        "widest_vector_bits": 0,
+        "isa": "aarch64",
+        "dispatch_files": 1,
+        "fma_vector_total": 16,
+        "vectorized": true
+      },
+      "analytic": {
+        "flops": 2147483648,
+        "compulsory_bytes": 12582912
+      },
+      "thermal": {
+        "before_ratio": 0.9974862359853801,
+        "after_ratio": 0.9317890905726138,
+        "thermal_suspect": true
+      }
+    },
+    {
+      "shape": "1024x1024x1024",
+      "variant": "scalar_naive",
+      "counters": {
+        "backend": "kperf",
+        "status": "ok",
+        "events": {
+          "cycles": "FIXED_CYCLES",
+          "instructions": "FIXED_INSTRUCTIONS",
+          "l1d_miss_ld": "L1D_CACHE_MISS_LD_NONSPEC",
+          "l1d_miss_st": "L1D_CACHE_MISS_ST_NONSPEC",
+          "simd_alu": "INST_SIMD_ALU",
+          "simd_ld": "INST_SIMD_LD",
+          "simd_st": "INST_SIMD_ST",
+          "l1d_tlb_miss": "L1D_TLB_MISS",
+          "branch_mispred": "BRANCH_MISPRED_NONSPEC",
+          "ldst": "INST_LDST"
+        },
+        "skipped_events": [],
+        "per_invocation": {
+          "cycles": 3964471038.3333335,
+          "instructions": 8609568959.0,
+          "l1d_miss_ld": 1068354061.6666666,
+          "l1d_miss_st": 101421389.66666667,
+          "simd_alu": 1073741951.0,
+          "simd_ld": 2148532419.0,
+          "simd_st": 1073742654.0,
+          "l1d_tlb_miss": 622472958.3333334,
+          "branch_mispred": 1053714.6666666667,
+          "ldst": 3223340563.0
+        },
+        "derived": {
+          "ipc": 2.1716816381686748,
+          "flops_per_cycle": 0.5416822640991732,
+          "l1_refill_bytes_est": 149731257770.66666,
+          "l1_refill_bytes_vs_compulsory": 11899.571241590711,
+          "l1_line_bytes_assumed": 128,
+          "simd_alu_per_analytic_fma_vec": 4.000000473111868,
+          "flops_upper_bound_from_simd": 8589935608.0,
+          "simd_share_of_instructions": 0.1247149486940999
+        },
+        "scope": "calling thread only (local-sync executes the kernel on it)",
+        "method": "per-invocation = (C[4] - C[1]) / 3",
+        "iterations": [
+          1,
+          4
+        ],
+        "latency_ms_estimate": 1054.5393193412262
+      },
+      "static_asm": {
+        "instructions": 1081,
+        "fma_scalar": 14,
+        "fp_scalar": 65,
+        "widest_vector_bits": 0,
+        "isa": "aarch64",
+        "dispatch_files": 1,
+        "fma_vector_total": 0,
+        "vectorized": false
+      },
+      "analytic": {
+        "flops": 2147483648,
+        "compulsory_bytes": 12582912
+      },
+      "thermal": {
+        "before_ratio": 0.9974862359853801,
+        "after_ratio": 0.9317890905726138,
+        "thermal_suspect": true
+      }
+    },
+    {
+      "shape": "1024x1024x1024",
+      "variant": "scalar_tiled",
+      "counters": {
+        "backend": "kperf",
+        "status": "ok",
+        "events": {
+          "cycles": "FIXED_CYCLES",
+          "instructions": "FIXED_INSTRUCTIONS",
+          "l1d_miss_ld": "L1D_CACHE_MISS_LD_NONSPEC",
+          "l1d_miss_st": "L1D_CACHE_MISS_ST_NONSPEC",
+          "simd_alu": "INST_SIMD_ALU",
+          "simd_ld": "INST_SIMD_LD",
+          "simd_st": "INST_SIMD_ST",
+          "l1d_tlb_miss": "L1D_TLB_MISS",
+          "branch_mispred": "BRANCH_MISPRED_NONSPEC",
+          "ldst": "INST_LDST"
+        },
+        "skipped_events": [],
+        "per_invocation": {
+          "cycles": 3964679535.3333335,
+          "instructions": 8605449516.666666,
+          "l1d_miss_ld": 1075266888.3333333,
+          "l1d_miss_st": 96931285.33333333,
+          "simd_alu": 1073741951.0,
+          "simd_ld": 2148532419.0,
+          "simd_st": 1073742654.0,
+          "l1d_tlb_miss": 631935462.0,
+          "branch_mispred": 1065480.0,
+          "ldst": 3223344385.3333335
+        },
+        "derived": {
+          "ipc": 2.170528397055717,
+          "flops_per_cycle": 0.5416537777799104,
+          "l1_refill_bytes_est": 150041366229.3333,
+          "l1_refill_bytes_vs_compulsory": 11924.216447618272,
+          "l1_line_bytes_assumed": 128,
+          "simd_alu_per_analytic_fma_vec": 4.000000473111868,
+          "flops_upper_bound_from_simd": 8589935608.0,
+          "simd_share_of_instructions": 0.12477464993785886
+        },
+        "scope": "calling thread only (local-sync executes the kernel on it)",
+        "method": "per-invocation = (C[4] - C[1]) / 3",
+        "iterations": [
+          1,
+          4
+        ],
+        "latency_ms_estimate": 1041.94491666082
+      },
+      "static_asm": {
+        "instructions": 1094,
+        "fma_scalar": 14,
+        "fp_scalar": 65,
+        "widest_vector_bits": 0,
+        "isa": "aarch64",
+        "dispatch_files": 1,
+        "fma_vector_total": 0,
+        "vectorized": false
+      },
+      "analytic": {
+        "flops": 2147483648,
+        "compulsory_bytes": 12582912
+      },
+      "thermal": {
+        "before_ratio": 0.9974862359853801,
+        "after_ratio": 0.9317890905726138,
+        "thermal_suspect": true
+      }
+    },
+    {
+      "shape": "1024x1024x1024",
+      "variant": "vec_heuristic",
+      "counters": {
+        "backend": "kperf",
+        "status": "ok",
+        "events": {
+          "cycles": "FIXED_CYCLES",
+          "instructions": "FIXED_INSTRUCTIONS",
+          "l1d_miss_ld": "L1D_CACHE_MISS_LD_NONSPEC",
+          "l1d_miss_st": "L1D_CACHE_MISS_ST_NONSPEC",
+          "simd_alu": "INST_SIMD_ALU",
+          "simd_ld": "INST_SIMD_LD",
+          "simd_st": "INST_SIMD_ST",
+          "l1d_tlb_miss": "L1D_TLB_MISS",
+          "branch_mispred": "BRANCH_MISPRED_NONSPEC",
+          "ldst": "INST_LDST"
+        },
+        "skipped_events": [],
+        "per_invocation": {
+          "cycles": 84065257.37878788,
+          "instructions": 492945980.6666667,
+          "l1d_miss_ld": 29189592.106060605,
+          "l1d_miss_st": 331903.9393939394,
+          "simd_alu": 268697727.0,
+          "simd_ld": 130023875.0,
+          "simd_st": 132158.0,
+          "l1d_tlb_miss": 13548436.090909092,
+          "branch_mispred": 18719.954545454544,
+          "ldst": 130184095.5909091
+        },
+        "derived": {
+          "ipc": 5.863849062467171,
+          "flops_per_cycle": 25.545435950117877,
+          "l1_refill_bytes_est": 3778751493.8181815,
+          "l1_refill_bytes_vs_compulsory": 300.3081873113459,
+          "l1_line_bytes_assumed": 128,
+          "simd_alu_per_analytic_fma_vec": 1.000977035611868,
+          "flops_upper_bound_from_simd": 2149581816.0,
+          "simd_share_of_instructions": 0.5450855419017914
+        },
+        "scope": "calling thread only (local-sync executes the kernel on it)",
+        "method": "per-invocation = (C[79] - C[13]) / 66",
+        "iterations": [
+          13,
+          79
+        ],
+        "latency_ms_estimate": 22.609249999125797
+      },
+      "static_asm": {
+        "instructions": 1264,
+        "vec_load": 7,
+        "fma_packed_128": 64,
+        "vec_store": 8,
+        "fp_scalar": 65,
+        "fma_scalar": 13,
+        "widest_vector_bits": 0,
+        "isa": "aarch64",
+        "dispatch_files": 1,
+        "fma_vector_total": 64,
+        "vectorized": true
+      },
+      "analytic": {
+        "flops": 2147483648,
+        "compulsory_bytes": 12582912
+      },
+      "thermal": {
+        "before_ratio": 0.9974862359853801,
+        "after_ratio": 0.9317890905726138,
+        "thermal_suspect": true
+      }
+    },
+    {
+      "shape": "1024x1024x1024",
+      "variant": "vec_autotuned",
+      "counters": {
+        "backend": "kperf",
+        "status": "ok",
+        "events": {
+          "cycles": "FIXED_CYCLES",
+          "instructions": "FIXED_INSTRUCTIONS",
+          "l1d_miss_ld": "L1D_CACHE_MISS_LD_NONSPEC",
+          "l1d_miss_st": "L1D_CACHE_MISS_ST_NONSPEC",
+          "simd_alu": "INST_SIMD_ALU",
+          "simd_ld": "INST_SIMD_LD",
+          "simd_st": "INST_SIMD_ST",
+          "l1d_tlb_miss": "L1D_TLB_MISS",
+          "branch_mispred": "BRANCH_MISPRED_NONSPEC",
+          "ldst": "INST_LDST"
+        },
+        "skipped_events": [],
+        "per_invocation": {
+          "cycles": 80736888.60294117,
+          "instructions": 438336578.5147059,
+          "l1d_miss_ld": 49537596.926470585,
+          "l1d_miss_st": 330171.3382352941,
+          "simd_alu": 268697727.0,
+          "simd_ld": 117440963.0,
+          "simd_st": 132158.0,
+          "l1d_tlb_miss": 8427580.338235294,
+          "branch_mispred": 17696.058823529413,
+          "ldst": 117594314.5735294
+        },
+        "derived": {
+          "ipc": 5.429198302035356,
+          "flops_per_cycle": 26.598543554993636,
+          "l1_refill_bytes_est": 6383074337.882353,
+          "l1_refill_bytes_vs_compulsory": 507.2811713125191,
+          "l1_line_bytes_assumed": 128,
+          "simd_alu_per_analytic_fma_vec": 1.000977035611868,
+          "flops_upper_bound_from_simd": 2149581816.0,
+          "simd_share_of_instructions": 0.6129940784555934
+        },
+        "scope": "calling thread only (local-sync executes the kernel on it)",
+        "method": "per-invocation = (C[81] - C[13]) / 68",
+        "iterations": [
+          13,
+          81
+        ],
+        "latency_ms_estimate": 21.90238899978188
+      },
+      "static_asm": {
+        "instructions": 1171,
+        "vec_load": 6,
+        "fma_packed_128": 32,
+        "vec_store": 8,
+        "fp_scalar": 65,
+        "fma_scalar": 13,
+        "widest_vector_bits": 0,
+        "isa": "aarch64",
+        "dispatch_files": 1,
+        "fma_vector_total": 32,
+        "vectorized": true
+      },
+      "analytic": {
+        "flops": 2147483648,
+        "compulsory_bytes": 12582912
+      },
+      "thermal": {
+        "before_ratio": 0.9974862359853801,
+        "after_ratio": 0.9317890905726138,
+        "thermal_suspect": true
+      }
+    },
+    {
+      "shape": "1024x1024x1024",
+      "variant": "packed_mmt4d",
+      "counters": {
+        "backend": "kperf",
+        "status": "ok",
+        "events": {
+          "cycles": "FIXED_CYCLES",
+          "instructions": "FIXED_INSTRUCTIONS",
+          "l1d_miss_ld": "L1D_CACHE_MISS_LD_NONSPEC",
+          "l1d_miss_st": "L1D_CACHE_MISS_ST_NONSPEC",
+          "simd_alu": "INST_SIMD_ALU",
+          "simd_ld": "INST_SIMD_LD",
+          "simd_st": "INST_SIMD_ST",
+          "l1d_tlb_miss": "L1D_TLB_MISS",
+          "branch_mispred": "BRANCH_MISPRED_NONSPEC",
+          "ldst": "INST_LDST"
+        },
+        "skipped_events": [],
+        "per_invocation": {
+          "cycles": 78225307.54929577,
+          "instructions": 487247250.943662,
+          "l1d_miss_ld": 4088270.676056338,
+          "l1d_miss_st": 1385470.8169014084,
+          "simd_alu": 268697763.0,
+          "simd_ld": 102891809.39436619,
+          "simd_st": 2360295.3943661973,
+          "l1d_tlb_miss": 204123.6338028169,
+          "branch_mispred": 27428.49295774648,
+          "ldst": 105311847.26760563
+        },
+        "derived": {
+          "ipc": 6.22876746935907,
+          "flops_per_cycle": 27.45254336835564,
+          "l1_refill_bytes_est": 700638911.0985916,
+          "l1_refill_bytes_vs_compulsory": 55.681777882464054,
+          "l1_line_bytes_assumed": 128,
+          "simd_alu_per_analytic_fma_vec": 1.0009771697223186,
+          "flops_upper_bound_from_simd": 2149582104.0,
+          "simd_share_of_instructions": 0.5514608086133014
+        },
+        "scope": "calling thread only (local-sync executes the kernel on it)",
+        "method": "per-invocation = (C[85] - C[14]) / 71",
+        "iterations": [
+          14,
+          85
+        ],
+        "latency_ms_estimate": 20.958458335371688
+      },
+      "static_asm": {
+        "instructions": 1242,
+        "vec_load": 2,
+        "vec_store": 9,
+        "fma_packed_128": 16,
+        "fp_scalar": 65,
+        "fma_scalar": 13,
+        "widest_vector_bits": 0,
+        "isa": "aarch64",
+        "dispatch_files": 1,
+        "fma_vector_total": 16,
+        "vectorized": true
+      },
+      "analytic": {
+        "flops": 2147483648,
+        "compulsory_bytes": 12582912
+      },
+      "thermal": {
+        "before_ratio": 0.9974862359853801,
+        "after_ratio": 0.9317890905726138,
+        "thermal_suspect": true
+      }
+    },
+    {
+      "shape": "1024x1024x1024",
+      "variant": "packed_mmt4d_ukernel",
+      "counters": {
+        "backend": "kperf",
+        "status": "ok",
+        "events": {
+          "cycles": "FIXED_CYCLES",
+          "instructions": "FIXED_INSTRUCTIONS",
+          "l1d_miss_ld": "L1D_CACHE_MISS_LD_NONSPEC",
+          "l1d_miss_st": "L1D_CACHE_MISS_ST_NONSPEC",
+          "simd_alu": "INST_SIMD_ALU",
+          "simd_ld": "INST_SIMD_LD",
+          "simd_st": "INST_SIMD_ST",
+          "l1d_tlb_miss": "L1D_TLB_MISS",
+          "branch_mispred": "BRANCH_MISPRED_NONSPEC",
+          "ldst": "INST_LDST"
+        },
+        "skipped_events": [],
+        "per_invocation": {
+          "cycles": 72942647.40789473,
+          "instructions": 403584619.32894737,
+          "l1d_miss_ld": 4001391.5,
+          "l1d_miss_st": 1386486.4473684211,
+          "simd_alu": 268697763.0,
+          "simd_ld": 35782944.0,
+          "simd_st": 2491366.0,
+          "l1d_tlb_miss": 203869.61842105264,
+          "branch_mispred": 27430.63157894737,
+          "ldst": 38375056.881578945
+        },
+        "derived": {
+          "ipc": 5.532903365463351,
+          "flops_per_cycle": 29.4407143737365,
+          "l1_refill_bytes_est": 689648377.2631578,
+          "l1_refill_bytes_vs_compulsory": 54.8083287289268,
+          "l1_line_bytes_assumed": 128,
+          "simd_alu_per_analytic_fma_vec": 1.0009771697223186,
+          "flops_upper_bound_from_simd": 2149582104.0,
+          "simd_share_of_instructions": 0.6657780057296834
+        },
+        "scope": "calling thread only (local-sync executes the kernel on it)",
+        "method": "per-invocation = (C[91] - C[15]) / 76",
+        "iterations": [
+          15,
+          91
+        ],
+        "latency_ms_estimate": 19.716194336069748
+      },
+      "static_asm": {
+        "instructions": 1298,
+        "vec_load": 3,
+        "vec_store": 17,
+        "fma_packed_128": 16,
+        "fp_scalar": 65,
+        "fma_scalar": 13,
+        "widest_vector_bits": 0,
+        "isa": "aarch64",
+        "dispatch_files": 1,
+        "fma_vector_total": 16,
+        "vectorized": true
+      },
+      "analytic": {
+        "flops": 2147483648,
+        "compulsory_bytes": 12582912
+      },
+      "thermal": {
+        "before_ratio": 0.9974862359853801,
+        "after_ratio": 0.9317890905726138,
+        "thermal_suspect": true
+      }
+    },
+    {
+      "shape": "1024x1024x1024",
+      "variant": "packed_late",
+      "counters": {
+        "backend": "kperf",
+        "status": "ok",
+        "events": {
+          "cycles": "FIXED_CYCLES",
+          "instructions": "FIXED_INSTRUCTIONS",
+          "l1d_miss_ld": "L1D_CACHE_MISS_LD_NONSPEC",
+          "l1d_miss_st": "L1D_CACHE_MISS_ST_NONSPEC",
+          "simd_alu": "INST_SIMD_ALU",
+          "simd_ld": "INST_SIMD_LD",
+          "simd_st": "INST_SIMD_ST",
+          "l1d_tlb_miss": "L1D_TLB_MISS",
+          "branch_mispred": "BRANCH_MISPRED_NONSPEC",
+          "ldst": "INST_LDST"
+        },
+        "skipped_events": [],
+        "per_invocation": {
+          "cycles": 72514902.25,
+          "instructions": 403350726.7631579,
+          "l1d_miss_ld": 3798118.447368421,
+          "l1d_miss_st": 1260897.855263158,
+          "simd_alu": 268697759.0,
+          "simd_ld": 35782927.7368421,
+          "simd_st": 2360269.736842105,
+          "l1d_tlb_miss": 199592.36842105264,
+          "branch_mispred": 25130.855263157893,
+          "ldst": 38199054.90789474
+        },
+        "derived": {
+          "ipc": 5.562314975928384,
+          "flops_per_cycle": 29.614376926226914,
+          "l1_refill_bytes_est": 647554086.7368422,
+          "l1_refill_bytes_vs_compulsory": 51.462975083735955,
+          "l1_line_bytes_assumed": 128,
+          "simd_alu_per_analytic_fma_vec": 1.0009771548211575,
+          "flops_upper_bound_from_simd": 2149582072.0,
+          "simd_share_of_instructions": 0.6661640631126858
+        },
+        "scope": "calling thread only (local-sync executes the kernel on it)",
+        "method": "per-invocation = (C[91] - C[15]) / 76",
+        "iterations": [
+          15,
+          91
+        ],
+        "latency_ms_estimate": 19.619277668728802
+      },
+      "static_asm": {
+        "instructions": 1214,
+        "vec_load": 3,
+        "fma_packed_128": 16,
+        "vec_store": 9,
+        "fp_scalar": 65,
+        "fma_scalar": 13,
+        "widest_vector_bits": 0,
+        "isa": "aarch64",
+        "dispatch_files": 1,
+        "fma_vector_total": 16,
+        "vectorized": true
+      },
+      "analytic": {
+        "flops": 2147483648,
+        "compulsory_bytes": 12582912
+      },
+      "thermal": {
+        "before_ratio": 0.9974862359853801,
+        "after_ratio": 0.9317890905726138,
+        "thermal_suspect": true
+      }
+    }
+  ]
+}

@@ -1,2 +1,3 @@
-weekend_env/
-weekend_env/
+build/
+__pycache__/
+*.pyc

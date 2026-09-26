@@ -1,0 +1,137 @@
+{
+  "variant": "vec_autotuned",
+  "shape": "128x128x128",
+  "flags": [
+    "--iree-llvmcpu-target-cpu=host",
+    "--iree-opt-data-tiling=false"
+  ],
+  "phases": {
+    "input": {
+      "lines": 8,
+      "dispatch_exports": [],
+      "op_counts": {
+        "linalg.matmul": 1
+      },
+      "lowering_configs": [
+        "#iree_cpu.lowering_config<distribution = [16, 64, 0], vector_common_parallel = [4, 64, 0], vector_reduction = [0, 0, 16]>"
+      ],
+      "pipelines": []
+    },
+    "global-optimization": {
+      "lines": 15,
+      "dispatch_exports": [],
+      "op_counts": {
+        "linalg.matmul": 1
+      },
+      "lowering_configs": [
+        "#iree_cpu.lowering_config<distribution = [16, 64, 0], vector_common_parallel = [4, 64, 0], vector_reduction = [0, 0, 16]>"
+      ],
+      "pipelines": []
+    },
+    "dispatch-creation": {
+      "lines": 22,
+      "dispatch_exports": [],
+      "op_counts": {
+        "linalg.matmul": 1,
+        "flow.dispatch": 1
+      },
+      "lowering_configs": [
+        "#iree_cpu.lowering_config<distribution = [16, 64, 0], vector_common_parallel = [4, 64, 0], vector_reduction = [0, 0, 16]>"
+      ],
+      "pipelines": []
+    },
+    "flow": {
+      "lines": 27,
+      "dispatch_exports": [
+        "matmul_dispatch_0_matmul_128x128x128_f32"
+      ],
+      "op_counts": {
+        "linalg.matmul": 1,
+        "flow.dispatch": 1
+      },
+      "lowering_configs": [
+        "#iree_cpu.lowering_config<distribution = [16, 64, 0], vector_common_parallel = [4, 64, 0], vector_reduction = [0, 0, 16]>"
+      ],
+      "pipelines": []
+    },
+    "stream": {
+      "lines": 46,
+      "dispatch_exports": [
+        "matmul_dispatch_0_matmul_128x128x128_f32"
+      ],
+      "op_counts": {
+        "linalg.matmul": 1,
+        "stream.cmd.dispatch": 1
+      },
+      "lowering_configs": [
+        "#iree_cpu.lowering_config<distribution = [16, 64, 0], vector_common_parallel = [4, 64, 0], vector_reduction = [0, 0, 16]>"
+      ],
+      "pipelines": []
+    },
+    "executable-sources": {
+      "lines": 48,
+      "dispatch_exports": [
+        "matmul_dispatch_0_matmul_128x128x128_f32"
+      ],
+      "op_counts": {
+        "linalg.matmul": 1,
+        "stream.cmd.dispatch": 1
+      },
+      "lowering_configs": [
+        "#iree_cpu.lowering_config<distribution = [16, 64, 0], vector_common_parallel = [4, 64, 0], vector_reduction = [0, 0, 16]>"
+      ],
+      "pipelines": []
+    },
+    "executable-configurations": {
+      "lines": 48,
+      "dispatch_exports": [
+        "matmul_dispatch_0_matmul_128x128x128_f32"
+      ],
+      "op_counts": {
+        "linalg.matmul": 1,
+        "stream.cmd.dispatch": 1
+      },
+      "lowering_configs": [
+        "#iree_cpu.lowering_config<distribution = [16, 64, 0], vector_common_parallel = [4, 64, 0], vector_reduction = [0, 0, 16]>"
+      ],
+      "pipelines": [
+        "CPUDoubleTilingExpert"
+      ]
+    },
+    "executable-targets": {
+      "lines": 614,
+      "dispatch_exports": [
+        "matmul_dispatch_0_matmul_128x128x128_f32"
+      ],
+      "op_counts": {
+        "stream.cmd.dispatch": 1,
+        "llvm.intr.fmuladd": 64
+      },
+      "lowering_configs": [],
+      "pipelines": []
+    },
+    "hal": {
+      "lines": 131,
+      "dispatch_exports": [],
+      "op_counts": {
+        "hal.command_buffer.dispatch": 1
+      },
+      "lowering_configs": [],
+      "pipelines": []
+    }
+  },
+  "asm": {
+    "instructions": 1448,
+    "vec_load": 162,
+    "fma_packed_512": 256,
+    "vec_store": 27,
+    "fp_scalar": 71,
+    "vec_stack_access": 22,
+    "fma_scalar": 13,
+    "widest_vector_bits": 512,
+    "isa": "x86_64",
+    "dispatch_files": 1,
+    "fma_vector_total": 256,
+    "vectorized": true
+  }
+}

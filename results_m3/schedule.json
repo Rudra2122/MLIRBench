@@ -1,0 +1,1342 @@
+{
+  "template": "schedules/matmul.mlir.in",
+  "results": [
+    {
+      "shape": {
+        "M": 128,
+        "K": 128,
+        "N": 128,
+        "dtype": "f32",
+        "label": "square",
+        "name": "128x128x128",
+        "flops": 4194304,
+        "compulsory_bytes": 196608,
+        "operational_intensity": 21.333333333333332
+      },
+      "tile": "d128x16_v4x16x2",
+      "rows": [
+        {
+          "stage": "S1_tile_vectorize",
+          "title": "tile + vectorize (default contract lowering)",
+          "spec": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/S1_tile_vectorize_94810dc46f.mlir",
+          "compile": {
+            "ok": true,
+            "vmfb": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/128x128x128/td_S1_tile_vectorize_b90fecede9/kernel.vmfb",
+            "dump_dir": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/128x128x128/td_S1_tile_vectorize_b90fecede9/dispatches",
+            "compile_seconds": 0.249,
+            "vmfb_bytes": 11903,
+            "error": "",
+            "flags": [
+              "--iree-hal-target-device=local",
+              "--iree-hal-local-target-device-backends=llvm-cpu",
+              "--iree-llvmcpu-target-cpu=host",
+              "--iree-opt-data-tiling=false",
+              "--iree-codegen-transform-dialect-library=/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/S1_tile_vectorize_94810dc46f.mlir"
+            ]
+          },
+          "correctness": {
+            "ok": true,
+            "max_rel_err": 2.6034464876504374e-07,
+            "rtol": 0.0001
+          },
+          "timing": {
+            "ok": true,
+            "device": "local-sync",
+            "repetitions": 7,
+            "iterations_per_rep": 693,
+            "median_ms": 0.4043516632059285,
+            "p95_ms": 0.4053293950089709,
+            "min_ms": 0.403945485444425,
+            "mean_ms": 0.40447219856462757,
+            "stdev_ms": 0.0005362113538033811,
+            "cv_pct": 0.13257063296470398,
+            "gflops": 10.37291145718355
+          },
+          "asm": {
+            "instructions": 1572,
+            "vec_store": 45,
+            "vec_load": 46,
+            "fp_packed_128": 80,
+            "fp_scalar": 193,
+            "fma_scalar": 13,
+            "widest_vector_bits": 0,
+            "isa": "aarch64",
+            "dispatch_files": 1,
+            "fma_vector_total": 0,
+            "vectorized": false
+          },
+          "status": "ok"
+        },
+        {
+          "stage": "S2_outerproduct",
+          "title": "+ contract -> outer-product FMAs",
+          "spec": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/S2_outerproduct_7800d79586.mlir",
+          "compile": {
+            "ok": true,
+            "vmfb": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/128x128x128/td_S2_outerproduct_3631bce446/kernel.vmfb",
+            "dump_dir": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/128x128x128/td_S2_outerproduct_3631bce446/dispatches",
+            "compile_seconds": 0.233,
+            "vmfb_bytes": 10183,
+            "error": "",
+            "flags": [
+              "--iree-hal-target-device=local",
+              "--iree-hal-local-target-device-backends=llvm-cpu",
+              "--iree-llvmcpu-target-cpu=host",
+              "--iree-opt-data-tiling=false",
+              "--iree-codegen-transform-dialect-library=/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/S2_outerproduct_7800d79586.mlir"
+            ]
+          },
+          "correctness": {
+            "ok": true,
+            "max_rel_err": 5.347217170479745e-07,
+            "rtol": 0.0001
+          },
+          "timing": {
+            "ok": true,
+            "device": "local-sync",
+            "repetitions": 7,
+            "iterations_per_rep": 4923,
+            "median_ms": 0.05687885107474431,
+            "p95_ms": 0.05700184588882222,
+            "min_ms": 0.05684826950512928,
+            "mean_ms": 0.0569103353605399,
+            "stdev_ms": 5.955800455792624e-05,
+            "cv_pct": 0.10465235212657376,
+            "gflops": 73.7410113029231
+          },
+          "asm": {
+            "instructions": 1150,
+            "vec_store": 20,
+            "vec_load": 16,
+            "fma_packed_128": 32,
+            "fp_scalar": 65,
+            "fma_scalar": 13,
+            "widest_vector_bits": 0,
+            "isa": "aarch64",
+            "dispatch_files": 1,
+            "fma_vector_total": 32,
+            "vectorized": true
+          },
+          "status": "ok"
+        },
+        {
+          "stage": "S3_hoist_acc",
+          "title": "+ C accumulator hoisted out of K loop",
+          "spec": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/S3_hoist_acc_1d4a2e0f6a.mlir",
+          "compile": {
+            "ok": true,
+            "vmfb": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/128x128x128/td_S3_hoist_acc_7f3eeb99a8/kernel.vmfb",
+            "dump_dir": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/128x128x128/td_S3_hoist_acc_7f3eeb99a8/dispatches",
+            "compile_seconds": 0.232,
+            "vmfb_bytes": 10159,
+            "error": "",
+            "flags": [
+              "--iree-hal-target-device=local",
+              "--iree-hal-local-target-device-backends=llvm-cpu",
+              "--iree-llvmcpu-target-cpu=host",
+              "--iree-opt-data-tiling=false",
+              "--iree-codegen-transform-dialect-library=/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/S3_hoist_acc_1d4a2e0f6a.mlir"
+            ]
+          },
+          "correctness": {
+            "ok": true,
+            "max_rel_err": 5.347217170479745e-07,
+            "rtol": 0.0001
+          },
+          "timing": {
+            "ok": true,
+            "device": "local-sync",
+            "repetitions": 7,
+            "iterations_per_rep": 7073,
+            "median_ms": 0.03952695604621264,
+            "p95_ms": 0.03956258205947646,
+            "min_ms": 0.03948070896097095,
+            "mean_ms": 0.039523403795294905,
+            "stdev_ms": 3.2017968480260535e-05,
+            "cv_pct": 0.08101014944485156,
+            "gflops": 106.1124968767203
+          },
+          "asm": {
+            "instructions": 1146,
+            "vec_store": 20,
+            "vec_load": 16,
+            "fma_packed_128": 32,
+            "fp_scalar": 65,
+            "fma_scalar": 13,
+            "widest_vector_bits": 0,
+            "isa": "aarch64",
+            "dispatch_files": 1,
+            "fma_vector_total": 32,
+            "vectorized": true
+          },
+          "status": "ok",
+          "confirm_ms": 0.039960426465098745,
+          "confirm_min_ms": 0.039581052308198056,
+          "confirm_rounds_ms": [
+            0.039960426465098745,
+            0.039581052308198056,
+            0.040051093647746554
+          ]
+        },
+        {
+          "stage": "S4_fuse_fill",
+          "title": "+ zero-fill fused into register tile",
+          "spec": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/S4_fuse_fill_655bc5c71f.mlir",
+          "compile": {
+            "ok": true,
+            "vmfb": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/128x128x128/td_S4_fuse_fill_66ae2de13f/kernel.vmfb",
+            "dump_dir": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/128x128x128/td_S4_fuse_fill_66ae2de13f/dispatches",
+            "compile_seconds": 0.232,
+            "vmfb_bytes": 10111,
+            "error": "",
+            "flags": [
+              "--iree-hal-target-device=local",
+              "--iree-hal-local-target-device-backends=llvm-cpu",
+              "--iree-llvmcpu-target-cpu=host",
+              "--iree-opt-data-tiling=false",
+              "--iree-codegen-transform-dialect-library=/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/S4_fuse_fill_655bc5c71f.mlir"
+            ]
+          },
+          "correctness": {
+            "ok": true,
+            "max_rel_err": 5.347217170479745e-07,
+            "rtol": 0.0001
+          },
+          "timing": {
+            "ok": true,
+            "device": "local-sync",
+            "repetitions": 7,
+            "iterations_per_rep": 7384,
+            "median_ms": 0.037853546040273904,
+            "p95_ms": 0.03792252581240407,
+            "min_ms": 0.03781576334036693,
+            "mean_ms": 0.03786022697748437,
+            "stdev_ms": 3.949147885320069e-05,
+            "cv_pct": 0.10430861620741586,
+            "gflops": 110.80346331457326
+          },
+          "asm": {
+            "instructions": 1134,
+            "vec_load": 4,
+            "fma_packed_128": 32,
+            "vec_store": 12,
+            "fp_scalar": 65,
+            "fma_scalar": 13,
+            "widest_vector_bits": 0,
+            "isa": "aarch64",
+            "dispatch_files": 1,
+            "fma_vector_total": 32,
+            "vectorized": true
+          },
+          "status": "ok",
+          "confirm_ms": 0.0379617457692219,
+          "confirm_min_ms": 0.03787893365962454,
+          "confirm_rounds_ms": [
+            0.03801777847516148,
+            0.0379617457692219,
+            0.03787893365962454
+          ]
+        },
+        {
+          "stage": "S5_kblock",
+          "title": "+ cache-level K blocking (TK searched)",
+          "spec": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/K_60500be936.mlir",
+          "compile": {
+            "ok": true,
+            "vmfb": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/128x128x128/td_K_1efab8cc4b/kernel.vmfb",
+            "dump_dir": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/128x128x128/td_K_1efab8cc4b/dispatches",
+            "compile_seconds": 0.235,
+            "vmfb_bytes": 10135,
+            "error": "",
+            "flags": [
+              "--iree-hal-target-device=local",
+              "--iree-hal-local-target-device-backends=llvm-cpu",
+              "--iree-llvmcpu-target-cpu=host",
+              "--iree-opt-data-tiling=false",
+              "--iree-codegen-transform-dialect-library=/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/K_60500be936.mlir"
+            ]
+          },
+          "correctness": {
+            "ok": true,
+            "max_rel_err": 5.347217170479745e-07,
+            "rtol": 0.0001
+          },
+          "timing": {
+            "ok": true,
+            "device": "local-sync",
+            "repetitions": 7,
+            "iterations_per_rep": 7037,
+            "median_ms": 0.039927563465934755,
+            "p95_ms": 0.040005631165514643,
+            "min_ms": 0.039485406013557954,
+            "mean_ms": 0.03983851061083569,
+            "stdev_ms": 0.0001736298990398483,
+            "cv_pct": 0.4358343130242993,
+            "gflops": 105.04783252247485
+          },
+          "asm": {
+            "instructions": 1155,
+            "vec_store": 20,
+            "vec_load": 16,
+            "fma_packed_128": 32,
+            "fp_scalar": 65,
+            "fma_scalar": 13,
+            "widest_vector_bits": 0,
+            "isa": "aarch64",
+            "dispatch_files": 1,
+            "fma_vector_total": 32,
+            "vectorized": true
+          },
+          "status": "ok",
+          "confirm_ms": 0.03957064989089725,
+          "confirm_min_ms": 0.03955022376778057,
+          "confirm_rounds_ms": [
+            0.039658185058719056,
+            0.03957064989089725,
+            0.03955022376778057
+          ]
+        },
+        {
+          "stage": "IREE_same_tiles",
+          "title": "IREE CPUDoubleTilingExpert, same tiles",
+          "spec": null,
+          "compile": {
+            "ok": true,
+            "vmfb": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/128x128x128/tune_5973499a7e/kernel.vmfb",
+            "dump_dir": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/128x128x128/tune_5973499a7e/dispatches",
+            "compile_seconds": 0.0,
+            "vmfb_bytes": 9967,
+            "error": "",
+            "flags": [
+              "--iree-hal-target-device=local",
+              "--iree-hal-local-target-device-backends=llvm-cpu",
+              "--iree-llvmcpu-target-cpu=host",
+              "--iree-opt-data-tiling=false"
+            ]
+          },
+          "correctness": {
+            "ok": true,
+            "max_rel_err": 5.347217170479745e-07,
+            "rtol": 0.0001
+          },
+          "timing": {
+            "ok": true,
+            "device": "local-sync",
+            "repetitions": 7,
+            "iterations_per_rep": 7196,
+            "median_ms": 0.038867162989261975,
+            "p95_ms": 0.039034630593871196,
+            "min_ms": 0.03874570912947612,
+            "mean_ms": 0.03887978794572291,
+            "stdev_ms": 0.00011626283894586896,
+            "cv_pct": 0.2990315664997314,
+            "gflops": 107.91381920925848
+          },
+          "asm": {
+            "instructions": 1139,
+            "vec_load": 4,
+            "fma_packed_128": 32,
+            "vec_store": 12,
+            "fp_scalar": 65,
+            "fma_scalar": 13,
+            "widest_vector_bits": 0,
+            "isa": "aarch64",
+            "dispatch_files": 1,
+            "fma_vector_total": 32,
+            "vectorized": true
+          },
+          "status": "ok",
+          "confirm_ms": 0.038997458932597644,
+          "confirm_min_ms": 0.03878877237749381,
+          "confirm_rounds_ms": [
+            0.03904881743867467,
+            0.038997458932597644,
+            0.03878877237749381
+          ]
+        },
+        {
+          "stage": "IREE_packed_late",
+          "title": "IREE packed layout (late materialization)",
+          "spec": null,
+          "compile": {
+            "ok": true,
+            "vmfb": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/128x128x128/packed_late_0ebec3c5d5/kernel.vmfb",
+            "dump_dir": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/128x128x128/packed_late_0ebec3c5d5/dispatches",
+            "compile_seconds": 0.327,
+            "vmfb_bytes": 12147,
+            "error": "",
+            "flags": [
+              "--iree-hal-target-device=local",
+              "--iree-hal-local-target-device-backends=llvm-cpu",
+              "--iree-llvmcpu-target-cpu=host",
+              "--iree-dispatch-creation-data-tiling"
+            ]
+          },
+          "correctness": {
+            "ok": true,
+            "max_rel_err": 5.347217170479745e-07,
+            "rtol": 0.0001
+          },
+          "timing": {
+            "ok": true,
+            "device": "local-sync",
+            "repetitions": 7,
+            "iterations_per_rep": 4996,
+            "median_ms": 0.054852426122185036,
+            "p95_ms": 0.057057377420368795,
+            "min_ms": 0.05403439658063891,
+            "mean_ms": 0.055262501836264064,
+            "stdev_ms": 0.001071247949150033,
+            "cv_pct": 1.9384716825235453,
+            "gflops": 76.4652413123367
+          },
+          "asm": {
+            "instructions": 1197,
+            "vec_load": 3,
+            "fma_packed_128": 16,
+            "vec_store": 9,
+            "fp_scalar": 65,
+            "fma_scalar": 13,
+            "widest_vector_bits": 0,
+            "isa": "aarch64",
+            "dispatch_files": 1,
+            "fma_vector_total": 16,
+            "vectorized": true
+          },
+          "status": "ok",
+          "confirm_ms": 0.0543889976059511,
+          "confirm_min_ms": 0.05384089524417047,
+          "confirm_rounds_ms": [
+            0.05384089524417047,
+            0.05474893486502564,
+            0.0543889976059511
+          ]
+        }
+      ],
+      "tk_sweep": {
+        "64": 0.04000065369382226
+      },
+      "best_tk": 64,
+      "full_schedule_vs_iree": 1.0240196497093865,
+      "kblock_vs_iree": 0.9807472292759296,
+      "best_mine_vs_best_iree": 1.0240196497093865,
+      "thermal": {
+        "before": {
+          "t": "2026-09-26T02:06:05",
+          "label": "schedule 128x128x128",
+          "phase": "before",
+          "peak_gflops": 35.53,
+          "baseline_gflops": 35.527,
+          "ratio": 1.0000844428181384,
+          "waited_s": 0.0,
+          "os_thermal": "Note: No thermal warning level has been recorded | Note: No performance warning level has been recorded | Note: No CPU power status has been recorded",
+          "throttled": false
+        },
+        "after": {
+          "t": "2026-09-26T02:07:08",
+          "label": "schedule 128x128x128",
+          "phase": "after",
+          "peak_gflops": 35.522,
+          "baseline_gflops": 35.527,
+          "ratio": 0.9998592619697694,
+          "waited_s": 0.0,
+          "os_thermal": "Note: No thermal warning level has been recorded | Note: No performance warning level has been recorded | Note: No CPU power status has been recorded",
+          "throttled": false
+        }
+      }
+    },
+    {
+      "shape": {
+        "M": 512,
+        "K": 512,
+        "N": 512,
+        "dtype": "f32",
+        "label": "square",
+        "name": "512x512x512",
+        "flops": 268435456,
+        "compulsory_bytes": 3145728,
+        "operational_intensity": 85.33333333333333
+      },
+      "tile": "d256x256_v4x16x1",
+      "rows": [
+        {
+          "stage": "S1_tile_vectorize",
+          "title": "tile + vectorize (default contract lowering)",
+          "spec": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/S1_tile_vectorize_1caf33413f.mlir",
+          "compile": {
+            "ok": true,
+            "vmfb": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/512x512x512/td_S1_tile_vectorize_1ec861a05f/kernel.vmfb",
+            "dump_dir": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/512x512x512/td_S1_tile_vectorize_1ec861a05f/dispatches",
+            "compile_seconds": 0.257,
+            "vmfb_bytes": 11103,
+            "error": "",
+            "flags": [
+              "--iree-hal-target-device=local",
+              "--iree-hal-local-target-device-backends=llvm-cpu",
+              "--iree-llvmcpu-target-cpu=host",
+              "--iree-opt-data-tiling=false",
+              "--iree-codegen-transform-dialect-library=/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/S1_tile_vectorize_1caf33413f.mlir"
+            ]
+          },
+          "correctness": {
+            "ok": true,
+            "max_rel_err": 1.0364641306491456e-06,
+            "rtol": 0.0001
+          },
+          "timing": {
+            "ok": true,
+            "device": "local-sync",
+            "repetitions": 7,
+            "iterations_per_rep": 9,
+            "median_ms": 30.383749994345838,
+            "p95_ms": 30.40210088689087,
+            "min_ms": 30.382231421147782,
+            "mean_ms": 30.388811471990294,
+            "stdev_ms": 0.008002146710508891,
+            "cv_pct": 0.026332542547393006,
+            "gflops": 8.834836254575341
+          },
+          "asm": {
+            "instructions": 1392,
+            "vec_store": 33,
+            "vec_load": 21,
+            "fp_packed_128": 80,
+            "fp_scalar": 129,
+            "fma_scalar": 13,
+            "widest_vector_bits": 0,
+            "isa": "aarch64",
+            "dispatch_files": 1,
+            "fma_vector_total": 0,
+            "vectorized": false
+          },
+          "status": "ok"
+        },
+        {
+          "stage": "S2_outerproduct",
+          "title": "+ contract -> outer-product FMAs",
+          "spec": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/S2_outerproduct_9f37983b01.mlir",
+          "compile": {
+            "ok": true,
+            "vmfb": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/512x512x512/td_S2_outerproduct_c5be53ef27/kernel.vmfb",
+            "dump_dir": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/512x512x512/td_S2_outerproduct_c5be53ef27/dispatches",
+            "compile_seconds": 0.238,
+            "vmfb_bytes": 10135,
+            "error": "",
+            "flags": [
+              "--iree-hal-target-device=local",
+              "--iree-hal-local-target-device-backends=llvm-cpu",
+              "--iree-llvmcpu-target-cpu=host",
+              "--iree-opt-data-tiling=false",
+              "--iree-codegen-transform-dialect-library=/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/S2_outerproduct_9f37983b01.mlir"
+            ]
+          },
+          "correctness": {
+            "ok": true,
+            "max_rel_err": 1.0364641306491456e-06,
+            "rtol": 0.0001
+          },
+          "timing": {
+            "ok": true,
+            "device": "local-sync",
+            "repetitions": 7,
+            "iterations_per_rep": 36,
+            "median_ms": 7.881847274903622,
+            "p95_ms": 7.884449049985657,
+            "min_ms": 7.87930553067579,
+            "mean_ms": 7.88164733205035,
+            "stdev_ms": 0.0018978849807947057,
+            "cv_pct": 0.024079800844133754,
+            "gflops": 34.05742925959986
+          },
+          "asm": {
+            "instructions": 1153,
+            "vec_store": 22,
+            "vec_load": 10,
+            "fma_packed_128": 16,
+            "fp_scalar": 65,
+            "fma_scalar": 13,
+            "widest_vector_bits": 0,
+            "isa": "aarch64",
+            "dispatch_files": 1,
+            "fma_vector_total": 16,
+            "vectorized": true
+          },
+          "status": "ok"
+        },
+        {
+          "stage": "S3_hoist_acc",
+          "title": "+ C accumulator hoisted out of K loop",
+          "spec": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/S3_hoist_acc_bbb162e7f7.mlir",
+          "compile": {
+            "ok": true,
+            "vmfb": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/512x512x512/td_S3_hoist_acc_ae5edf94df/kernel.vmfb",
+            "dump_dir": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/512x512x512/td_S3_hoist_acc_ae5edf94df/dispatches",
+            "compile_seconds": 0.237,
+            "vmfb_bytes": 10119,
+            "error": "",
+            "flags": [
+              "--iree-hal-target-device=local",
+              "--iree-hal-local-target-device-backends=llvm-cpu",
+              "--iree-llvmcpu-target-cpu=host",
+              "--iree-opt-data-tiling=false",
+              "--iree-codegen-transform-dialect-library=/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/S3_hoist_acc_bbb162e7f7.mlir"
+            ]
+          },
+          "correctness": {
+            "ok": true,
+            "max_rel_err": 1.0364641306491456e-06,
+            "rtol": 0.0001
+          },
+          "timing": {
+            "ok": true,
+            "device": "local-sync",
+            "repetitions": 7,
+            "iterations_per_rep": 113,
+            "median_ms": 2.47585915741964,
+            "p95_ms": 2.476169485743034,
+            "min_ms": 2.4757459934850314,
+            "mean_ms": 2.4759271972448897,
+            "stdev_ms": 0.00015015282907239314,
+            "cv_pct": 0.006064509055010868,
+            "gflops": 108.42113340557125
+          },
+          "asm": {
+            "instructions": 1153,
+            "vec_store": 22,
+            "vec_load": 10,
+            "fma_packed_128": 16,
+            "fp_scalar": 65,
+            "fma_scalar": 13,
+            "widest_vector_bits": 0,
+            "isa": "aarch64",
+            "dispatch_files": 1,
+            "fma_vector_total": 16,
+            "vectorized": true
+          },
+          "status": "ok",
+          "confirm_ms": 2.4764550143061617,
+          "confirm_min_ms": 2.476452410929894,
+          "confirm_rounds_ms": [
+            2.4764804453877485,
+            2.4764550143061617,
+            2.476452410929894
+          ]
+        },
+        {
+          "stage": "S4_fuse_fill",
+          "title": "+ zero-fill fused into register tile",
+          "spec": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/S4_fuse_fill_a72acb2f1f.mlir",
+          "compile": {
+            "ok": true,
+            "vmfb": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/512x512x512/td_S4_fuse_fill_ccd6b1ac3c/kernel.vmfb",
+            "dump_dir": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/512x512x512/td_S4_fuse_fill_ccd6b1ac3c/dispatches",
+            "compile_seconds": 0.232,
+            "vmfb_bytes": 10007,
+            "error": "",
+            "flags": [
+              "--iree-hal-target-device=local",
+              "--iree-hal-local-target-device-backends=llvm-cpu",
+              "--iree-llvmcpu-target-cpu=host",
+              "--iree-opt-data-tiling=false",
+              "--iree-codegen-transform-dialect-library=/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/S4_fuse_fill_a72acb2f1f.mlir"
+            ]
+          },
+          "correctness": {
+            "ok": true,
+            "max_rel_err": 1.0364641306491456e-06,
+            "rtol": 0.0001
+          },
+          "timing": {
+            "ok": true,
+            "device": "local-sync",
+            "repetitions": 7,
+            "iterations_per_rep": 115,
+            "median_ms": 2.4445745658696345,
+            "p95_ms": 2.4573872777957306,
+            "min_ms": 2.444186938278701,
+            "mean_ms": 2.4477644324568764,
+            "stdev_ms": 0.005554845809555255,
+            "cv_pct": 0.22693547368770825,
+            "gflops": 109.80865944848222
+          },
+          "asm": {
+            "instructions": 1129,
+            "vec_load": 2,
+            "fma_packed_128": 16,
+            "vec_store": 8,
+            "fp_scalar": 65,
+            "fma_scalar": 13,
+            "widest_vector_bits": 0,
+            "isa": "aarch64",
+            "dispatch_files": 1,
+            "fma_vector_total": 16,
+            "vectorized": true
+          },
+          "status": "ok",
+          "confirm_ms": 2.4472540244460106,
+          "confirm_min_ms": 2.4446867592224297,
+          "confirm_rounds_ms": [
+            2.447753280158276,
+            2.4472540244460106,
+            2.4446867592224297
+          ]
+        },
+        {
+          "stage": "S5_kblock",
+          "title": "+ cache-level K blocking (TK searched)",
+          "spec": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/K_a54e506304.mlir",
+          "compile": {
+            "ok": true,
+            "vmfb": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/512x512x512/td_K_2a04d1181c/kernel.vmfb",
+            "dump_dir": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/512x512x512/td_K_2a04d1181c/dispatches",
+            "compile_seconds": 0.236,
+            "vmfb_bytes": 10095,
+            "error": "",
+            "flags": [
+              "--iree-hal-target-device=local",
+              "--iree-hal-local-target-device-backends=llvm-cpu",
+              "--iree-llvmcpu-target-cpu=host",
+              "--iree-opt-data-tiling=false",
+              "--iree-codegen-transform-dialect-library=/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/K_a54e506304.mlir"
+            ]
+          },
+          "correctness": {
+            "ok": true,
+            "max_rel_err": 1.0364641306491456e-06,
+            "rtol": 0.0001
+          },
+          "timing": {
+            "ok": true,
+            "device": "local-sync",
+            "repetitions": 7,
+            "iterations_per_rep": 110,
+            "median_ms": 2.556265475736423,
+            "p95_ms": 2.572470677233386,
+            "min_ms": 2.555874636693096,
+            "mean_ms": 2.5607815975407986,
+            "stdev_ms": 0.006885818744449929,
+            "cv_pct": 0.2688951978982746,
+            "gflops": 105.01078958658142
+          },
+          "asm": {
+            "instructions": 1165,
+            "vec_store": 22,
+            "vec_load": 10,
+            "fma_packed_128": 16,
+            "fp_scalar": 65,
+            "fma_scalar": 13,
+            "widest_vector_bits": 0,
+            "isa": "aarch64",
+            "dispatch_files": 1,
+            "fma_vector_total": 16,
+            "vectorized": true
+          },
+          "status": "ok",
+          "confirm_ms": 2.5573609830726953,
+          "confirm_min_ms": 2.5557768806307153,
+          "confirm_rounds_ms": [
+            2.5573609830726953,
+            2.557538989119642,
+            2.5557768806307153
+          ]
+        },
+        {
+          "stage": "IREE_same_tiles",
+          "title": "IREE CPUDoubleTilingExpert, same tiles",
+          "spec": null,
+          "compile": {
+            "ok": true,
+            "vmfb": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/512x512x512/tune_dfb832dfb3/kernel.vmfb",
+            "dump_dir": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/512x512x512/tune_dfb832dfb3/dispatches",
+            "compile_seconds": 0.0,
+            "vmfb_bytes": 10015,
+            "error": "",
+            "flags": [
+              "--iree-hal-target-device=local",
+              "--iree-hal-local-target-device-backends=llvm-cpu",
+              "--iree-llvmcpu-target-cpu=host",
+              "--iree-opt-data-tiling=false"
+            ]
+          },
+          "correctness": {
+            "ok": true,
+            "max_rel_err": 1.0364641306491456e-06,
+            "rtol": 0.0001
+          },
+          "timing": {
+            "ok": true,
+            "device": "local-sync",
+            "repetitions": 7,
+            "iterations_per_rep": 115,
+            "median_ms": 2.4637044073365955,
+            "p95_ms": 2.492277759997903,
+            "min_ms": 2.439218440659992,
+            "mean_ms": 2.4647953480435825,
+            "stdev_ms": 0.023101015568637407,
+            "cv_pct": 0.9372386874623774,
+            "gflops": 108.95603190083747
+          },
+          "asm": {
+            "instructions": 1144,
+            "vec_load": 2,
+            "fma_packed_128": 16,
+            "vec_store": 8,
+            "fp_scalar": 65,
+            "fma_scalar": 13,
+            "widest_vector_bits": 0,
+            "isa": "aarch64",
+            "dispatch_files": 1,
+            "fma_vector_total": 16,
+            "vectorized": true
+          },
+          "status": "ok",
+          "confirm_ms": 2.446797483033784,
+          "confirm_min_ms": 2.4399771531069177,
+          "confirm_rounds_ms": [
+            2.446797483033784,
+            2.4593677391986484,
+            2.4399771531069177
+          ]
+        },
+        {
+          "stage": "IREE_packed_late",
+          "title": "IREE packed layout (late materialization)",
+          "spec": null,
+          "compile": {
+            "ok": true,
+            "vmfb": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/512x512x512/packed_late_c66950feaa/kernel.vmfb",
+            "dump_dir": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/512x512x512/packed_late_c66950feaa/dispatches",
+            "compile_seconds": 0.711,
+            "vmfb_bytes": 12147,
+            "error": "",
+            "flags": [
+              "--iree-hal-target-device=local",
+              "--iree-hal-local-target-device-backends=llvm-cpu",
+              "--iree-llvmcpu-target-cpu=host",
+              "--iree-dispatch-creation-data-tiling"
+            ]
+          },
+          "correctness": {
+            "ok": true,
+            "max_rel_err": 1.0364641306491456e-06,
+            "rtol": 0.0001
+          },
+          "timing": {
+            "ok": true,
+            "device": "local-sync",
+            "repetitions": 7,
+            "iterations_per_rep": 112,
+            "median_ms": 2.4938117723130353,
+            "p95_ms": 2.5001598977334134,
+            "min_ms": 2.4927354502973946,
+            "mean_ms": 2.4955547377597824,
+            "stdev_ms": 0.0031140301284821874,
+            "cv_pct": 0.12478308254931728,
+            "gflops": 107.64062427655614
+          },
+          "asm": {
+            "instructions": 1214,
+            "vec_load": 3,
+            "fma_packed_128": 16,
+            "vec_store": 9,
+            "fp_scalar": 65,
+            "fma_scalar": 13,
+            "widest_vector_bits": 0,
+            "isa": "aarch64",
+            "dispatch_files": 1,
+            "fma_vector_total": 16,
+            "vectorized": true
+          },
+          "status": "ok",
+          "confirm_ms": 2.4913359562300945,
+          "confirm_min_ms": 2.490998132478645,
+          "confirm_rounds_ms": [
+            2.5033415024933805,
+            2.490998132478645,
+            2.4913359562300945
+          ]
+        }
+      ],
+      "tk_sweep": {
+        "64": 2.6282228265280048,
+        "128": 2.667059342806729,
+        "256": 2.5558318985118107
+      },
+      "best_tk": 256,
+      "full_schedule_vs_iree": 0.9980735339209633,
+      "kblock_vs_iree": 0.9546909871509517,
+      "best_mine_vs_best_iree": 0.9980735339209633,
+      "thermal": {
+        "before": {
+          "t": "2026-09-26T02:07:10",
+          "label": "schedule 512x512x512",
+          "phase": "before",
+          "peak_gflops": 35.639,
+          "baseline_gflops": 35.527,
+          "ratio": 1.003152531877164,
+          "waited_s": 0.0,
+          "os_thermal": "Note: No thermal warning level has been recorded | Note: No performance warning level has been recorded | Note: No CPU power status has been recorded",
+          "throttled": false
+        },
+        "after": {
+          "t": "2026-09-26T02:08:16",
+          "label": "schedule 512x512x512",
+          "phase": "after",
+          "peak_gflops": 35.525,
+          "baseline_gflops": 35.527,
+          "ratio": 0.9999437047879077,
+          "waited_s": 0.0,
+          "os_thermal": "Note: No thermal warning level has been recorded | Note: No performance warning level has been recorded | Note: No CPU power status has been recorded",
+          "throttled": false
+        }
+      }
+    },
+    {
+      "shape": {
+        "M": 1024,
+        "K": 1024,
+        "N": 1024,
+        "dtype": "f32",
+        "label": "square",
+        "name": "1024x1024x1024",
+        "flops": 2147483648,
+        "compulsory_bytes": 12582912,
+        "operational_intensity": 170.66666666666666
+      },
+      "tile": "d16x256_v4x16x2",
+      "rows": [
+        {
+          "stage": "S1_tile_vectorize",
+          "title": "tile + vectorize (default contract lowering)",
+          "spec": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/S1_tile_vectorize_5a9c49f352.mlir",
+          "compile": {
+            "ok": true,
+            "vmfb": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/1024x1024x1024/td_S1_tile_vectorize_84b90c1807/kernel.vmfb",
+            "dump_dir": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/1024x1024x1024/td_S1_tile_vectorize_84b90c1807/dispatches",
+            "compile_seconds": 0.252,
+            "vmfb_bytes": 11887,
+            "error": "",
+            "flags": [
+              "--iree-hal-target-device=local",
+              "--iree-hal-local-target-device-backends=llvm-cpu",
+              "--iree-llvmcpu-target-cpu=host",
+              "--iree-opt-data-tiling=false",
+              "--iree-codegen-transform-dialect-library=/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/S1_tile_vectorize_5a9c49f352.mlir"
+            ]
+          },
+          "correctness": {
+            "ok": true,
+            "max_rel_err": 1.3201895042824022e-06,
+            "rtol": 0.0001
+          },
+          "timing": {
+            "ok": true,
+            "device": "local-sync",
+            "repetitions": 7,
+            "iterations_per_rep": 1,
+            "median_ms": 213.71750009711832,
+            "p95_ms": 214.54883308615535,
+            "min_ms": 213.51675014011562,
+            "mean_ms": 213.9328570337966,
+            "stdev_ms": 0.4094156877274211,
+            "cv_pct": 0.19137578649863146,
+            "gflops": 10.0482349223818
+          },
+          "asm": {
+            "instructions": 1565,
+            "vec_store": 35,
+            "vec_load": 28,
+            "fp_packed_128": 80,
+            "fp_scalar": 193,
+            "fma_scalar": 13,
+            "widest_vector_bits": 0,
+            "isa": "aarch64",
+            "dispatch_files": 1,
+            "fma_vector_total": 0,
+            "vectorized": false
+          },
+          "status": "ok"
+        },
+        {
+          "stage": "S2_outerproduct",
+          "title": "+ contract -> outer-product FMAs",
+          "spec": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/S2_outerproduct_1b6c4bbecb.mlir",
+          "compile": {
+            "ok": true,
+            "vmfb": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/1024x1024x1024/td_S2_outerproduct_c6e4b41b46/kernel.vmfb",
+            "dump_dir": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/1024x1024x1024/td_S2_outerproduct_c6e4b41b46/dispatches",
+            "compile_seconds": 0.238,
+            "vmfb_bytes": 10335,
+            "error": "",
+            "flags": [
+              "--iree-hal-target-device=local",
+              "--iree-hal-local-target-device-backends=llvm-cpu",
+              "--iree-llvmcpu-target-cpu=host",
+              "--iree-opt-data-tiling=false",
+              "--iree-codegen-transform-dialect-library=/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/S2_outerproduct_1b6c4bbecb.mlir"
+            ]
+          },
+          "correctness": {
+            "ok": true,
+            "max_rel_err": 1.280848789555387e-06,
+            "rtol": 0.0001
+          },
+          "timing": {
+            "ok": true,
+            "device": "local-sync",
+            "repetitions": 7,
+            "iterations_per_rep": 6,
+            "median_ms": 46.952215333779655,
+            "p95_ms": 47.026556998025626,
+            "min_ms": 46.91391651673863,
+            "mean_ms": 46.960374986242854,
+            "stdev_ms": 0.04148778667258598,
+            "cv_pct": 0.08834637007208719,
+            "gflops": 45.737642680621256
+          },
+          "asm": {
+            "instructions": 1180,
+            "vec_store": 22,
+            "vec_load": 14,
+            "fma_packed_128": 32,
+            "fp_scalar": 65,
+            "fma_scalar": 13,
+            "widest_vector_bits": 0,
+            "isa": "aarch64",
+            "dispatch_files": 1,
+            "fma_vector_total": 32,
+            "vectorized": true
+          },
+          "status": "ok"
+        },
+        {
+          "stage": "S3_hoist_acc",
+          "title": "+ C accumulator hoisted out of K loop",
+          "spec": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/S3_hoist_acc_51fe929f0c.mlir",
+          "compile": {
+            "ok": true,
+            "vmfb": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/1024x1024x1024/td_S3_hoist_acc_d5e9106142/kernel.vmfb",
+            "dump_dir": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/1024x1024x1024/td_S3_hoist_acc_d5e9106142/dispatches",
+            "compile_seconds": 0.237,
+            "vmfb_bytes": 10327,
+            "error": "",
+            "flags": [
+              "--iree-hal-target-device=local",
+              "--iree-hal-local-target-device-backends=llvm-cpu",
+              "--iree-llvmcpu-target-cpu=host",
+              "--iree-opt-data-tiling=false",
+              "--iree-codegen-transform-dialect-library=/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/S3_hoist_acc_51fe929f0c.mlir"
+            ]
+          },
+          "correctness": {
+            "ok": true,
+            "max_rel_err": 1.280848789555387e-06,
+            "rtol": 0.0001
+          },
+          "timing": {
+            "ok": true,
+            "device": "local-sync",
+            "repetitions": 7,
+            "iterations_per_rep": 13,
+            "median_ms": 19.80722093811402,
+            "p95_ms": 19.86983608848487,
+            "min_ms": 19.802077216669343,
+            "mean_ms": 19.819798087445346,
+            "stdev_ms": 0.029891666761367706,
+            "cv_pct": 0.15081721130298642,
+            "gflops": 108.41923027514208
+          },
+          "asm": {
+            "instructions": 1178,
+            "vec_store": 22,
+            "vec_load": 14,
+            "fma_packed_128": 32,
+            "fp_scalar": 65,
+            "fma_scalar": 13,
+            "widest_vector_bits": 0,
+            "isa": "aarch64",
+            "dispatch_files": 1,
+            "fma_vector_total": 32,
+            "vectorized": true
+          },
+          "status": "ok",
+          "confirm_ms": 19.769800643968797,
+          "confirm_min_ms": 19.76898709276261,
+          "confirm_rounds_ms": [
+            19.76898709276261,
+            19.836730753573086,
+            19.769800643968797
+          ]
+        },
+        {
+          "stage": "S4_fuse_fill",
+          "title": "+ zero-fill fused into register tile",
+          "spec": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/S4_fuse_fill_de8b13a3bd.mlir",
+          "compile": {
+            "ok": true,
+            "vmfb": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/1024x1024x1024/td_S4_fuse_fill_ae70a092ef/kernel.vmfb",
+            "dump_dir": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/1024x1024x1024/td_S4_fuse_fill_ae70a092ef/dispatches",
+            "compile_seconds": 0.247,
+            "vmfb_bytes": 10215,
+            "error": "",
+            "flags": [
+              "--iree-hal-target-device=local",
+              "--iree-hal-local-target-device-backends=llvm-cpu",
+              "--iree-llvmcpu-target-cpu=host",
+              "--iree-opt-data-tiling=false",
+              "--iree-codegen-transform-dialect-library=/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/S4_fuse_fill_de8b13a3bd.mlir"
+            ]
+          },
+          "correctness": {
+            "ok": true,
+            "max_rel_err": 1.280848789555387e-06,
+            "rtol": 0.0001
+          },
+          "timing": {
+            "ok": true,
+            "device": "local-sync",
+            "repetitions": 7,
+            "iterations_per_rep": 14,
+            "median_ms": 19.60805358664532,
+            "p95_ms": 19.784702719854458,
+            "min_ms": 19.600062348347688,
+            "mean_ms": 19.64992517724215,
+            "stdev_ms": 0.07722399727814175,
+            "cv_pct": 0.3929989380701554,
+            "gflops": 109.52049057345555
+          },
+          "asm": {
+            "instructions": 1152,
+            "vec_load": 6,
+            "fma_packed_128": 32,
+            "vec_store": 8,
+            "fp_scalar": 65,
+            "fma_scalar": 13,
+            "widest_vector_bits": 0,
+            "isa": "aarch64",
+            "dispatch_files": 1,
+            "fma_vector_total": 32,
+            "vectorized": true
+          },
+          "status": "ok",
+          "confirm_ms": 19.630432684117785,
+          "confirm_min_ms": 19.6045387419872,
+          "confirm_rounds_ms": [
+            19.715767786172883,
+            19.630432684117785,
+            19.6045387419872
+          ]
+        },
+        {
+          "stage": "S5_kblock",
+          "title": "+ cache-level K blocking (TK searched)",
+          "spec": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/K_7b47d945dd.mlir",
+          "compile": {
+            "ok": true,
+            "vmfb": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/1024x1024x1024/td_K_a771bd9ef8/kernel.vmfb",
+            "dump_dir": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/1024x1024x1024/td_K_a771bd9ef8/dispatches",
+            "compile_seconds": 0.256,
+            "vmfb_bytes": 10359,
+            "error": "",
+            "flags": [
+              "--iree-hal-target-device=local",
+              "--iree-hal-local-target-device-backends=llvm-cpu",
+              "--iree-llvmcpu-target-cpu=host",
+              "--iree-opt-data-tiling=false",
+              "--iree-codegen-transform-dialect-library=/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/schedules/K_7b47d945dd.mlir"
+            ]
+          },
+          "correctness": {
+            "ok": true,
+            "max_rel_err": 1.280848789555387e-06,
+            "rtol": 0.0001
+          },
+          "timing": {
+            "ok": true,
+            "device": "local-sync",
+            "repetitions": 7,
+            "iterations_per_rep": 14,
+            "median_ms": 19.84291393143524,
+            "p95_ms": 19.99475670496135,
+            "min_ms": 19.726494077726134,
+            "mean_ms": 19.844157734116045,
+            "stdev_ms": 0.09845293396539682,
+            "cv_pct": 0.4961305754798386,
+            "gflops": 108.224208169242
+          },
+          "asm": {
+            "instructions": 1188,
+            "vec_store": 22,
+            "vec_load": 14,
+            "fma_packed_128": 32,
+            "fp_scalar": 65,
+            "fma_scalar": 13,
+            "widest_vector_bits": 0,
+            "isa": "aarch64",
+            "dispatch_files": 1,
+            "fma_vector_total": 32,
+            "vectorized": true
+          },
+          "status": "ok",
+          "confirm_ms": 19.742184268709803,
+          "confirm_min_ms": 19.725380872841924,
+          "confirm_rounds_ms": [
+            19.742184268709803,
+            20.311092913079147,
+            19.725380872841924
+          ]
+        },
+        {
+          "stage": "IREE_same_tiles",
+          "title": "IREE CPUDoubleTilingExpert, same tiles",
+          "spec": null,
+          "compile": {
+            "ok": true,
+            "vmfb": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/1024x1024x1024/tune_83c3e31d75/kernel.vmfb",
+            "dump_dir": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/1024x1024x1024/tune_83c3e31d75/dispatches",
+            "compile_seconds": 0.0,
+            "vmfb_bytes": 10175,
+            "error": "",
+            "flags": [
+              "--iree-hal-target-device=local",
+              "--iree-hal-local-target-device-backends=llvm-cpu",
+              "--iree-llvmcpu-target-cpu=host",
+              "--iree-opt-data-tiling=false"
+            ]
+          },
+          "correctness": {
+            "ok": true,
+            "max_rel_err": 1.280848789555387e-06,
+            "rtol": 0.0001
+          },
+          "timing": {
+            "ok": true,
+            "device": "local-sync",
+            "repetitions": 7,
+            "iterations_per_rep": 13,
+            "median_ms": 20.987150536921735,
+            "p95_ms": 21.12145407859666,
+            "min_ms": 20.455384537434348,
+            "mean_ms": 20.877200955330586,
+            "stdev_ms": 0.25548308182224905,
+            "cv_pct": 1.2237420254223133,
+            "gflops": 102.32373586028413
+          },
+          "asm": {
+            "instructions": 1171,
+            "vec_load": 6,
+            "fma_packed_128": 32,
+            "vec_store": 8,
+            "fp_scalar": 65,
+            "fma_scalar": 13,
+            "widest_vector_bits": 0,
+            "isa": "aarch64",
+            "dispatch_files": 1,
+            "fma_vector_total": 32,
+            "vectorized": true
+          },
+          "status": "ok",
+          "confirm_ms": 20.43066670795759,
+          "confirm_min_ms": 20.39024677987282,
+          "confirm_rounds_ms": [
+            20.64507054344106,
+            20.39024677987282,
+            20.43066670795759
+          ]
+        },
+        {
+          "stage": "IREE_packed_late",
+          "title": "IREE packed layout (late materialization)",
+          "spec": null,
+          "compile": {
+            "ok": true,
+            "vmfb": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/1024x1024x1024/packed_late_e53ec095bb/kernel.vmfb",
+            "dump_dir": "/Users/rudrabrahmbhatt/Downloads/MLIRBench/build/1024x1024x1024/packed_late_e53ec095bb/dispatches",
+            "compile_seconds": 0.448,
+            "vmfb_bytes": 12267,
+            "error": "",
+            "flags": [
+              "--iree-hal-target-device=local",
+              "--iree-hal-local-target-device-backends=llvm-cpu",
+              "--iree-llvmcpu-target-cpu=host",
+              "--iree-dispatch-creation-data-tiling"
+            ]
+          },
+          "correctness": {
+            "ok": true,
+            "max_rel_err": 1.280848789555387e-06,
+            "rtol": 0.0001
+          },
+          "timing": {
+            "ok": true,
+            "device": "local-sync",
+            "repetitions": 7,
+            "iterations_per_rep": 14,
+            "median_ms": 18.96479170370315,
+            "p95_ms": 19.001104868116922,
+            "min_ms": 18.949258789819265,
+            "mean_ms": 18.97019983925001,
+            "stdev_ms": 0.01907344303909073,
+            "cv_pct": 0.1005442388626139,
+            "gflops": 113.23528787192916
+          },
+          "asm": {
+            "instructions": 1214,
+            "vec_load": 3,
+            "fma_packed_128": 16,
+            "vec_store": 9,
+            "fp_scalar": 65,
+            "fma_scalar": 13,
+            "widest_vector_bits": 0,
+            "isa": "aarch64",
+            "dispatch_files": 1,
+            "fma_vector_total": 16,
+            "vectorized": true
+          },
+          "status": "ok",
+          "confirm_ms": 18.955669640230813,
+          "confirm_min_ms": 18.93339878214257,
+          "confirm_rounds_ms": [
+            19.0348660107702,
+            18.955669640230813,
+            18.93339878214257
+          ]
+        }
+      ],
+      "tk_sweep": {
+        "64": 21.637458315429587,
+        "128": 20.43042257095554,
+        "256": 20.045988112022833,
+        "512": 19.831006165726908
+      },
+      "best_tk": 512,
+      "full_schedule_vs_iree": 1.0400778640204815,
+      "kblock_vs_iree": 1.033706112511434,
+      "best_mine_vs_best_iree": 0.965766092807517,
+      "thermal": {
+        "before": {
+          "t": "2026-09-26T02:08:17",
+          "label": "schedule 1024x1024x1024",
+          "phase": "before",
+          "peak_gflops": 35.488,
+          "baseline_gflops": 35.527,
+          "ratio": 0.9989022433642019,
+          "waited_s": 0.0,
+          "os_thermal": "Note: No thermal warning level has been recorded | Note: No performance warning level has been recorded | Note: No CPU power status has been recorded",
+          "throttled": false
+        },
+        "after": {
+          "t": "2026-09-26T02:09:23",
+          "label": "schedule 1024x1024x1024",
+          "phase": "after",
+          "peak_gflops": 35.567,
+          "baseline_gflops": 35.527,
+          "ratio": 1.0011259042418441,
+          "waited_s": 0.0,
+          "os_thermal": "Note: No thermal warning level has been recorded | Note: No performance warning level has been recorded | Note: No CPU power status has been recorded",
+          "throttled": false
+        }
+      }
+    }
+  ]
+}

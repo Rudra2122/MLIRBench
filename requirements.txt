@@ -1,0 +1,4 @@
+iree-base-compiler==3.11.*
+iree-base-runtime==3.11.*
+numpy>=1.26
+matplotlib>=3.8

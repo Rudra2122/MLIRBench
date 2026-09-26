@@ -1,0 +1,66 @@
+digraph MLIRBench {
+  graph [rankdir=TB, fontname="Helvetica", fontsize=11, nodesep=0.35, ranksep=0.42, bgcolor="white", pad=0.3, compound=true, newrank=true];
+  node  [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=10.5, color="#8a8f98", fillcolor="#ffffff", penwidth=1.1, margin="0.14,0.06"];
+  edge  [color="#5f6670", arrowsize=0.7, penwidth=1.0, fontname="Helvetica", fontsize=9, fontcolor="#5f6670"];
+
+  subgraph cluster_in {
+    label="Kernel suite  (mlirbench/kernels.py)"; fontcolor="#33415c"; style="rounded,filled"; fillcolor="#eef3fb"; color="#b8c7e0";
+    shapes [label="Matmul shapes (fp32)\nsquare 64-1024 | transformer / decode\npadded-width 960 / 1024 / 1088"];
+    cfgs   [label="Configurations\ntile (cache + register) | vector | layout\nISA target | ukernels"];
+  }
+
+  subgraph cluster_opt {
+    label="Optimization (inside IREE codegen)"; fontcolor="#3b5c33"; style="rounded,filled"; fillcolor="#eef7ec"; color="#bcd9b4";
+    ladder [label="8-variant ladder  (compiler.py)\nv1 build -> scalar -> tiled -> vectorized\n-> autotuned -> packed mmt4d / ukernel / late"];
+    sched  [label="Hand-written transform-dialect schedule\n(schedules/matmul.mlir.in)\ntile -> K-block -> fuse -> vectorize ->\nhoist -> bufferize -> FMA lowering"];
+    tuner  [label="Autotuner  (autotune.py)\nregister tile -> cache tile -> boundary expansion\nreject wrong / non-compiling | confirm winner"];
+  }
+
+  iree [label="IREE 3.11 compiler  (iree-compile, llvm-cpu)", fillcolor="#fff7e6", color="#e0c48a"];
+
+  subgraph cluster_ir {
+    label="IR capture  (irstages.py, asm.py)"; fontcolor="#5c4a33"; style="rounded,filled"; fillcolor="#fbf5ee"; color="#e0cdb4";
+    ir [label="9 phases: input | global-opt | dispatch | Flow | Stream |\nexec sources | configurations | targets | HAL\n+ LLVM IR + assembly (static FMA / vector-width / spill counts)"];
+  }
+
+  subgraph cluster_hosts {
+    label="Execution hosts (single core, local-sync)"; fontcolor="#33415c"; style="rounded,filled"; fillcolor="#eef3fb"; color="#b8c7e0";
+    x86  [label="x86 sandbox VM\nAVX-512, no PMU"];
+    c4   [label="GCE C4  Xeon 8581C\nAVX-512, Linux perf"];
+    m3   [label="Apple M3\nNEON, macOS kperf"];
+    rv   [label="RISC-V (RVV)\nqemu-riscv64 + libc harness"];
+  }
+
+  subgraph cluster_meas {
+    label="Measurement"; fontcolor="#5c3355"; style="rounded,filled"; fillcolor="#f8eef6"; color="#dbb8d3";
+    timing  [label="Timing  (bench.py)\nmedian / p95 / CV\ninterleaved confirmation"];
+    ctrs    [label="HW counters  (counters*.py)\ncycles, IPC, L1/L2/L3, stalls,\nFP-width, iteration differencing"];
+    correct [label="Correctness\nvs float64 NumPy"];
+    thermal [label="Thermal guard  (thermal.py)\nsustained-clock baseline"];
+  }
+
+  subgraph cluster_ana {
+    label="Analysis"; fontcolor="#33415c"; style="rounded,filled"; fillcolor="#eef3fb"; color="#b8c7e0";
+    peaks [label="Machine ceilings  (peaks.py)\nFMA peak + L1/L2/L3/DRAM bandwidth"];
+    roof  [label="Hierarchical roofline  (roofline.py)\nactual vs theoretical FLOPs and bytes"];
+    pad   [label="Padded-width experiment  (padding.py)\ncapacity vs power-of-two conflicts"];
+    rep   [label="REPORT.md + plots  (report.py)\ndocs/: findings, walkthrough, schedule"];
+  }
+
+  shapes -> ladder [lhead=cluster_opt];
+  cfgs -> tuner;
+  ladder -> iree; sched -> iree; tuner -> iree;
+  iree -> ir;
+  iree -> c4 [lhead=cluster_hosts, label=" vmfb / static lib"];
+  c4 -> ctrs [ltail=cluster_hosts, lhead=cluster_meas];
+  ctrs -> roof [ltail=cluster_meas, lhead=cluster_ana];
+  peaks -> roof;
+  roof -> rep; rep -> pad [dir=back];
+  ctrs -> tuner [style=dashed, constraint=false, label=" per-config counters"];
+  ir -> rep [style=dotted, constraint=false];
+  {rank=same; x86; c4; m3; rv;}
+  x86 -> c4 -> m3 -> rv [style=invis];
+  timing -> ctrs -> correct -> thermal [style=invis];
+  {rank=same; timing; ctrs; correct; thermal;}
+  {rank=same; peaks; roof; pad; rep;}
+}

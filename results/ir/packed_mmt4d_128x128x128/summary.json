@@ -1,0 +1,158 @@
+{
+  "variant": "packed_mmt4d",
+  "shape": "128x128x128",
+  "flags": [
+    "--iree-llvmcpu-target-cpu=host",
+    "--iree-global-opt-data-tiling",
+    "--iree-llvmcpu-enable-ukernels=none"
+  ],
+  "phases": {
+    "input": {
+      "lines": 8,
+      "dispatch_exports": [],
+      "op_counts": {
+        "linalg.matmul": 1
+      },
+      "lowering_configs": [],
+      "pipelines": []
+    },
+    "global-optimization": {
+      "lines": 20,
+      "dispatch_exports": [],
+      "op_counts": {
+        "linalg.mmt4d": 1,
+        "linalg.pack": 2,
+        "linalg.unpack": 1
+      },
+      "lowering_configs": [],
+      "pipelines": []
+    },
+    "dispatch-creation": {
+      "lines": 55,
+      "dispatch_exports": [],
+      "op_counts": {
+        "linalg.mmt4d": 1,
+        "linalg.pack": 2,
+        "linalg.unpack": 1,
+        "flow.dispatch": 4
+      },
+      "lowering_configs": [],
+      "pipelines": []
+    },
+    "flow": {
+      "lines": 75,
+      "dispatch_exports": [
+        "matmul_dispatch_0_pack_f32",
+        "matmul_dispatch_1_pack_f32",
+        "matmul_dispatch_2_mmt4d_8x8x128x16x16x1_f32",
+        "matmul_dispatch_3_unpack_f32"
+      ],
+      "op_counts": {
+        "linalg.mmt4d": 1,
+        "linalg.pack": 2,
+        "linalg.unpack": 1,
+        "flow.dispatch": 4
+      },
+      "lowering_configs": [],
+      "pipelines": []
+    },
+    "stream": {
+      "lines": 121,
+      "dispatch_exports": [
+        "matmul_dispatch_0_pack_f32",
+        "matmul_dispatch_1_pack_f32",
+        "matmul_dispatch_2_mmt4d_8x8x128x16x16x1_f32",
+        "matmul_dispatch_3_unpack_f32"
+      ],
+      "op_counts": {
+        "linalg.mmt4d": 1,
+        "linalg.pack": 2,
+        "linalg.unpack": 1,
+        "stream.cmd.dispatch": 4
+      },
+      "lowering_configs": [],
+      "pipelines": []
+    },
+    "executable-sources": {
+      "lines": 129,
+      "dispatch_exports": [
+        "matmul_dispatch_0_pack_f32",
+        "matmul_dispatch_1_pack_f32",
+        "matmul_dispatch_2_mmt4d_8x8x128x16x16x1_f32",
+        "matmul_dispatch_3_unpack_f32"
+      ],
+      "op_counts": {
+        "linalg.mmt4d": 1,
+        "linalg.pack": 2,
+        "linalg.unpack": 1,
+        "stream.cmd.dispatch": 4
+      },
+      "lowering_configs": [],
+      "pipelines": []
+    },
+    "executable-configurations": {
+      "lines": 129,
+      "dispatch_exports": [
+        "matmul_dispatch_0_pack_f32",
+        "matmul_dispatch_1_pack_f32",
+        "matmul_dispatch_2_mmt4d_8x8x128x16x16x1_f32",
+        "matmul_dispatch_3_unpack_f32"
+      ],
+      "op_counts": {
+        "linalg.mmt4d": 1,
+        "linalg.pack": 2,
+        "linalg.unpack": 1,
+        "stream.cmd.dispatch": 4
+      },
+      "lowering_configs": [
+        "#iree_cpu.lowering_config<distribution = [1, 4], vector_common_parallel = [1, 1]>",
+        "#iree_cpu.lowering_config<distribution = [1, 64], vector_common_parallel = [1, 16]>",
+        "#iree_cpu.lowering_config<distribution = [16, 64], vector_common_parallel = [16, 16]>",
+        "#iree_cpu.lowering_config<distribution = [8, 8, 0, 0, 0, 0], vector_common_parallel = [1, 1, 0, 16, 16, 0], vector_reduction = [0, 0, 1, 0, 0, 1]>",
+        "#iree_cpu.lowering_config<vector_common_parallel = [1, 1, 16, 16]>"
+      ],
+      "pipelines": [
+        "CPUDataTiling",
+        "Mmt4dTilingExpert"
+      ]
+    },
+    "executable-targets": {
+      "lines": 1057,
+      "dispatch_exports": [
+        "matmul_dispatch_0_pack_f32",
+        "matmul_dispatch_1_pack_f32",
+        "matmul_dispatch_2_mmt4d_8x8x128x16x16x1_f32",
+        "matmul_dispatch_3_unpack_f32"
+      ],
+      "op_counts": {
+        "stream.cmd.dispatch": 4,
+        "llvm.intr.fmuladd": 16
+      },
+      "lowering_configs": [],
+      "pipelines": []
+    },
+    "hal": {
+      "lines": 154,
+      "dispatch_exports": [],
+      "op_counts": {
+        "hal.command_buffer.dispatch": 4
+      },
+      "lowering_configs": [],
+      "pipelines": []
+    }
+  },
+  "asm": {
+    "instructions": 1274,
+    "vec_load": 68,
+    "vec_store": 60,
+    "fma_packed_512": 16,
+    "fp_scalar": 71,
+    "vec_stack_access": 22,
+    "fma_scalar": 13,
+    "widest_vector_bits": 512,
+    "isa": "x86_64",
+    "dispatch_files": 1,
+    "fma_vector_total": 16,
+    "vectorized": true
+  }
+}

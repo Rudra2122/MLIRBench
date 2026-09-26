@@ -1,0 +1,196 @@
+{
+  "host": {
+    "machine": "x86_64",
+    "system": "Linux",
+    "python": "3.12.3",
+    "timestamp": "2026-09-26T04:21:23",
+    "cpu_model": "INTEL(R) XEON(R) PLATINUM 8581C CPU @ 2.30GHz",
+    "hypervisor": true,
+    "iree_compile_version": "IREE (https://iree.dev):\n  IREE compiler version 3.11.0rc20260316 @ e4a3b0405d7d23554da26403658d0e8c3c5ecf25\n  LLVM version 23.0.0git\n  Optimized build"
+  },
+  "caches_bytes": {
+    "L1": 49152,
+    "L2": 2097152,
+    "L3": 272629760
+  },
+  "peak_gflops": 240.238,
+  "peak_detail": {
+    "peak_gflops": 240.238,
+    "vector_bytes": 64,
+    "accumulators": 12,
+    "all_trials": [
+      {
+        "vector_bytes": 64,
+        "accumulators": 8,
+        "peak_gflops": 212.157,
+        "sink": 12.9852
+      },
+      {
+        "vector_bytes": 64,
+        "accumulators": 12,
+        "peak_gflops": 240.238,
+        "sink": 19.5366
+      },
+      {
+        "vector_bytes": 64,
+        "accumulators": 16,
+        "peak_gflops": 234.537,
+        "sink": 26.088
+      },
+      {
+        "vector_bytes": 64,
+        "accumulators": 24,
+        "peak_gflops": 237.313,
+        "sink": 39.1909
+      },
+      {
+        "vector_bytes": 32,
+        "accumulators": 8,
+        "peak_gflops": 113.755,
+        "sink": 6.4926
+      },
+      {
+        "vector_bytes": 32,
+        "accumulators": 12,
+        "peak_gflops": 125.346,
+        "sink": 9.7683
+      },
+      {
+        "vector_bytes": 32,
+        "accumulators": 16,
+        "peak_gflops": 126.473,
+        "sink": 13.044
+      },
+      {
+        "vector_bytes": 32,
+        "accumulators": 24,
+        "peak_gflops": 123.927,
+        "sink": 19.5954
+      },
+      {
+        "vector_bytes": 16,
+        "accumulators": 8,
+        "peak_gflops": 57.843,
+        "sink": 3.2463
+      },
+      {
+        "vector_bytes": 16,
+        "accumulators": 12,
+        "peak_gflops": 63.551,
+        "sink": 4.88415
+      },
+      {
+        "vector_bytes": 16,
+        "accumulators": 16,
+        "peak_gflops": 62.503,
+        "sink": 6.52201
+      },
+      {
+        "vector_bytes": 16,
+        "accumulators": 24,
+        "peak_gflops": 62.922,
+        "sink": 9.79771
+      }
+    ]
+  },
+  "bandwidth_gbs": {
+    "L1": 446.214,
+    "L2": 188.513,
+    "L3": 38.417500000000004,
+    "DRAM": 20.164
+  },
+  "bandwidth_sweep": [
+    {
+      "bytes": 16384,
+      "read_gbs": 446.214,
+      "copy_gbs": 470.381
+    },
+    {
+      "bytes": 32768,
+      "read_gbs": 432.128,
+      "copy_gbs": 478.59
+    },
+    {
+      "bytes": 65536,
+      "read_gbs": 188.513,
+      "copy_gbs": 108.441
+    },
+    {
+      "bytes": 131072,
+      "read_gbs": 188.665,
+      "copy_gbs": 109.621
+    },
+    {
+      "bytes": 262144,
+      "read_gbs": 188.301,
+      "copy_gbs": 109.376
+    },
+    {
+      "bytes": 524288,
+      "read_gbs": 188.629,
+      "copy_gbs": 110.108
+    },
+    {
+      "bytes": 1048576,
+      "read_gbs": 187.954,
+      "copy_gbs": 109.721
+    },
+    {
+      "bytes": 2097152,
+      "read_gbs": 71.579,
+      "copy_gbs": 74.359
+    },
+    {
+      "bytes": 4194304,
+      "read_gbs": 38.58,
+      "copy_gbs": 36.406
+    },
+    {
+      "bytes": 8388608,
+      "read_gbs": 38.436,
+      "copy_gbs": 36.223
+    },
+    {
+      "bytes": 16777216,
+      "read_gbs": 38.315,
+      "copy_gbs": 36.043
+    },
+    {
+      "bytes": 33554432,
+      "read_gbs": 38.399,
+      "copy_gbs": 35.859
+    },
+    {
+      "bytes": 67108864,
+      "read_gbs": 38.447,
+      "copy_gbs": 36.121
+    },
+    {
+      "bytes": 134217728,
+      "read_gbs": 35.307,
+      "copy_gbs": 31.161
+    },
+    {
+      "bytes": 268435456,
+      "read_gbs": 23.484,
+      "copy_gbs": 20.624
+    },
+    {
+      "bytes": 536870912,
+      "read_gbs": 21.374,
+      "copy_gbs": 31.004
+    },
+    {
+      "bytes": 1073741824,
+      "read_gbs": 20.164,
+      "copy_gbs": 0.0
+    }
+  ],
+  "ridge_points": {
+    "L1": 0.5383918926792973,
+    "L2": 1.2743842599714608,
+    "L3": 6.253348083555671,
+    "DRAM": 11.914203531045427
+  },
+  "method": "single core; FMA peak from C microbenchmark (best over SIMD width x accumulator count); bandwidth = median read GB/s per cache-level band"
+}

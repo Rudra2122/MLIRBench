@@ -1,0 +1,1264 @@
+{
+  "host": {
+    "machine": "x86_64",
+    "system": "Linux",
+    "python": "3.12.3",
+    "timestamp": "2026-09-26T08:06:45",
+    "cpu_model": "INTEL(R) XEON(R) PLATINUM 8581C CPU @ 2.30GHz",
+    "hypervisor": true,
+    "iree_compile_version": "IREE (https://iree.dev):\n  IREE compiler version 3.11.0rc20260316 @ e4a3b0405d7d23554da26403658d0e8c3c5ecf25\n  LLVM version 23.0.0git\n  Optimized build"
+  },
+  "backend": "perf",
+  "iree_tile": "d64x64_v8x16x16",
+  "sched_tile": "d64x64_v16x32x4",
+  "tk": 64,
+  "rows": [
+    {
+      "shape": "960x960x960",
+      "label": "bracket, 3840 B rows",
+      "kernel": "iree_fixed",
+      "row_bytes": {
+        "A": 3840,
+        "B": 3840
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.2536954561518817e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 12,
+        "median_ms": 17.659108333191398,
+        "p95_ms": 18.221178483448362,
+        "min_ms": 17.464798916535074,
+        "mean_ms": 17.785662166625116,
+        "stdev_ms": 0.29148480507931857,
+        "cv_pct": 1.6388751925485872,
+        "gflops": 100.20166174948747
+      },
+      "status": "ok",
+      "counters": {
+        "status": "ok",
+        "derived": {
+          "ipc": 1.098885385372567,
+          "flops_per_cycle": 30.223789886595902,
+          "l1_miss_rate": 0.10818728394366457,
+          "l1_to_l2_bytes": 431197273.45454544,
+          "l1_miss_per_kflop": 3.807608935166689,
+          "cycles_per_l1_miss": 8.689579108166768,
+          "l2_miss_per_kflop": 0.6487106425994975,
+          "l2_miss_rate": 0.07954681055953303,
+          "l2_fill_bytes": 73467461.81818181,
+          "l2_fill_bytes_vs_compulsory": 6.643108164983165,
+          "stall_frac_l1d_miss": 0.22108373113809998,
+          "stall_frac_l2_miss": 0.12777163726369856,
+          "stall_frac_l3_miss": 0.0,
+          "measured_flops": 1769472000.0,
+          "measured_vs_analytic_flops": 1.0,
+          "fp_instr_mix_pct": {
+            "512b_packed_single": 100.0,
+            "256b_packed_single": 0.0,
+            "128b_packed_single": 0.0,
+            "scalar_single": 0.0
+          }
+        },
+        "per_invocation": {
+          "cycles": 58545669.04545455,
+          "instructions": 64334980.09090909,
+          "L1-dcache-loads": 62275871.54545455,
+          "L1-dcache-load-misses": 6737457.3977272725,
+          "branches": 464236.26136363635,
+          "branch-misses": 2446.7727272727275,
+          "fp_arith_inst_retired.512b_packed_single": 110592000.0,
+          "fp_arith_inst_retired.256b_packed_single": 0.0,
+          "fp_arith_inst_retired.128b_packed_single": 0.0,
+          "fp_arith_inst_retired.scalar_single": 0.0,
+          "l2_rqsts.references": 14430186.579545455,
+          "l2_rqsts.miss": 1147875.3181818181,
+          "l2_lines_in.all": 1147929.0909090908,
+          "cycle_activity.stalls_total": 14679714.340909092,
+          "cycle_activity.stalls_l1d_miss": 12943494.954545455,
+          "cycle_activity.stalls_l2_miss": 7480475.988636363,
+          "cycle_activity.stalls_l3_miss": 0.0,
+          "mem_load_retired.l1_miss": 7062333.965909091,
+          "mem_load_retired.l2_miss": 720650.8295454546,
+          "mem_load_retired.l3_miss": 0.0,
+          "task-clock": 18.168750000000003,
+          "page-faults": 0.0,
+          "context-switches": 0.4772727272727273
+        }
+      },
+      "thermal_suspect": false
+    },
+    {
+      "shape": "960x960x960",
+      "label": "bracket, 3840 B rows",
+      "kernel": "sched_S4",
+      "row_bytes": {
+        "A": 3840,
+        "B": 3840
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.2536954561518817e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 25,
+        "median_ms": 11.081979840091662,
+        "p95_ms": 11.318805592032732,
+        "min_ms": 10.874145120105823,
+        "mean_ms": 11.089378688135184,
+        "stdev_ms": 0.16283947628126524,
+        "cv_pct": 1.4684274102343662,
+        "gflops": 159.6711080089245
+      },
+      "status": "ok",
+      "counters": {
+        "status": "ok",
+        "derived": {
+          "ipc": 3.4989275347700963,
+          "flops_per_cycle": 50.362045636888915,
+          "l1_miss_rate": 0.020696891353694388,
+          "l1_to_l2_bytes": 52117715.40983607,
+          "l1_miss_per_kflop": 0.46021598718639717,
+          "cycles_per_l1_miss": 43.14544339198039,
+          "l2_miss_per_kflop": 0.5969107326190256,
+          "l2_miss_rate": 0.1867483736986543,
+          "l2_fill_bytes": 67599905.04918033,
+          "l2_fill_bytes_vs_compulsory": 6.112549284684275,
+          "stall_frac_l1d_miss": 0.08487125586930407,
+          "stall_frac_l2_miss": 0.06639269549998297,
+          "stall_frac_l3_miss": 0.0,
+          "measured_flops": 1769472000.0,
+          "measured_vs_analytic_flops": 1.0,
+          "fp_instr_mix_pct": {
+            "512b_packed_single": 100.0,
+            "256b_packed_single": 0.0,
+            "128b_packed_single": 0.0,
+            "scalar_single": 0.0
+          }
+        },
+        "per_invocation": {
+          "cycles": 35135030.31147541,
+          "instructions": 122934924.99180327,
+          "L1-dcache-loads": 39345971.78688525,
+          "L1-dcache-load-misses": 814339.3032786886,
+          "branches": 451901.3360655738,
+          "branch-misses": 3886.4918032786886,
+          "fp_arith_inst_retired.512b_packed_single": 110592000.0,
+          "fp_arith_inst_retired.256b_packed_single": 0.0,
+          "fp_arith_inst_retired.128b_packed_single": 0.0,
+          "fp_arith_inst_retired.scalar_single": 0.0,
+          "l2_rqsts.references": 5655828.786885246,
+          "l2_rqsts.miss": 1056216.8278688525,
+          "l2_lines_in.all": 1056248.5163934426,
+          "cycle_activity.stalls_total": 4940584.450819672,
+          "cycle_activity.stalls_l1d_miss": 2981954.1475409837,
+          "cycle_activity.stalls_l2_miss": 2332709.368852459,
+          "cycle_activity.stalls_l3_miss": 0.0,
+          "mem_load_retired.l1_miss": 1939240.713114754,
+          "mem_load_retired.l2_miss": 335505.9016393443,
+          "mem_load_retired.l3_miss": 0.0,
+          "task-clock": 10.84016393442623,
+          "page-faults": 0.0,
+          "context-switches": 0.2540983606557377
+        }
+      },
+      "thermal_suspect": false
+    },
+    {
+      "shape": "960x960x960",
+      "label": "bracket, 3840 B rows",
+      "kernel": "sched_S5",
+      "row_bytes": {
+        "A": 3840,
+        "B": 3840
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.2536954561518817e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 22,
+        "median_ms": 12.33225786406613,
+        "p95_ms": 12.653988809126366,
+        "min_ms": 12.269900818203247,
+        "mean_ms": 12.428356172792766,
+        "stdev_ms": 0.16453419241367748,
+        "cv_pct": 1.323861258288232,
+        "gflops": 143.48321446925848
+      },
+      "status": "ok",
+      "counters": {
+        "status": "ok",
+        "derived": {
+          "ipc": 3.215516898464215,
+          "flops_per_cycle": 44.22940703692201,
+          "l1_miss_rate": 0.03179679106959688,
+          "l1_to_l2_bytes": 80227635.2,
+          "l1_miss_per_kflop": 0.7084355107060185,
+          "cycles_per_l1_miss": 31.91453791004923,
+          "l2_miss_per_kflop": 0.5962914858217593,
+          "l2_miss_rate": 0.3104055481372469,
+          "l2_fill_bytes": 67530089.472,
+          "l2_fill_bytes_vs_compulsory": 6.106236388888889,
+          "stall_frac_l1d_miss": 0.15537044936724007,
+          "stall_frac_l2_miss": 0.1280616034517584,
+          "stall_frac_l3_miss": 0.0,
+          "measured_flops": 1769472000.0,
+          "measured_vs_analytic_flops": 1.0,
+          "fp_instr_mix_pct": {
+            "512b_packed_single": 100.0,
+            "256b_packed_single": 0.0,
+            "128b_packed_single": 0.0,
+            "scalar_single": 0.0
+          }
+        },
+        "per_invocation": {
+          "cycles": 40006686.016,
+          "instructions": 128642174.936,
+          "L1-dcache-loads": 39424003.424,
+          "L1-dcache-load-misses": 1253556.8,
+          "branches": 496503.216,
+          "branch-misses": 733.2,
+          "fp_arith_inst_retired.512b_packed_single": 110592000.0,
+          "fp_arith_inst_retired.256b_packed_single": 0.0,
+          "fp_arith_inst_retired.128b_packed_single": 0.0,
+          "fp_arith_inst_retired.scalar_single": 0.0,
+          "l2_rqsts.references": 3399169.552,
+          "l2_rqsts.miss": 1055121.088,
+          "l2_lines_in.all": 1055157.648,
+          "cycle_activity.stalls_total": 7980373.64,
+          "cycle_activity.stalls_l1d_miss": 6215856.784,
+          "cycle_activity.stalls_l2_miss": 5123320.36,
+          "cycle_activity.stalls_l3_miss": 0.0,
+          "mem_load_retired.l1_miss": 1220072.848,
+          "mem_load_retired.l2_miss": 249301.048,
+          "mem_load_retired.l3_miss": 0.0,
+          "task-clock": 12.2812,
+          "page-faults": 0.016,
+          "context-switches": 0.256
+        }
+      },
+      "thermal_suspect": false
+    },
+    {
+      "shape": "1024x1024x1024",
+      "label": "power-of-two, 4096 B rows",
+      "kernel": "iree_fixed",
+      "row_bytes": {
+        "A": 4096,
+        "B": 4096
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.2808487894257928e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 6,
+        "median_ms": 43.24534066624134,
+        "p95_ms": 43.54230713336923,
+        "min_ms": 43.11181833387915,
+        "mean_ms": 43.31087676679696,
+        "stdev_ms": 0.16425169657055633,
+        "cv_pct": 0.3792389090965602,
+        "gflops": 49.65815079533858
+      },
+      "status": "ok",
+      "counters": {
+        "status": "ok",
+        "derived": {
+          "ipc": 0.5098187905673924,
+          "flops_per_cycle": 14.001809035996265,
+          "l1_miss_rate": 0.09292626888995084,
+          "l1_to_l2_bytes": 449661387.2941176,
+          "l1_miss_per_kflop": 3.2717171946869175,
+          "cycles_per_l1_miss": 21.829314270056628,
+          "l2_miss_per_kflop": 4.041284007732482,
+          "l2_miss_rate": 0.7539281299317527,
+          "l2_fill_bytes": 555437976.4705882,
+          "l2_fill_bytes_vs_compulsory": 44.14224437638825,
+          "stall_frac_l1d_miss": 0.5850397311073307,
+          "stall_frac_l2_miss": 0.566328689993384,
+          "stall_frac_l3_miss": 0.0,
+          "measured_flops": 2147483648.0,
+          "measured_vs_analytic_flops": 1.0,
+          "fp_instr_mix_pct": {
+            "512b_packed_single": 100.0,
+            "256b_packed_single": 0.0,
+            "128b_packed_single": 0.0,
+            "scalar_single": 0.0
+          }
+        },
+        "per_invocation": {
+          "cycles": 153371870.9117647,
+          "instructions": 78191861.73529412,
+          "L1-dcache-loads": 75607890.64705883,
+          "L1-dcache-load-misses": 7025959.176470588,
+          "branches": 583021.7941176471,
+          "branch-misses": 1631.9117647058824,
+          "fp_arith_inst_retired.512b_packed_single": 134217728.0,
+          "fp_arith_inst_retired.256b_packed_single": 0.0,
+          "fp_arith_inst_retired.128b_packed_single": 0.0,
+          "fp_arith_inst_retired.scalar_single": 0.0,
+          "l2_rqsts.references": 11511165.294117646,
+          "l2_rqsts.miss": 8678591.323529411,
+          "l2_lines_in.all": 8678718.38235294,
+          "cycle_activity.stalls_total": 93717763.1764706,
+          "cycle_activity.stalls_l1d_miss": 89728638.11764705,
+          "cycle_activity.stalls_l2_miss": 86858890.73529412,
+          "cycle_activity.stalls_l3_miss": 0.0,
+          "mem_load_retired.l1_miss": 8449978.794117646,
+          "mem_load_retired.l2_miss": 7163688.764705882,
+          "mem_load_retired.l3_miss": 0.0,
+          "task-clock": 43.38617647058824,
+          "page-faults": -0.029411764705882353,
+          "context-switches": 1.2058823529411764
+        }
+      },
+      "thermal_suspect": false
+    },
+    {
+      "shape": "1024x1024x1024",
+      "label": "power-of-two, 4096 B rows",
+      "kernel": "sched_S4",
+      "row_bytes": {
+        "A": 4096,
+        "B": 4096
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.2808487894257928e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 10,
+        "median_ms": 21.671336099643668,
+        "p95_ms": 21.927394120430108,
+        "min_ms": 21.525584399569198,
+        "mean_ms": 21.73420859999169,
+        "stdev_ms": 0.15806832319559147,
+        "cv_pct": 0.7272789458533674,
+        "gflops": 99.09327408914628
+      },
+      "status": "ok",
+      "counters": {
+        "status": "ok",
+        "derived": {
+          "ipc": 1.9298614367944964,
+          "flops_per_cycle": 27.770507299794485,
+          "l1_miss_rate": 0.18065006434095243,
+          "l1_to_l2_bytes": 552209928.0,
+          "l1_miss_per_kflop": 4.017856030259281,
+          "cycles_per_l1_miss": 8.962348261148973,
+          "l2_miss_per_kflop": 2.102649385051336,
+          "l2_miss_rate": 0.3275224742356466,
+          "l2_fill_bytes": 288989965.0,
+          "l2_fill_bytes_vs_compulsory": 22.966858943303425,
+          "stall_frac_l1d_miss": 0.34310284440681665,
+          "stall_frac_l2_miss": 0.33955650280952787,
+          "stall_frac_l3_miss": 0.0,
+          "measured_flops": 2147483648.0,
+          "measured_vs_analytic_flops": 1.0,
+          "fp_instr_mix_pct": {
+            "512b_packed_single": 100.0,
+            "256b_packed_single": 0.0,
+            "128b_packed_single": 0.0,
+            "scalar_single": 0.0
+          }
+        },
+        "per_invocation": {
+          "cycles": 77329651.375,
+          "instructions": 149235512.109375,
+          "L1-dcache-loads": 47762397.1875,
+          "L1-dcache-load-misses": 8628280.125,
+          "branches": 553990.1875,
+          "branch-misses": 4565.578125,
+          "fp_arith_inst_retired.512b_packed_single": 134217728.0,
+          "fp_arith_inst_retired.256b_packed_single": 0.0,
+          "fp_arith_inst_retired.128b_packed_single": 0.0,
+          "fp_arith_inst_retired.scalar_single": 0.0,
+          "l2_rqsts.references": 13786550.625,
+          "l2_rqsts.miss": 4515405.171875,
+          "l2_lines_in.all": 4515468.203125,
+          "cycle_activity.stalls_total": 27096270.71875,
+          "cycle_activity.stalls_l1d_miss": 26532023.34375,
+          "cycle_activity.stalls_l2_miss": 26257785.984375,
+          "cycle_activity.stalls_l3_miss": 0.0,
+          "mem_load_retired.l1_miss": 9069820.8125,
+          "mem_load_retired.l2_miss": 1927057.71875,
+          "mem_load_retired.l3_miss": 0.0,
+          "task-clock": 21.73546875,
+          "page-faults": 0.0,
+          "context-switches": 0.6875
+        }
+      },
+      "thermal_suspect": false
+    },
+    {
+      "shape": "1024x1024x1024",
+      "label": "power-of-two, 4096 B rows",
+      "kernel": "sched_S5",
+      "row_bytes": {
+        "A": 4096,
+        "B": 4096
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.2808487894257928e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 17,
+        "median_ms": 16.41710094126585,
+        "p95_ms": 16.783074223263505,
+        "min_ms": 16.27203964691195,
+        "mean_ms": 16.475322729328422,
+        "stdev_ms": 0.21061807438201763,
+        "cv_pct": 1.2783851208394688,
+        "gflops": 130.80772638743468
+      },
+      "status": "ok",
+      "counters": {
+        "status": "ok",
+        "derived": {
+          "ipc": 2.9057068129866015,
+          "flops_per_cycle": 39.96981720934845,
+          "l1_miss_rate": 0.17168927018934446,
+          "l1_to_l2_bytes": 525764868.5176471,
+          "l1_miss_per_kflop": 3.825442898361122,
+          "cycles_per_l1_miss": 6.540125981232903,
+          "l2_miss_per_kflop": 2.3756413775331833,
+          "l2_miss_rate": 0.24831436185840713,
+          "l2_fill_bytes": 326508932.5176471,
+          "l2_fill_bytes_vs_compulsory": 25.94859858494179,
+          "stall_frac_l1d_miss": 0.16105022433939772,
+          "stall_frac_l2_miss": 0.08647460249437934,
+          "stall_frac_l3_miss": 0.0,
+          "measured_flops": 2147483648.0,
+          "measured_vs_analytic_flops": 1.0,
+          "fp_instr_mix_pct": {
+            "512b_packed_single": 100.0,
+            "256b_packed_single": 0.0,
+            "128b_packed_single": 0.0,
+            "scalar_single": 0.0
+          }
+        },
+        "per_invocation": {
+          "cycles": 53727632.44705883,
+          "instructions": 156116747.6470588,
+          "L1-dcache-loads": 47848511.8,
+          "L1-dcache-load-misses": 8215076.070588236,
+          "branches": 603475.1529411764,
+          "branch-misses": 934.5529411764705,
+          "fp_arith_inst_retired.512b_packed_single": 134217728.0,
+          "fp_arith_inst_retired.256b_packed_single": 0.0,
+          "fp_arith_inst_retired.128b_packed_single": 0.0,
+          "fp_arith_inst_retired.scalar_single": 0.0,
+          "l2_rqsts.references": 20545130.670588236,
+          "l2_rqsts.miss": 5101651.011764706,
+          "l2_lines_in.all": 5101702.070588236,
+          "cycle_activity.stalls_total": 9996549.48235294,
+          "cycle_activity.stalls_l1d_miss": 8652847.258823529,
+          "cycle_activity.stalls_l2_miss": 4646075.658823529,
+          "cycle_activity.stalls_l3_miss": 0.0,
+          "mem_load_retired.l1_miss": 8552550.729411764,
+          "mem_load_retired.l2_miss": 289941.9882352941,
+          "mem_load_retired.l3_miss": 0.0,
+          "task-clock": 16.73517647058824,
+          "page-faults": 0.0,
+          "context-switches": 0.4470588235294118
+        }
+      },
+      "thermal_suspect": false
+    },
+    {
+      "shape": "1088x1088x1088",
+      "label": "bracket, 4352 B rows",
+      "kernel": "iree_fixed",
+      "row_bytes": {
+        "A": 4352,
+        "B": 4352
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.3749660077928364e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 9,
+        "median_ms": 25.911555111128514,
+        "p95_ms": 26.26288608913051,
+        "min_ms": 25.380627000332524,
+        "mean_ms": 25.910094466760505,
+        "stdev_ms": 0.3141186603086279,
+        "cv_pct": 1.2123408531435649,
+        "gflops": 99.40842735809908
+      },
+      "status": "ok",
+      "counters": {
+        "status": "ok",
+        "derived": {
+          "ipc": 1.1163921405524815,
+          "flops_per_cycle": 30.722034100102004,
+          "l1_miss_rate": 0.10188470021510869,
+          "l1_to_l2_bytes": 591046132.4590164,
+          "l1_miss_per_kflop": 3.5852935854964536,
+          "cycles_per_l1_miss": 9.078734360190055,
+          "l2_miss_per_kflop": 0.6332668581890468,
+          "l2_miss_rate": 0.0781220333093742,
+          "l2_fill_bytes": 104400834.09836066,
+          "l2_fill_bytes_vs_compulsory": 7.349620786417267,
+          "stall_frac_l1d_miss": 0.20784089457105065,
+          "stall_frac_l2_miss": 0.1262373387239177,
+          "stall_frac_l3_miss": 0.0,
+          "measured_flops": 2575826944.0,
+          "measured_vs_analytic_flops": 1.0,
+          "fp_instr_mix_pct": {
+            "512b_packed_single": 100.0,
+            "256b_packed_single": 0.0,
+            "128b_packed_single": 0.0,
+            "scalar_single": 0.0
+          }
+        },
+        "per_invocation": {
+          "cycles": 83842981.73770492,
+          "instructions": 93601645.85245901,
+          "L1-dcache-loads": 90642616.60655738,
+          "L1-dcache-load-misses": 9235095.819672132,
+          "branches": 671261.1639344263,
+          "branch-misses": 3691.409836065574,
+          "fp_arith_inst_retired.512b_packed_single": 160989184.0,
+          "fp_arith_inst_retired.256b_packed_single": 0.0,
+          "fp_arith_inst_retired.128b_packed_single": 0.0,
+          "fp_arith_inst_retired.scalar_single": 0.0,
+          "l2_rqsts.references": 20879971.590163935,
+          "l2_rqsts.miss": 1631185.8360655739,
+          "l2_lines_in.all": 1631263.0327868853,
+          "cycle_activity.stalls_total": 19960258.01639344,
+          "cycle_activity.stalls_l1d_miss": 17426000.327868853,
+          "cycle_activity.stalls_l2_miss": 10584114.885245902,
+          "cycle_activity.stalls_l3_miss": 0.0,
+          "mem_load_retired.l1_miss": 10267094.573770491,
+          "mem_load_retired.l2_miss": 1059971.9180327868,
+          "mem_load_retired.l3_miss": 0.0,
+          "task-clock": 25.5627868852459,
+          "page-faults": 0.01639344262295082,
+          "context-switches": 0.5737704918032787
+        }
+      },
+      "thermal_suspect": false
+    },
+    {
+      "shape": "1088x1088x1088",
+      "label": "bracket, 4352 B rows",
+      "kernel": "sched_S4",
+      "row_bytes": {
+        "A": 4352,
+        "B": 4352
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.3749660077928364e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 15,
+        "median_ms": 16.908687466639094,
+        "p95_ms": 17.231987720175916,
+        "min_ms": 16.6769406664874,
+        "mean_ms": 16.946375346718316,
+        "stdev_ms": 0.22332214633134226,
+        "cv_pct": 1.317816593591436,
+        "gflops": 152.33748622310964
+      },
+      "status": "ok",
+      "counters": {
+        "status": "ok",
+        "derived": {
+          "ipc": 3.3077761538640895,
+          "flops_per_cycle": 47.619959917279544,
+          "l1_miss_rate": 0.018444573525834798,
+          "l1_to_l2_bytes": 67604623.82022472,
+          "l1_miss_per_kflop": 0.4100905340910244,
+          "cycles_per_l1_miss": 51.207223621324275,
+          "l2_miss_per_kflop": 0.5891080301855293,
+          "l2_miss_rate": 0.18563573533516145,
+          "l2_fill_bytes": 97119347.7752809,
+          "l2_fill_bytes_vs_compulsory": 6.837017954281844,
+          "stall_frac_l1d_miss": 0.10362570708771517,
+          "stall_frac_l2_miss": 0.09199148481859913,
+          "stall_frac_l3_miss": 0.0,
+          "measured_flops": 2575826944.0,
+          "measured_vs_analytic_flops": 1.0,
+          "fp_instr_mix_pct": {
+            "512b_packed_single": 100.0,
+            "256b_packed_single": 0.0,
+            "128b_packed_single": 0.0,
+            "scalar_single": 0.0
+          }
+        },
+        "per_invocation": {
+          "cycles": 54091329.52808989,
+          "instructions": 178922009.94382024,
+          "L1-dcache-loads": 57270082.483146064,
+          "L1-dcache-load-misses": 1056322.2471910112,
+          "branches": 654388.6292134832,
+          "branch-misses": 4971.157303370786,
+          "fp_arith_inst_retired.512b_packed_single": 160989184.0,
+          "fp_arith_inst_retired.256b_packed_single": 0.0,
+          "fp_arith_inst_retired.128b_packed_single": 0.0,
+          "fp_arith_inst_retired.scalar_single": 0.0,
+          "l2_rqsts.references": 8174290.011235955,
+          "l2_rqsts.miss": 1517440.3370786516,
+          "l2_lines_in.all": 1517489.808988764,
+          "cycle_activity.stalls_total": 8450345.202247191,
+          "cycle_activity.stalls_l1d_miss": 5605252.269662921,
+          "cycle_activity.stalls_l2_miss": 4975941.7191011235,
+          "cycle_activity.stalls_l3_miss": 0.0,
+          "mem_load_retired.l1_miss": 932908.797752809,
+          "mem_load_retired.l2_miss": 216464.42696629214,
+          "mem_load_retired.l3_miss": 0.0,
+          "task-clock": 16.603033707865166,
+          "page-faults": 0.011235955056179775,
+          "context-switches": 0.30337078651685395
+        }
+      },
+      "thermal_suspect": false
+    },
+    {
+      "shape": "1088x1088x1088",
+      "label": "bracket, 4352 B rows",
+      "kernel": "sched_S5",
+      "row_bytes": {
+        "A": 4352,
+        "B": 4352
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.3749660077928364e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 17,
+        "median_ms": 17.05291552913396,
+        "p95_ms": 17.2513724587428,
+        "min_ms": 16.903800235227475,
+        "mean_ms": 17.064781482237294,
+        "stdev_ms": 0.1374604926487276,
+        "cv_pct": 0.8055215520445429,
+        "gflops": 151.04906487100948
+      },
+      "status": "ok",
+      "counters": {
+        "status": "ok",
+        "derived": {
+          "ipc": 3.383135347706835,
+          "flops_per_cycle": 46.54261046335529,
+          "l1_miss_rate": 0.030762269397613506,
+          "l1_to_l2_bytes": 112980356.92307693,
+          "l1_miss_per_kflop": 0.6853403257680486,
+          "cycles_per_l1_miss": 31.3503919719269,
+          "l2_miss_per_kflop": 0.583983555427502,
+          "l2_miss_rate": 0.3131854716232951,
+          "l2_fill_bytes": 96274400.82051282,
+          "l2_fill_bytes_vs_compulsory": 6.777535290605684,
+          "stall_frac_l1d_miss": 0.10181952149492869,
+          "stall_frac_l2_miss": 0.06993016480283623,
+          "stall_frac_l3_miss": 0.0,
+          "measured_flops": 2575826944.0,
+          "measured_vs_analytic_flops": 1.0,
+          "fp_instr_mix_pct": {
+            "512b_packed_single": 100.0,
+            "256b_packed_single": 0.0,
+            "128b_packed_single": 0.0,
+            "scalar_single": 0.0
+          }
+        },
+        "per_invocation": {
+          "cycles": 55343413.666666664,
+          "instructions": 187234259.03846154,
+          "L1-dcache-loads": 57385820.73076923,
+          "L1-dcache-load-misses": 1765318.076923077,
+          "branches": 718760.1153846154,
+          "branch-misses": 1006.3461538461538,
+          "fp_arith_inst_retired.512b_packed_single": 160989184.0,
+          "fp_arith_inst_retired.256b_packed_single": 0.0,
+          "fp_arith_inst_retired.128b_packed_single": 0.0,
+          "fp_arith_inst_retired.scalar_single": 0.0,
+          "l2_rqsts.references": 4803034.346153846,
+          "l2_rqsts.miss": 1504240.576923077,
+          "l2_lines_in.all": 1504287.5128205128,
+          "cycle_activity.stalls_total": 8514767.602564102,
+          "cycle_activity.stalls_l1d_miss": 5635039.897435897,
+          "cycle_activity.stalls_l2_miss": 3870174.0384615385,
+          "cycle_activity.stalls_l3_miss": 0.0,
+          "mem_load_retired.l1_miss": 1547067.6025641025,
+          "mem_load_retired.l2_miss": 189614.6794871795,
+          "mem_load_retired.l3_miss": 0.0,
+          "task-clock": 16.72525641025641,
+          "page-faults": -0.01282051282051282,
+          "context-switches": 0.32051282051282054
+        }
+      },
+      "thermal_suspect": false
+    },
+    {
+      "shape": "1024x1024x1088",
+      "label": "only B row stride changed",
+      "kernel": "iree_fixed",
+      "row_bytes": {
+        "A": 4096,
+        "B": 4352
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.1004740807062058e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 10,
+        "median_ms": 23.257179400025052,
+        "p95_ms": 23.841483919823077,
+        "min_ms": 22.85369510009332,
+        "mean_ms": 23.339973220026877,
+        "stdev_ms": 0.38882979206144247,
+        "cv_pct": 1.6659393239055085,
+        "gflops": 98.10739887045555
+      },
+      "status": "ok",
+      "counters": {
+        "status": "ok",
+        "derived": {
+          "ipc": 1.102344283499903,
+          "flops_per_cycle": 30.32350332056465,
+          "l1_miss_rate": 0.11251484909429901,
+          "l1_to_l2_bytes": 578222067.942029,
+          "l1_miss_per_kflop": 3.9596416545239457,
+          "cycles_per_l1_miss": 8.32846070776427,
+          "l2_miss_per_kflop": 0.6418250952128762,
+          "l2_miss_rate": 0.07811269671266897,
+          "l2_fill_bytes": 93729202.08695652,
+          "l2_fill_bytes_vs_compulsory": 7.150970618206522,
+          "stall_frac_l1d_miss": 0.2174506652927427,
+          "stall_frac_l2_miss": 0.12160627835011584,
+          "stall_frac_l3_miss": 0.0,
+          "measured_flops": 2281701376.0,
+          "measured_vs_analytic_flops": 1.0,
+          "fp_instr_mix_pct": {
+            "512b_packed_single": 100.0,
+            "256b_packed_single": 0.0,
+            "128b_packed_single": 0.0,
+            "scalar_single": 0.0
+          }
+        },
+        "per_invocation": {
+          "cycles": 75245308.95652173,
+          "instructions": 82946236.1884058,
+          "L1-dcache-loads": 80298021.85507247,
+          "L1-dcache-load-misses": 9034719.811594203,
+          "branches": 596288.4927536232,
+          "branch-misses": 1188.5217391304348,
+          "fp_arith_inst_retired.512b_packed_single": 142606336.0,
+          "fp_arith_inst_retired.256b_packed_single": 0.0,
+          "fp_arith_inst_retired.128b_packed_single": 0.0,
+          "fp_arith_inst_retired.scalar_single": 0.0,
+          "l2_rqsts.references": 18747953.463768117,
+          "l2_rqsts.miss": 1464453.2028985508,
+          "l2_lines_in.all": 1464518.7826086956,
+          "cycle_activity.stalls_total": 18468588.92753623,
+          "cycle_activity.stalls_l1d_miss": 16362142.492753623,
+          "cycle_activity.stalls_l2_miss": 9150301.985507246,
+          "cycle_activity.stalls_l3_miss": 0.0,
+          "mem_load_retired.l1_miss": 9327832.20289855,
+          "mem_load_retired.l2_miss": 929453.4057971014,
+          "mem_load_retired.l3_miss": 0.0,
+          "task-clock": 23.52927536231884,
+          "page-faults": 0.0,
+          "context-switches": 0.7101449275362319
+        }
+      },
+      "thermal_suspect": false
+    },
+    {
+      "shape": "1024x1024x1088",
+      "label": "only B row stride changed",
+      "kernel": "sched_S4",
+      "row_bytes": {
+        "A": 4096,
+        "B": 4352
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.1004740807062058e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 12,
+        "median_ms": 16.612679582976853,
+        "p95_ms": 17.592907033304073,
+        "min_ms": 16.261104416419887,
+        "mean_ms": 16.864683016531973,
+        "stdev_ms": 0.5247005368511111,
+        "cv_pct": 3.111238653799552,
+        "gflops": 137.34698033531436
+      },
+      "status": "ok",
+      "counters": {
+        "status": "ok",
+        "derived": {
+          "ipc": 2.9136444706341016,
+          "flops_per_cycle": 41.939118708351245,
+          "l1_miss_rate": 0.18584411937495318,
+          "l1_to_l2_bytes": 603478088.8275862,
+          "l1_miss_per_kflop": 4.132593878021588,
+          "cycles_per_l1_miss": 5.769762966937892,
+          "l2_miss_per_kflop": 0.5915776811958247,
+          "l2_miss_rate": 0.09616207976343816,
+          "l2_fill_bytes": 86390516.22988506,
+          "l2_fill_bytes_vs_compulsory": 6.591073320761494,
+          "stall_frac_l1d_miss": 0.1562847641243246,
+          "stall_frac_l2_miss": 0.13444070634103142,
+          "stall_frac_l3_miss": 0.0,
+          "measured_flops": 2281701376.0,
+          "measured_vs_analytic_flops": 1.0,
+          "fp_instr_mix_pct": {
+            "512b_packed_single": 100.0,
+            "256b_packed_single": 0.0,
+            "128b_packed_single": 0.0,
+            "scalar_single": 0.0
+          }
+        },
+        "per_invocation": {
+          "cycles": 54405086.37931035,
+          "instructions": 158517079.10344827,
+          "L1-dcache-loads": 50737925.79310345,
+          "L1-dcache-load-misses": 9429345.137931034,
+          "branches": 583376.2068965518,
+          "branch-misses": 4668.379310344828,
+          "fp_arith_inst_retired.512b_packed_single": 142606336.0,
+          "fp_arith_inst_retired.256b_packed_single": 0.0,
+          "fp_arith_inst_retired.128b_packed_single": 0.0,
+          "fp_arith_inst_retired.scalar_single": 0.0,
+          "l2_rqsts.references": 14036755.574712643,
+          "l2_rqsts.miss": 1349803.6091954024,
+          "l2_lines_in.all": 1349851.816091954,
+          "cycle_activity.stalls_total": 10699985.91954023,
+          "cycle_activity.stalls_l1d_miss": 8502686.091954023,
+          "cycle_activity.stalls_l2_miss": 7314258.24137931,
+          "cycle_activity.stalls_l3_miss": 0.0,
+          "mem_load_retired.l1_miss": 8889751.632183908,
+          "mem_load_retired.l2_miss": 469177.6206896552,
+          "mem_load_retired.l3_miss": 0.0,
+          "task-clock": 16.858735632183908,
+          "page-faults": -0.034482758620689655,
+          "context-switches": 0.4827586206896552
+        }
+      },
+      "thermal_suspect": false
+    },
+    {
+      "shape": "1024x1024x1088",
+      "label": "only B row stride changed",
+      "kernel": "sched_S5",
+      "row_bytes": {
+        "A": 4096,
+        "B": 4352
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.1004740807062058e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 17,
+        "median_ms": 16.279792058733566,
+        "p95_ms": 16.703343964678318,
+        "min_ms": 16.075485117706943,
+        "mean_ms": 16.37642255287467,
+        "stdev_ms": 0.2748424261855978,
+        "cv_pct": 1.6782812320469391,
+        "gflops": 140.15543735252703
+      },
+      "status": "ok",
+      "counters": {
+        "status": "ok",
+        "derived": {
+          "ipc": 3.0668977580651773,
+          "flops_per_cycle": 41.681334098061065,
+          "l1_miss_rate": 0.154188797819707,
+          "l1_to_l2_bytes": 511061964.5217391,
+          "l1_miss_per_kflop": 3.4997319454884592,
+          "cycles_per_l1_miss": 6.855254889850682,
+          "l2_miss_per_kflop": 0.620233928760909,
+          "l2_miss_rate": 0.12425671013600588,
+          "l2_fill_bytes": 90575155.47826087,
+          "l2_fill_bytes_vs_compulsory": 6.91033595872962,
+          "stall_frac_l1d_miss": 0.09885745675048978,
+          "stall_frac_l2_miss": 0.06550331308301202,
+          "stall_frac_l3_miss": 0.0,
+          "measured_flops": 2281701376.0,
+          "measured_vs_analytic_flops": 1.0,
+          "fp_instr_mix_pct": {
+            "512b_packed_single": 100.0,
+            "256b_packed_single": 0.0,
+            "128b_packed_single": 0.0,
+            "scalar_single": 0.0
+          }
+        },
+        "per_invocation": {
+          "cycles": 54741562.98913044,
+          "instructions": 167886776.8043478,
+          "L1-dcache-loads": 51789386.18478261,
+          "L1-dcache-load-misses": 7985343.195652174,
+          "branches": 637770.695652174,
+          "branch-misses": 1122.2065217391305,
+          "fp_arith_inst_retired.512b_packed_single": 142606336.0,
+          "fp_arith_inst_retired.256b_packed_single": 0.0,
+          "fp_arith_inst_retired.128b_packed_single": 0.0,
+          "fp_arith_inst_retired.scalar_single": 0.0,
+          "l2_rqsts.references": 11389232.880434783,
+          "l2_rqsts.miss": 1415188.608695652,
+          "l2_lines_in.all": 1415236.8043478262,
+          "cycle_activity.stalls_total": 7724047.065217392,
+          "cycle_activity.stalls_l1d_miss": 5411611.695652174,
+          "cycle_activity.stalls_l2_miss": 3585753.7391304346,
+          "cycle_activity.stalls_l3_miss": 0.0,
+          "mem_load_retired.l1_miss": 7596938.597826087,
+          "mem_load_retired.l2_miss": 170182.09782608695,
+          "mem_load_retired.l3_miss": 0.0,
+          "task-clock": 16.35195652173913,
+          "page-faults": -0.010869565217391304,
+          "context-switches": 0.40217391304347827
+        }
+      },
+      "thermal_suspect": false
+    },
+    {
+      "shape": "1024x1088x1024",
+      "label": "only A row stride changed",
+      "kernel": "iree_fixed",
+      "row_bytes": {
+        "A": 4352,
+        "B": 4096
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.1486867291714805e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 5,
+        "median_ms": 46.250513800259796,
+        "p95_ms": 46.60020271963731,
+        "min_ms": 45.728118200349854,
+        "mean_ms": 46.250554760044906,
+        "stdev_ms": 0.30438593160216354,
+        "cv_pct": 0.6581238499329689,
+        "gflops": 49.33353574954627
+      },
+      "status": "ok",
+      "counters": {
+        "status": "ok",
+        "derived": {
+          "ipc": 0.5136325871544587,
+          "flops_per_cycle": 14.106819379664294,
+          "l1_miss_rate": 0.08862520804549866,
+          "l1_to_l2_bytes": 455642042.0,
+          "l1_miss_per_kflop": 3.120218526900691,
+          "cycles_per_l1_miss": 22.718825876037137,
+          "l2_miss_per_kflop": 4.066023085375919,
+          "l2_miss_rate": 0.7627026834499216,
+          "l2_fill_bytes": 593765882.0,
+          "l2_fill_bytes_vs_compulsory": 45.30074172973633,
+          "stall_frac_l1d_miss": 0.5892221454031165,
+          "stall_frac_l2_miss": 0.5723846210739785,
+          "stall_frac_l3_miss": 0.0,
+          "measured_flops": 2281701376.0,
+          "measured_vs_analytic_flops": 1.0,
+          "fp_instr_mix_pct": {
+            "512b_packed_single": 100.0,
+            "256b_packed_single": 0.0,
+            "128b_packed_single": 0.0,
+            "scalar_single": 0.0
+          }
+        },
+        "per_invocation": {
+          "cycles": 161744565.84375,
+          "instructions": 83077279.8125,
+          "L1-dcache-loads": 80331624.1875,
+          "L1-dcache-load-misses": 7119406.90625,
+          "branches": 617737.125,
+          "branch-misses": 3627.375,
+          "fp_arith_inst_retired.512b_packed_single": 142606336.0,
+          "fp_arith_inst_retired.256b_packed_single": 0.0,
+          "fp_arith_inst_retired.128b_packed_single": 0.0,
+          "fp_arith_inst_retired.scalar_single": 0.0,
+          "l2_rqsts.references": 12163914.8125,
+          "l2_rqsts.miss": 9277450.46875,
+          "l2_lines_in.all": 9277591.90625,
+          "cycle_activity.stalls_total": 99276833.90625,
+          "cycle_activity.stalls_l1d_miss": 95303480.09375,
+          "cycle_activity.stalls_l2_miss": 92580102.03125,
+          "cycle_activity.stalls_l3_miss": 0.0,
+          "mem_load_retired.l1_miss": 8777128.0625,
+          "mem_load_retired.l2_miss": 7669363.90625,
+          "mem_load_retired.l3_miss": 0.0,
+          "task-clock": 45.767500000000005,
+          "page-faults": 0.0,
+          "context-switches": 0.9375
+        }
+      },
+      "thermal_suspect": false
+    },
+    {
+      "shape": "1024x1088x1024",
+      "label": "only A row stride changed",
+      "kernel": "sched_S4",
+      "row_bytes": {
+        "A": 4352,
+        "B": 4096
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.1486867291714805e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 10,
+        "median_ms": 22.910633900573885,
+        "p95_ms": 23.24438262032345,
+        "min_ms": 22.725387099853833,
+        "mean_ms": 22.98823428020114,
+        "stdev_ms": 0.2028328929478051,
+        "cv_pct": 0.8823335036327564,
+        "gflops": 99.59136817872358
+      },
+      "status": "ok",
+      "counters": {
+        "status": "ok",
+        "derived": {
+          "ipc": 1.951739285549772,
+          "flops_per_cycle": 28.087060660076574,
+          "l1_miss_rate": 0.026772461948483272,
+          "l1_to_l2_bytes": 86948156.06153846,
+          "l1_miss_per_kflop": 0.595417504127209,
+          "cycles_per_l1_miss": 59.79599678488799,
+          "l2_miss_per_kflop": 2.1080314910789424,
+          "l2_miss_rate": 0.6608126335486909,
+          "l2_fill_bytes": 307837848.61538464,
+          "l2_fill_bytes_vs_compulsory": 23.48616398737981,
+          "stall_frac_l1d_miss": 0.3691229437126983,
+          "stall_frac_l2_miss": 0.3579917485255518,
+          "stall_frac_l3_miss": 0.0,
+          "measured_flops": 2281701376.0,
+          "measured_vs_analytic_flops": 1.0,
+          "fp_instr_mix_pct": {
+            "512b_packed_single": 100.0,
+            "256b_packed_single": 0.0,
+            "128b_packed_single": 0.0,
+            "scalar_single": 0.0
+          }
+        },
+        "per_invocation": {
+          "cycles": 81236744.6923077,
+          "instructions": 158552946.04615384,
+          "L1-dcache-loads": 50744863.92307692,
+          "L1-dcache-load-misses": 1358564.9384615384,
+          "branches": 589501.9230769231,
+          "branch-misses": 4875.184615384615,
+          "fp_arith_inst_retired.512b_packed_single": 142606336.0,
+          "fp_arith_inst_retired.256b_packed_single": 0.0,
+          "fp_arith_inst_retired.128b_packed_single": 0.0,
+          "fp_arith_inst_retired.scalar_single": 0.0,
+          "l2_rqsts.references": 7278762.707692307,
+          "l2_rqsts.miss": 4809898.353846154,
+          "l2_lines_in.all": 4809966.384615385,
+          "cycle_activity.stalls_total": 30836511.846153848,
+          "cycle_activity.stalls_l1d_miss": 29986346.338461537,
+          "cycle_activity.stalls_l2_miss": 29082084.276923075,
+          "cycle_activity.stalls_l3_miss": 0.0,
+          "mem_load_retired.l1_miss": 1908428.8307692308,
+          "mem_load_retired.l2_miss": 1671552.2307692308,
+          "mem_load_retired.l3_miss": 0.0,
+          "task-clock": 22.73246153846154,
+          "page-faults": -0.015384615384615385,
+          "context-switches": 0.7538461538461538
+        }
+      },
+      "thermal_suspect": false
+    },
+    {
+      "shape": "1024x1088x1024",
+      "label": "only A row stride changed",
+      "kernel": "sched_S5",
+      "row_bytes": {
+        "A": 4352,
+        "B": 4096
+      },
+      "correctness": {
+        "ok": true,
+        "max_rel_err": 1.1486867291714805e-06,
+        "rtol": 0.0001
+      },
+      "timing": {
+        "ok": true,
+        "device": "local-sync",
+        "repetitions": 5,
+        "iterations_per_rep": 17,
+        "median_ms": 15.667021117812563,
+        "p95_ms": 15.898977070623111,
+        "min_ms": 15.391541823619798,
+        "mean_ms": 15.658610764726557,
+        "stdev_ms": 0.1801758953358781,
+        "cv_pct": 1.1506505784137133,
+        "gflops": 145.63721838645046
+      },
+      "status": "ok",
+      "counters": {
+        "status": "ok",
+        "derived": {
+          "ipc": 3.3233596743027713,
+          "flops_per_cycle": 45.719724386333716,
+          "l1_miss_rate": 0.051815183777562,
+          "l1_to_l2_bytes": 168569325.7142857,
+          "l1_miss_per_kflop": 1.1543560178339982,
+          "cycles_per_l1_miss": 18.947705458382217,
+          "l2_miss_per_kflop": 1.6923588739723718,
+          "l2_miss_rate": 0.32160042509950476,
+          "l2_fill_bytes": 247136205.7142857,
+          "l2_fill_bytes_vs_compulsory": 18.854996163504463,
+          "stall_frac_l1d_miss": 0.1428444644669693,
+          "stall_frac_l2_miss": 0.08820098022700018,
+          "stall_frac_l3_miss": 0.0,
+          "measured_flops": 2281701376.0,
+          "measured_vs_analytic_flops": 1.0,
+          "fp_instr_mix_pct": {
+            "512b_packed_single": 100.0,
+            "256b_packed_single": 0.0,
+            "128b_packed_single": 0.0,
+            "scalar_single": 0.0
+          }
+        },
+        "per_invocation": {
+          "cycles": 49906280.202380955,
+          "instructions": 165856519.1190476,
+          "L1-dcache-loads": 50832507.428571425,
+          "L1-dcache-load-misses": 2633895.714285714,
+          "branches": 638071.7619047619,
+          "branch-misses": 1139.5119047619048,
+          "fp_arith_inst_retired.512b_packed_single": 142606336.0,
+          "fp_arith_inst_retired.256b_packed_single": 0.0,
+          "fp_arith_inst_retired.128b_packed_single": 0.0,
+          "fp_arith_inst_retired.scalar_single": 0.0,
+          "l2_rqsts.references": 12007003.94047619,
+          "l2_rqsts.miss": 3861457.5714285714,
+          "l2_lines_in.all": 3861503.214285714,
+          "cycle_activity.stalls_total": 8913492.511904761,
+          "cycle_activity.stalls_l1d_miss": 7128835.869047619,
+          "cycle_activity.stalls_l2_miss": 4401782.833333333,
+          "cycle_activity.stalls_l3_miss": 0.0,
+          "mem_load_retired.l1_miss": 2621487.6666666665,
+          "mem_load_retired.l2_miss": 268713.9761904762,
+          "mem_load_retired.l3_miss": 0.0,
+          "task-clock": 15.705595238095238,
+          "page-faults": -0.011904761904761904,
+          "context-switches": 0.16666666666666666
+        }
+      },
+      "thermal_suspect": false
+    }
+  ],
+  "verdict": {
+    "lines": [
+      "iree_fixed: L2 misses/kFLOP 960/1024/1088 = 0.65/4.04/0.63 -> 1024 is an outlier (6.2x the worse neighbour): supports the power-of-two SET-CONFLICT hypothesis",
+      "iree_fixed:   L1 misses/kFLOP 960/1024/1088 = 3.81/3.27/3.59 (1024 = 0.86x the worse neighbour)",
+      "iree_fixed:   L2-miss stall fraction 960/1024/1088 = 0.128/0.566/0.126 (1024 = 4.43x the worse neighbour)",
+      "iree_fixed:   change only B's stride -> 0.16x of 1024^3; only A's stride -> 1.01x (the one that drops is the conflicting operand)",
+      "sched_S4: L2 misses/kFLOP 960/1024/1088 = 0.60/2.10/0.59 -> 1024 is an outlier (3.5x the worse neighbour): supports the power-of-two SET-CONFLICT hypothesis",
+      "sched_S4:   L1 misses/kFLOP 960/1024/1088 = 0.46/4.02/0.41 (1024 = 8.73x the worse neighbour)",
+      "sched_S4:   L2-miss stall fraction 960/1024/1088 = 0.0664/0.34/0.092 (1024 = 3.69x the worse neighbour)",
+      "sched_S4:   change only B's stride -> 0.28x of 1024^3; only A's stride -> 1.00x (the one that drops is the conflicting operand)",
+      "sched_S5: L2 misses/kFLOP 960/1024/1088 = 0.60/2.38/0.58 -> 1024 is an outlier (4.0x the worse neighbour): supports the power-of-two SET-CONFLICT hypothesis",
+      "sched_S5:   L1 misses/kFLOP 960/1024/1088 = 0.708/3.83/0.685 (1024 = 5.40x the worse neighbour)",
+      "sched_S5:   L2-miss stall fraction 960/1024/1088 = 0.128/0.0865/0.0699 (1024 = 0.68x the worse neighbour)",
+      "sched_S5:   change only B's stride -> 0.26x of 1024^3; only A's stride -> 0.71x (the one that drops is the conflicting operand)",
+      "K blocking speedup (S5 vs S4) 960/1024/1088 = 0.90/1.32/0.99x: gains only at 1024^3 -> K blocking's gain is specific to the power-of-two stride",
+      "  at 1024^3: L2 misses/kFLOP S4->S5 2.10->2.38 (0.89x), L2-miss stall fraction 0.34->0.09 (3.93x): K blocking works by making the conflict misses cheaper (far fewer stall cycles), NOT by removing them"
+    ],
+    "calls": {
+      "iree_fixed": {
+        "call": "conflict",
+        "spike": 6.229717446191953,
+        "l2_miss_per_kflop": [
+          0.6487106425994975,
+          4.041284007732482,
+          0.6332668581890468
+        ]
+      },
+      "sched_S4": {
+        "call": "conflict",
+        "spike": 3.5225524859063615,
+        "l2_miss_per_kflop": [
+          0.5969107326190256,
+          2.102649385051336,
+          0.5891080301855293
+        ]
+      },
+      "sched_S5": {
+        "call": "conflict",
+        "spike": 3.9840269968961106,
+        "l2_miss_per_kflop": [
+          0.5962914858217593,
+          2.3756413775331833,
+          0.583983555427502
+        ]
+      }
+    }
+  }
+}
