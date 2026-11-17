@@ -96,7 +96,7 @@ linalg.matmul {lowering_config = #iree_cpu.lowering_config<distribution = [16, 6
 - **Why the heuristic loses at 128³.** Its register tile is 8×16: 8 rows × 1 zmm = **8 accumulator registers**. On this class of Xeon core an AVX-512 FMA has ~4-cycle latency with 2 FMA ports (the measured 171 GFLOP/s peak is consistent with 2 ports × 16 lanes × 2 FLOP at ~2.7 GHz), so at least 8 independent accumulators are needed just to cover latency, with no slack for loads.
   - The tuned tile 4×64 is 4 rows × 4 zmm = **16 accumulators**, the same count the packed mmt4d kernel uses.
   - Result: 0.0308 ms vs 0.0397 ms (1.29× in the confirmation run).
-- **Upper limit.** Going past the 32 architectural zmm registers spills. In `results/autotune/128x128x128.json`, 16×64 tiles (64 accumulators) show 176–404 vector stack accesses against a baseline of 22, and throughput collapses to 68–73 GFLOP/s. The static spill count and the timing agree.
+- **Upper limit.** Going past the 32 architectural zmm registers spills. In `results/autotune/128x128x128.json`, 16×64 tiles (64 accumulators) show 154–382 vector stack accesses in the dispatch function, against 0 for non-spilling tiles (the `.s`-wide count, 176–404, also includes 22 from runtime helpers the linker drops; see [ELF_AND_DWARF.md](ELF_AND_DWARF.md)), and throughput collapses to 68–73 GFLOP/s. The static spill count and the timing agree.
 
 ## 5. LLVM IR and assembly (`llvm/*.ll`, `llvm/*.s`)
 

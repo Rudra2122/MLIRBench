@@ -22,6 +22,7 @@ MLIRBench v1 was a single 128³ measurement with one roofline point. This versio
 - **The 1024³ slowdown is a cache-set conflict, not a capacity problem.** 1088³ is a bigger problem than 1024³, yet runs **2× faster**. B's rows are exactly 4096 bytes, so walking down a column crowds its lines into a few L2 sets: L2 misses per FLOP spike 6.2× at exactly 1024. Changing only B's row width removes the spike.
 - **Hardware counters confirm the analytic model where it should hold, and show where it breaks.** Measured FLOPs equal 2·M·N·K exactly in all 24 profiled configurations. Measured L2 traffic ranges from 1.04× the theoretical minimum (autotuned, 512³) to 44× (IREE's default, 1024³). I decomposed the 44× into about 6–7× capacity and about 6× set conflicts.
 - **Packing wins only when there's enough reuse.** At 1024³ it cuts L2 stall cycles from 22% to 4% without reducing traffic. At 128³ and for single-token decode its copies cost more than they save: 11× slower for the GEMV.
+- **The binary IREE ships matches its assembly, and checking it corrected one of my numbers.** I read the linked ELF with `readelf`, `nm`, `objdump` and `llvm-dwarfdump` on x86-64, AArch64 and RISC-V. For all 22 dispatch functions, objdump's FMA, vector and spill counts equal what I got from the `.s`, and the symbol-table size equals the DWARF address range. It also showed that the "baseline of 22" stack accesses I had quoted came from runtime helpers (`expf`, `powf`) that the linker drops: the spilling tiles have **154–382** stack accesses in the dispatch itself, against 0.
 - **The best kernels run close to the hardware limit:** 59.1 of 64 FLOP/cycle (92%) on Intel at 512³, and 94% of the measured peak on the M3 at 1024³.
 
 ---
@@ -50,6 +51,7 @@ The original v1 files are kept in `legacy/`.
 | Languages | Python 3.12, C (microbenchmarks, a libc-only IREE dispatch harness), MLIR |
 | Hardware counters | Linux `perf` (23 events incl. `l2_rqsts`, `cycle_activity`, `fp_arith_inst_retired`, `mem_load_retired`); macOS kperf via ctypes (private framework, per-thread PMU); Instruments `xctrace` backend (written, untested) |
 | RISC-V | `riscv64-linux-gnu-gcc`, `qemu-riscv64` user mode, RVV 1.0 |
+| ELF and DWARF | GNU Binutils (`readelf`, `nm`, `objdump`, `aarch64-` / `riscv64-linux-gnu-objdump`), `llvm-objdump`, `llvm-dwarfdump` (`.debug_info`, `.debug_line`) |
 | Analysis | NumPy, matplotlib, Graphviz |
 | Hardware | Google Cloud `c4-standard-8` (Intel Xeon Platinum 8581C, Emerald Rapids, PMU enabled); Apple MacBook Air M3; an x86 AVX-512 development VM |
 | Tooling | GNU Make, tmux, Google Cloud Shell |
@@ -83,6 +85,7 @@ The diagram above shows the flow. In words:
 | Padded-width experiment | `mlirbench/padding.py` | Capacity vs power-of-two set conflicts |
 | Thermal guard | `mlirbench/thermal.py` | Detects clock throttling between chunks of work |
 | RISC-V | `mlirbench/riscv.py`, `harness/` | RVV cross-compile, QEMU execution |
+| ELF / DWARF | `mlirbench/elfinspect.py` | ELF headers, sections and symbol tables; objdump vs `asm.py` cross-check; hot loop → MLIR line via `.debug_line` |
 | Report | `mlirbench/report.py` | `REPORT.md` and plots from the JSON |
 
 ---
@@ -157,7 +160,7 @@ One kernel, eight builds, one change per rung. C4 results, time (GFLOP/s):
 (Tile key: `d<tm>x<tn>` is the cache tile, one per workgroup; `v<vm>x<vn>x<vk>` is the register tile, which becomes one `vector.contract`.)
 
 - **Evidence for the hypothesis:**
-  - At 128³ and 512³ every winner holds **16 accumulators**. Tiles needing 64 accumulators spill (on the development VM: 176–404 vector stack accesses against a baseline of 22) and run at about half the throughput.
+  - At 128³ and 512³ every winner holds **16 accumulators**. Tiles needing 64 accumulators spill (on the development VM: 154–382 vector stack accesses in the dispatch function, against 0 for the winners; section 9 explains why I first reported 176–404) and run at about half the throughput.
   - On the M3, IREE's ARM default (8×8 on 4-lane NEON) *already* holds 16, which is why tuning barely helps there.
   - With per-config counters on C4 (about 90 configs per shape), what decides the ranking changes with size. At 512³, L2 behaviour is flat across all tiles (r = +0.09) and IPC decides (r = +0.75). At 1024³, the fraction of cycles stalled on L2 misses explains the ranking almost perfectly (r = −0.96).
 - **Tradeoff:** the search is staged (register tile, then cache tile), so it can miss joint optima; `--strategy grid` is exhaustive but slow. Near-ties aren't resolved: the C4 512³ winner changed between two runs, 0.7% apart. The tuner finds a region, not a unique point.
@@ -241,8 +244,30 @@ One kernel, eight builds, one change per rung. C4 results, time (GFLOP/s):
 - **Proves:**
   - The vectorized build passes at vector lengths 128, 256 and 512 (max relative error ≤ 4.3×10⁻⁷), including a non-power-of-two 64×96×80 shape.
   - With the vector extension disabled it crashes on an illegal instruction, which proves RVV code executes.
-  - Statically, the vector build has 9 RVV FMA instructions where the scalar build has 269 `fmadd.s`.
+  - Statically, the vector build's dispatch has 9 RVV FMA instructions where the scalar build's has 256 `fmadd.s` (269 across the whole `.s`, which also holds runtime helpers; see section 9).
 - **Doesn't prove:** anything about RISC-V performance, caches or timing (QEMU is functional emulation), and the harness bypasses IREE's runtime.
+
+### 9. Reading the shipped binary: ELF, symbol tables, objdump and DWARF
+
+- **Observation:** every static count so far (FMAs, vector width, spills) came from the `.s` IREE prints. That is what the compiler meant to emit, not the file that runs.
+- **Hypothesis:** the linked ELF should contain the same instructions, so counts from objdump should equal counts from the `.s`.
+- **Change:** `mlirbench/elfinspect.py` compiles with `--iree-llvmcpu-debug-symbols=true` and reads IREE's dumped `.o` and linked `.so` with standard tools:
+  - `readelf -h -S`: ELF64, `REL` / `DYN` / `EXEC`, machine `X86-64` / `AArch64` / `RISC-V`, and the section table.
+  - `readelf -s` and `nm -S`: the symbol tables, read by two tools.
+  - `objdump -d --disassemble=<dispatch>` (GNU cross objdumps for AArch64 and RISC-V): classified with the same rules as `asm.py`.
+  - `llvm-dwarfdump --debug-info / --debug-line`: the dispatch's address range from `DW_TAG_subprogram`, and the hottest loop mapped back to lines of the MLIR it was compiled from.
+- **Result:**
+
+| Check | Result |
+|---|---|
+| FMA / vector / load / store / spill counts, `.s` vs objdump | equal for **22/22** dispatch functions (x86-64, AArch64, RISC-V; 128³ and 512³) |
+| `.o` symbol size = `nm` size = DWARF `high_pc − low_pc` in the linked `.so` | **22/22** (e.g. 1,755 bytes for the 128³ x86 matmul) |
+| Symbols the linked `.so` keeps | only `iree_hal_executable_library_query`; dispatches are reached through the function table it returns, so only DWARF still names them |
+| Linker garbage collection | 33–36 `FUNC` symbols and 4.2–5.8 KB of `.text*` in the `.o` become 608–2,033 bytes of `.text` |
+| Hot loop → `.debug_line` | packed variants: 100% of the loop maps to `linalg.pack` / `linalg.mmt4d` / `linalg.unpack`. Matmul: only 10–39% maps to `linalg.matmul`; the FMAs keep just the function's location |
+
+- **What it corrected:** the unused runtime helpers are in the `.s` too, and `asm.py` counted every function in the file. On x86 they hold exactly 22 vector stack accesses and 13 scalar FMAs. So the spilling tiles have 154–382 stack accesses in the dispatch (objdump agrees), not "176–404 against a baseline of 22", and the scalar RISC-V dispatch has 256 `fmadd.s`, not 269. `asm.py` now reports a `dispatch_only` block next to the whole-file counts.
+- **Tradeoff:** this is static: what the binary contains, not what the CPU retires (that's `counters.py`). Raw instruction totals differ by a few (alignment NOPs on x86; some scalar address arithmetic on AArch64/RISC-V that I haven't explained yet), so they're reported, not gated. Details and the ELF/DWARF background are in [docs/ELF_AND_DWARF.md](docs/ELF_AND_DWARF.md).
 
 ---
 
@@ -282,7 +307,7 @@ These are in the repo on purpose; each one changed a conclusion or a method.
 ```
 mlirbench/            Python package: kernels, compiler variants, autotuner, transform schedule driver,
                       benchmarking, counters (perf / kperf / xctrace), roofline, IR capture, asm analysis,
-                      padded-width experiment, thermal guard, RISC-V, report
+                      padded-width experiment, thermal guard, RISC-V, ELF/DWARF inspection, report
 schedules/            matmul.mlir.in: the hand-written transform-dialect codegen schedule
 microbench/           peak_fma.c, bandwidth.c: machine ceilings
 harness/              libc-only IREE static-dispatch harness (used for RISC-V under QEMU)
@@ -290,6 +315,8 @@ docs/                 COUNTER_FINDINGS.md    every counter result, with the numb
                       TRANSFORM_SCHEDULE.md  the hand-written schedule, stage by stage
                       COMPILER_WALKTHROUGH.md  Linalg -> Flow -> Stream -> HAL -> LLVM -> asm, with real IR
                       MACOS.md               running on Apple Silicon (kperf, throttling)
+                      ELF_AND_DWARF.md       readelf / nm / objdump / llvm-dwarfdump checks, and what they found
+tests/                parser tests for elfinspect.py (no IREE needed)
 results_c4/           Google Cloud C4 (Intel, with counters): the primary results
 results_m3/           Apple M3 (ARM, NEON)
 results/              development VM (no counters)
@@ -313,6 +340,9 @@ python -m mlirbench counters
 python -m mlirbench counters --schedule     # the hand-written schedule's kernels
 python -m mlirbench tune --counters         # per-config counters in the autotuner
 python -m mlirbench padding                 # capacity vs power-of-two conflicts
+python -m mlirbench elf                     # ELF / symbol tables / objdump / DWARF (needs binutils or LLVM tools)
+python tests/test_elfinspect.py             # parser tests
+python scripts/spill_check.py               # reproduce the 176-404 -> 154-382 spill correction
 
 # Apple Silicon: see docs/MACOS.md
 make mac && make mac-counters

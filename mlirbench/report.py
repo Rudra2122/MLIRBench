@@ -181,6 +181,50 @@ def _thermal_section(th: dict, abl, sweep, tunes) -> list[str]:
     return md
 
 
+def _elf_section(elf: dict) -> list[str]:
+    sm = elf["summary"]
+    md = ["## Binary level: ELF, symbol tables, objdump and DWARF", "",
+          f"{sm['dispatches']} dispatch functions across {', '.join(sm['isas'])}. "
+          f"asm.py on the `.s` vs objdump on the ELF: FMA / vector / load / store / spill counts match in "
+          f"**{sm['counts_match']}/{sm['dispatches']}**. `.o` symbol size = DWARF `DW_TAG_subprogram` range "
+          f"in the linked `.so` in **{sm['size_checks_pass']}/{sm['dispatches']}**.", ""]
+    rows, loops = [], []
+    for k in elf["kernels"]:
+        if "error" in k:
+            rows.append([k["target"], k["variant"], k["shape"], "ERROR", "", "", "", "", "", ""])
+            continue
+        for e in k["elves"]:
+            for d in e["dispatches"]:
+                b = d.get("binary_counts", {})
+                fma = sum(v for kk, v in b.items() if kk.startswith(("fma_packed", "fma_vector")))
+                rows.append([e["elf"].get("isa"), k["variant"], k["shape"], d["symbol"],
+                             d["o_symbol_bytes"], d["dwarf_bytes"], fma, b.get("vec_stack_access", 0),
+                             "yes" if d.get("counts_match") else f"no {d.get('mismatches')}",
+                             "yes" if d["in_so_symtab"] or d["in_so_dynsym"] else "no"])
+                hl = d.get("hot_loop")
+                if hl:
+                    loops.append([e["elf"].get("isa"), k["variant"], k["shape"], d["symbol"], f"{hl['start']}-{hl['end']}",
+                                  hl["instructions"], hl["vector_fma"], f"{hl['op_level_location_pct']}%",
+                                  "; ".join(f"L{x['line']} {x['op']} ({x['instructions']})" for x in hl["dwarf_lines"][:3])])
+    md += [_table(["ISA", "Variant", "Shape", "Dispatch symbol", ".o sym bytes", "DWARF bytes", "vector FMA",
+                   "stack accesses", "asm.py = objdump", "in .so symtab"], rows), ""]
+    e0 = next((e for k in elf["kernels"] if "elves" in k for e in k["elves"]), None)
+    if e0:
+        md += [f"Linked `.so` symbol tables keep only: `{e0['so_symbols']}`. The `.o` has {e0.get('o_functions')} "
+               f"FUNC symbols ({e0.get('o_text_bytes')} bytes of `.text*`); after linking, `.text` is "
+               f"{e0['so_text_bytes']} bytes: unused runtime helpers are dropped.", ""]
+    if loops:
+        md += ["### Hottest loop, mapped back to MLIR through `.debug_line`", "",
+               _table(["ISA", "Variant", "Shape", "Dispatch", "Address range", "Insns", "Vector FMA",
+                       "Insns with an op-level line", "Lines (insns)"], loops), ""]
+    h = elf.get("riscv_harness")
+    if h:
+        md += [f"Statically linked RISC-V harness (`{h['file']}`, {h['elf'].get('type')}, {h['elf'].get('machine')}): "
+               f"dispatch symbols in `.symtab`: {', '.join(x['name'] for x in h['dispatch_symbols'])}; "
+               f"objdump ({h.get('objdump_tool')}) counts {h.get('dispatch_counts')}.", ""]
+    return md
+
+
 def build_report() -> Path:
     machine = read_json(RESULTS / "machine.json")
     sweep = read_json(RESULTS / "sweep.json")
@@ -347,6 +391,9 @@ def build_report() -> Path:
         md += [_table(["Build", "Shape", "vmfb bytes", "RVV FMA (static)", "scalar FMA (static)", "vsetvl",
                        "QEMU cpu", "Result"], tbl), "",
                "QEMU is functional emulation: these rows establish correctness and ISA usage, not RISC-V performance.", ""]
+    elf = read_json(RESULTS / "elf.json")
+    if elf and elf.get("kernels"):
+        md += _elf_section(elf)
     out = RESULTS / "REPORT.md"
     out.write_text("\n".join(md))
     return out

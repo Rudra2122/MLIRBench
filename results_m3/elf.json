@@ -1,0 +1,2976 @@
+{
+  "tools": {
+    "readelf": "/opt/homebrew/opt/llvm/bin/llvm-readelf",
+    "nm": "/opt/homebrew/opt/llvm/bin/llvm-nm",
+    "objdump": "/opt/homebrew/opt/llvm/bin/llvm-objdump",
+    "llvm-objdump": "/opt/homebrew/opt/llvm/bin/llvm-objdump",
+    "llvm-dwarfdump": "/opt/homebrew/opt/llvm/bin/llvm-dwarfdump"
+  },
+  "kernels": [
+    {
+      "shape": "128x128x128",
+      "target": "host",
+      "variant": "v1_generic_isa",
+      "elves": [
+        {
+          "so": "module_kernel_linked_embedded_elf_arm_64.so",
+          "o_exists": true,
+          "elf": {
+            "class": "ELF64",
+            "type": "DYN (Shared object file)",
+            "machine": "AArch64",
+            "isa": "aarch64"
+          },
+          "so_sections": [
+            {
+              "name": ".dynsym",
+              "type": "DYNSYM",
+              "size": 48
+            },
+            {
+              "name": ".hash",
+              "type": "HASH",
+              "size": 24
+            },
+            {
+              "name": ".dynstr",
+              "type": "STRTAB",
+              "size": 35
+            },
+            {
+              "name": ".rela.dyn",
+              "type": "RELA",
+              "size": 648
+            },
+            {
+              "name": ".rodata",
+              "type": "PROGBITS",
+              "size": 936
+            },
+            {
+              "name": ".eh_frame",
+              "type": "PROGBITS",
+              "size": 176
+            },
+            {
+              "name": ".text",
+              "type": "PROGBITS",
+              "size": 944
+            },
+            {
+              "name": ".data.rel.ro",
+              "type": "PROGBITS",
+              "size": 384
+            },
+            {
+              "name": ".dynamic",
+              "type": "DYNAMIC",
+              "size": 192
+            },
+            {
+              "name": ".relro_padding",
+              "type": "NOBITS",
+              "size": 240
+            },
+            {
+              "name": ".debug_abbrev",
+              "type": "PROGBITS",
+              "size": 80
+            },
+            {
+              "name": ".debug_info",
+              "type": "PROGBITS",
+              "size": 295
+            },
+            {
+              "name": ".debug_str",
+              "type": "PROGBITS",
+              "size": 392
+            },
+            {
+              "name": ".debug_pubnames",
+              "type": "PROGBITS",
+              "size": 215
+            },
+            {
+              "name": ".debug_pubtypes",
+              "type": "PROGBITS",
+              "size": 80
+            },
+            {
+              "name": ".debug_line",
+              "type": "PROGBITS",
+              "size": 475
+            },
+            {
+              "name": ".comment",
+              "type": "PROGBITS",
+              "size": 5
+            },
+            {
+              "name": ".symtab",
+              "type": "SYMTAB",
+              "size": 72
+            },
+            {
+              "name": ".shstrtab",
+              "type": "STRTAB",
+              "size": 210
+            },
+            {
+              "name": ".strtab",
+              "type": "STRTAB",
+              "size": 44
+            }
+          ],
+          "so_symbols": {
+            ".dynsym": [
+              "iree_hal_executable_library_query"
+            ],
+            ".symtab": [
+              "_DYNAMIC",
+              "iree_hal_executable_library_query"
+            ]
+          },
+          "dwarf_subprograms": [
+            {
+              "name": "matmul_dispatch_0_pack_f32",
+              "low_pc": 67864,
+              "high_pc": 67980,
+              "bytes": 116
+            },
+            {
+              "name": "matmul_dispatch_1_pack_f32",
+              "low_pc": 67980,
+              "high_pc": 68108,
+              "bytes": 128
+            },
+            {
+              "name": "matmul_dispatch_2_mmt4d_16x16x128x8x8x1_f32",
+              "low_pc": 68108,
+              "high_pc": 68608,
+              "bytes": 500
+            },
+            {
+              "name": "matmul_dispatch_3_unpack_f32",
+              "low_pc": 68608,
+              "high_pc": 68788,
+              "bytes": 180
+            }
+          ],
+          "dwarf_line_tables": 4,
+          "dwarf_line_rows": 41,
+          "o_header": {
+            "class": "ELF64",
+            "type": "REL (Relocatable file)",
+            "machine": "AArch64",
+            "isa": "aarch64"
+          },
+          "o_functions": 36,
+          "o_text_bytes": 5032,
+          "so_text_bytes": 944,
+          "dispatches": [
+            {
+              "symbol": "matmul_dispatch_0_pack_f32",
+              "so_range": [
+                "0x10918",
+                "0x1098c"
+              ],
+              "dwarf_bytes": 116,
+              "in_so_dynsym": false,
+              "in_so_symtab": false,
+              "o_symbol_bytes": 116,
+              "o_symbol_bind": "LOCAL",
+              "nm_bytes": 116,
+              "size_checks_pass": true,
+              "objdump_tool": "llvm-objdump",
+              "objdump_bytes": 116,
+              "binary_counts": {
+                "instructions": 29
+              },
+              "asm_counts": {
+                "instructions": 29
+              },
+              "mismatches": {},
+              "counts_match": true,
+              "instructions_s_vs_binary": [
+                29,
+                29
+              ],
+              "whole_file_asm": {
+                "instructions": 1258,
+                "vec_load": 3,
+                "vec_store": 17,
+                "fma_packed_128": 16,
+                "fp_scalar": 67,
+                "fma_scalar": 13
+              },
+              "hot_loop": {
+                "start": "0x10954",
+                "end": "0x1096c",
+                "branch": "b.ne",
+                "instructions": 6,
+                "bytes": 24,
+                "vector_fma": 0,
+                "scalar_fma": 0,
+                "fp_ops": 0,
+                "loops_found": 2,
+                "op_level_location_pct": 100.0,
+                "dwarf_lines": [
+                  {
+                    "line": 14,
+                    "instructions": 6,
+                    "op": "linalg.pack"
+                  }
+                ],
+                "source_file": "configured_module_matmul_dispatch_0.mlir"
+              }
+            },
+            {
+              "symbol": "matmul_dispatch_1_pack_f32",
+              "so_range": [
+                "0x1098c",
+                "0x10a0c"
+              ],
+              "dwarf_bytes": 128,
+              "in_so_dynsym": false,
+              "in_so_symtab": false,
+              "o_symbol_bytes": 128,
+              "o_symbol_bind": "LOCAL",
+              "nm_bytes": 128,
+              "size_checks_pass": true,
+              "objdump_tool": "llvm-objdump",
+              "objdump_bytes": 128,
+              "binary_counts": {
+                "instructions": 32,
+                "vec_load": 1,
+                "vec_store": 1
+              },
+              "asm_counts": {
+                "instructions": 32,
+                "vec_load": 1,
+                "vec_store": 1
+              },
+              "mismatches": {},
+              "counts_match": true,
+              "instructions_s_vs_binary": [
+                32,
+                32
+              ],
+              "whole_file_asm": {
+                "instructions": 1258,
+                "vec_load": 3,
+                "vec_store": 17,
+                "fma_packed_128": 16,
+                "fp_scalar": 67,
+                "fma_scalar": 13
+              },
+              "hot_loop": {
+                "start": "0x109dc",
+                "end": "0x109f4",
+                "branch": "b.ne",
+                "instructions": 6,
+                "bytes": 24,
+                "vector_fma": 0,
+                "scalar_fma": 0,
+                "fp_ops": 0,
+                "loops_found": 2,
+                "op_level_location_pct": 100.0,
+                "dwarf_lines": [
+                  {
+                    "line": 15,
+                    "instructions": 6,
+                    "op": "linalg.pack"
+                  }
+                ],
+                "source_file": "configured_module_matmul_dispatch_1.mlir"
+              }
+            },
+            {
+              "symbol": "matmul_dispatch_2_mmt4d_16x16x128x8x8x1_f32",
+              "so_range": [
+                "0x10a0c",
+                "0x10c00"
+              ],
+              "dwarf_bytes": 500,
+              "in_so_dynsym": false,
+              "in_so_symtab": false,
+              "o_symbol_bytes": 500,
+              "o_symbol_bind": "LOCAL",
+              "nm_bytes": 500,
+              "size_checks_pass": true,
+              "objdump_tool": "llvm-objdump",
+              "objdump_bytes": 500,
+              "binary_counts": {
+                "instructions": 125,
+                "vec_load": 2,
+                "fma_packed_128": 16,
+                "vec_store": 16
+              },
+              "asm_counts": {
+                "instructions": 125,
+                "vec_load": 2,
+                "fma_packed_128": 16,
+                "vec_store": 16
+              },
+              "mismatches": {},
+              "counts_match": true,
+              "instructions_s_vs_binary": [
+                125,
+                125
+              ],
+              "whole_file_asm": {
+                "instructions": 1258,
+                "vec_load": 3,
+                "vec_store": 17,
+                "fma_packed_128": 16,
+                "fp_scalar": 67,
+                "fma_scalar": 13
+              },
+              "hot_loop": {
+                "start": "0x10b24",
+                "end": "0x10b80",
+                "branch": "b.ne",
+                "instructions": 23,
+                "bytes": 92,
+                "vector_fma": 16,
+                "scalar_fma": 0,
+                "fp_ops": 0,
+                "loops_found": 3,
+                "op_level_location_pct": 100.0,
+                "dwarf_lines": [
+                  {
+                    "line": 20,
+                    "instructions": 23,
+                    "op": "linalg.mmt4d"
+                  }
+                ],
+                "source_file": "configured_module_matmul_dispatch_2.mlir"
+              }
+            },
+            {
+              "symbol": "matmul_dispatch_3_unpack_f32",
+              "so_range": [
+                "0x10c00",
+                "0x10cb4"
+              ],
+              "dwarf_bytes": 180,
+              "in_so_dynsym": false,
+              "in_so_symtab": false,
+              "o_symbol_bytes": 180,
+              "o_symbol_bind": "LOCAL",
+              "nm_bytes": 180,
+              "size_checks_pass": true,
+              "objdump_tool": "llvm-objdump",
+              "objdump_bytes": 180,
+              "binary_counts": {
+                "instructions": 45
+              },
+              "asm_counts": {
+                "instructions": 45
+              },
+              "mismatches": {},
+              "counts_match": true,
+              "instructions_s_vs_binary": [
+                45,
+                45
+              ],
+              "whole_file_asm": {
+                "instructions": 1258,
+                "vec_load": 3,
+                "vec_store": 17,
+                "fma_packed_128": 16,
+                "fp_scalar": 67,
+                "fma_scalar": 13
+              },
+              "hot_loop": {
+                "start": "0x10c60",
+                "end": "0x10c74",
+                "branch": "b.ne",
+                "instructions": 5,
+                "bytes": 20,
+                "vector_fma": 0,
+                "scalar_fma": 0,
+                "fp_ops": 0,
+                "loops_found": 4,
+                "op_level_location_pct": 100.0,
+                "dwarf_lines": [
+                  {
+                    "line": 15,
+                    "instructions": 5,
+                    "op": "linalg.unpack"
+                  }
+                ],
+                "source_file": "configured_module_matmul_dispatch_3.mlir"
+              }
+            }
+          ]
+        }
+      ],
+      "dispatch_count": 4,
+      "counts_match": 4,
+      "size_checks_pass": 4
+    },
+    {
+      "shape": "128x128x128",
+      "target": "host",
+      "variant": "vec_heuristic",
+      "elves": [
+        {
+          "so": "module_matmul_dispatch_0_embedded_elf_arm_64.so",
+          "o_exists": true,
+          "elf": {
+            "class": "ELF64",
+            "type": "DYN (Shared object file)",
+            "machine": "AArch64",
+            "isa": "aarch64"
+          },
+          "so_sections": [
+            {
+              "name": ".dynsym",
+              "type": "DYNSYM",
+              "size": 48
+            },
+            {
+              "name": ".hash",
+              "type": "HASH",
+              "size": 24
+            },
+            {
+              "name": ".dynstr",
+              "type": "STRTAB",
+              "size": 35
+            },
+            {
+              "name": ".rela.dyn",
+              "type": "RELA",
+              "size": 288
+            },
+            {
+              "name": ".rodata",
+              "type": "PROGBITS",
+              "size": 272
+            },
+            {
+              "name": ".eh_frame",
+              "type": "PROGBITS",
+              "size": 80
+            },
+            {
+              "name": ".text",
+              "type": "PROGBITS",
+              "size": 792
+            },
+            {
+              "name": ".data.rel.ro",
+              "type": "PROGBITS",
+              "size": 224
+            },
+            {
+              "name": ".dynamic",
+              "type": "DYNAMIC",
+              "size": 192
+            },
+            {
+              "name": ".relro_padding",
+              "type": "NOBITS",
+              "size": 1664
+            },
+            {
+              "name": ".debug_abbrev",
+              "type": "PROGBITS",
+              "size": 57
+            },
+            {
+              "name": ".debug_info",
+              "type": "PROGBITS",
+              "size": 79
+            },
+            {
+              "name": ".debug_str",
+              "type": "PROGBITS",
+              "size": 182
+            },
+            {
+              "name": ".debug_pubnames",
+              "type": "PROGBITS",
+              "size": 63
+            },
+            {
+              "name": ".debug_pubtypes",
+              "type": "PROGBITS",
+              "size": 26
+            },
+            {
+              "name": ".debug_line",
+              "type": "PROGBITS",
+              "size": 147
+            },
+            {
+              "name": ".comment",
+              "type": "PROGBITS",
+              "size": 5
+            },
+            {
+              "name": ".symtab",
+              "type": "SYMTAB",
+              "size": 72
+            },
+            {
+              "name": ".shstrtab",
+              "type": "STRTAB",
+              "size": 210
+            },
+            {
+              "name": ".strtab",
+              "type": "STRTAB",
+              "size": 44
+            }
+          ],
+          "so_symbols": {
+            ".dynsym": [
+              "iree_hal_executable_library_query"
+            ],
+            ".symtab": [
+              "_DYNAMIC",
+              "iree_hal_executable_library_query"
+            ]
+          },
+          "dwarf_subprograms": [
+            {
+              "name": "matmul_dispatch_0_matmul_128x128x128_f32",
+              "low_pc": 66752,
+              "high_pc": 67524,
+              "bytes": 772
+            }
+          ],
+          "dwarf_line_tables": 1,
+          "dwarf_line_rows": 15,
+          "o_header": {
+            "class": "ELF64",
+            "type": "REL (Relocatable file)",
+            "machine": "AArch64",
+            "isa": "aarch64"
+          },
+          "o_functions": 33,
+          "o_text_bytes": 4928,
+          "so_text_bytes": 792,
+          "dispatches": [
+            {
+              "symbol": "matmul_dispatch_0_matmul_128x128x128_f32",
+              "so_range": [
+                "0x104c0",
+                "0x107c4"
+              ],
+              "dwarf_bytes": 772,
+              "in_so_dynsym": false,
+              "in_so_symtab": false,
+              "o_symbol_bytes": 772,
+              "o_symbol_bind": "LOCAL",
+              "nm_bytes": 772,
+              "size_checks_pass": true,
+              "objdump_tool": "llvm-objdump",
+              "objdump_bytes": 772,
+              "binary_counts": {
+                "instructions": 193,
+                "vec_load": 6,
+                "fma_packed_128": 64,
+                "vec_store": 8
+              },
+              "asm_counts": {
+                "instructions": 193,
+                "vec_load": 6,
+                "fma_packed_128": 64,
+                "vec_store": 8
+              },
+              "mismatches": {},
+              "counts_match": true,
+              "instructions_s_vs_binary": [
+                193,
+                193
+              ],
+              "whole_file_asm": {
+                "instructions": 1232,
+                "vec_load": 6,
+                "fma_packed_128": 64,
+                "vec_store": 8,
+                "fp_scalar": 65,
+                "fma_scalar": 13
+              },
+              "hot_loop": {
+                "start": "0x10590",
+                "end": "0x1074c",
+                "branch": "b.lo",
+                "instructions": 111,
+                "bytes": 444,
+                "vector_fma": 64,
+                "scalar_fma": 0,
+                "fp_ops": 0,
+                "loops_found": 3,
+                "op_level_location_pct": 13.5,
+                "dwarf_lines": [
+                  {
+                    "line": 1,
+                    "instructions": 96,
+                    "op": "(function-level location only)"
+                  },
+                  {
+                    "line": 18,
+                    "instructions": 15,
+                    "op": "linalg.matmul"
+                  }
+                ],
+                "source_file": "configured_module_matmul_dispatch_0.mlir"
+              }
+            }
+          ]
+        }
+      ],
+      "dispatch_count": 1,
+      "counts_match": 1,
+      "size_checks_pass": 1
+    },
+    {
+      "shape": "128x128x128",
+      "target": "host",
+      "variant": "packed_mmt4d_ukernel",
+      "elves": [
+        {
+          "so": "module_kernel_linked_embedded_elf_arm_64.so",
+          "o_exists": true,
+          "elf": {
+            "class": "ELF64",
+            "type": "DYN (Shared object file)",
+            "machine": "AArch64",
+            "isa": "aarch64"
+          },
+          "so_sections": [
+            {
+              "name": ".dynsym",
+              "type": "DYNSYM",
+              "size": 48
+            },
+            {
+              "name": ".hash",
+              "type": "HASH",
+              "size": 24
+            },
+            {
+              "name": ".dynstr",
+              "type": "STRTAB",
+              "size": 35
+            },
+            {
+              "name": ".rela.dyn",
+              "type": "RELA",
+              "size": 648
+            },
+            {
+              "name": ".rodata",
+              "type": "PROGBITS",
+              "size": 960
+            },
+            {
+              "name": ".eh_frame",
+              "type": "PROGBITS",
+              "size": 176
+            },
+            {
+              "name": ".text",
+              "type": "PROGBITS",
+              "size": 944
+            },
+            {
+              "name": ".data.rel.ro",
+              "type": "PROGBITS",
+              "size": 384
+            },
+            {
+              "name": ".dynamic",
+              "type": "DYNAMIC",
+              "size": 192
+            },
+            {
+              "name": ".relro_padding",
+              "type": "NOBITS",
+              "size": 224
+            },
+            {
+              "name": ".debug_abbrev",
+              "type": "PROGBITS",
+              "size": 80
+            },
+            {
+              "name": ".debug_info",
+              "type": "PROGBITS",
+              "size": 295
+            },
+            {
+              "name": ".debug_str",
+              "type": "PROGBITS",
+              "size": 398
+            },
+            {
+              "name": ".debug_pubnames",
+              "type": "PROGBITS",
+              "size": 215
+            },
+            {
+              "name": ".debug_pubtypes",
+              "type": "PROGBITS",
+              "size": 80
+            },
+            {
+              "name": ".debug_line",
+              "type": "PROGBITS",
+              "size": 482
+            },
+            {
+              "name": ".comment",
+              "type": "PROGBITS",
+              "size": 5
+            },
+            {
+              "name": ".symtab",
+              "type": "SYMTAB",
+              "size": 72
+            },
+            {
+              "name": ".shstrtab",
+              "type": "STRTAB",
+              "size": 210
+            },
+            {
+              "name": ".strtab",
+              "type": "STRTAB",
+              "size": 44
+            }
+          ],
+          "so_symbols": {
+            ".dynsym": [
+              "iree_hal_executable_library_query"
+            ],
+            ".symtab": [
+              "_DYNAMIC",
+              "iree_hal_executable_library_query"
+            ]
+          },
+          "dwarf_subprograms": [
+            {
+              "name": "matmul_dispatch_0_pack_f32",
+              "low_pc": 67888,
+              "high_pc": 68004,
+              "bytes": 116
+            },
+            {
+              "name": "matmul_dispatch_1_pack_f32",
+              "low_pc": 68004,
+              "high_pc": 68132,
+              "bytes": 128
+            },
+            {
+              "name": "matmul_dispatch_2_mmt4d_16x16x128x8x8x1_f32",
+              "low_pc": 68132,
+              "high_pc": 68632,
+              "bytes": 500
+            },
+            {
+              "name": "matmul_dispatch_3_unpack_f32",
+              "low_pc": 68632,
+              "high_pc": 68812,
+              "bytes": 180
+            }
+          ],
+          "dwarf_line_tables": 4,
+          "dwarf_line_rows": 39,
+          "o_header": {
+            "class": "ELF64",
+            "type": "REL (Relocatable file)",
+            "machine": "AArch64",
+            "isa": "aarch64"
+          },
+          "o_functions": 36,
+          "o_text_bytes": 5080,
+          "so_text_bytes": 944,
+          "dispatches": [
+            {
+              "symbol": "matmul_dispatch_0_pack_f32",
+              "so_range": [
+                "0x10930",
+                "0x109a4"
+              ],
+              "dwarf_bytes": 116,
+              "in_so_dynsym": false,
+              "in_so_symtab": false,
+              "o_symbol_bytes": 116,
+              "o_symbol_bind": "LOCAL",
+              "nm_bytes": 116,
+              "size_checks_pass": true,
+              "objdump_tool": "llvm-objdump",
+              "objdump_bytes": 116,
+              "binary_counts": {
+                "instructions": 29
+              },
+              "asm_counts": {
+                "instructions": 29
+              },
+              "mismatches": {},
+              "counts_match": true,
+              "instructions_s_vs_binary": [
+                29,
+                29
+              ],
+              "whole_file_asm": {
+                "instructions": 1270,
+                "vec_load": 3,
+                "vec_store": 17,
+                "fma_packed_128": 16,
+                "fp_scalar": 65,
+                "fma_scalar": 13
+              },
+              "hot_loop": {
+                "start": "0x1096c",
+                "end": "0x10984",
+                "branch": "b.ne",
+                "instructions": 6,
+                "bytes": 24,
+                "vector_fma": 0,
+                "scalar_fma": 0,
+                "fp_ops": 0,
+                "loops_found": 2,
+                "op_level_location_pct": 100.0,
+                "dwarf_lines": [
+                  {
+                    "line": 14,
+                    "instructions": 6,
+                    "op": "linalg.pack"
+                  }
+                ],
+                "source_file": "configured_module_matmul_dispatch_0.mlir"
+              }
+            },
+            {
+              "symbol": "matmul_dispatch_1_pack_f32",
+              "so_range": [
+                "0x109a4",
+                "0x10a24"
+              ],
+              "dwarf_bytes": 128,
+              "in_so_dynsym": false,
+              "in_so_symtab": false,
+              "o_symbol_bytes": 128,
+              "o_symbol_bind": "LOCAL",
+              "nm_bytes": 128,
+              "size_checks_pass": true,
+              "objdump_tool": "llvm-objdump",
+              "objdump_bytes": 128,
+              "binary_counts": {
+                "instructions": 32,
+                "vec_load": 1,
+                "vec_store": 1
+              },
+              "asm_counts": {
+                "instructions": 32,
+                "vec_load": 1,
+                "vec_store": 1
+              },
+              "mismatches": {},
+              "counts_match": true,
+              "instructions_s_vs_binary": [
+                32,
+                32
+              ],
+              "whole_file_asm": {
+                "instructions": 1270,
+                "vec_load": 3,
+                "vec_store": 17,
+                "fma_packed_128": 16,
+                "fp_scalar": 65,
+                "fma_scalar": 13
+              },
+              "hot_loop": {
+                "start": "0x109f4",
+                "end": "0x10a0c",
+                "branch": "b.ne",
+                "instructions": 6,
+                "bytes": 24,
+                "vector_fma": 0,
+                "scalar_fma": 0,
+                "fp_ops": 0,
+                "loops_found": 2,
+                "op_level_location_pct": 100.0,
+                "dwarf_lines": [
+                  {
+                    "line": 15,
+                    "instructions": 6,
+                    "op": "linalg.pack"
+                  }
+                ],
+                "source_file": "configured_module_matmul_dispatch_1.mlir"
+              }
+            },
+            {
+              "symbol": "matmul_dispatch_2_mmt4d_16x16x128x8x8x1_f32",
+              "so_range": [
+                "0x10a24",
+                "0x10c18"
+              ],
+              "dwarf_bytes": 500,
+              "in_so_dynsym": false,
+              "in_so_symtab": false,
+              "o_symbol_bytes": 500,
+              "o_symbol_bind": "LOCAL",
+              "nm_bytes": 500,
+              "size_checks_pass": true,
+              "objdump_tool": "llvm-objdump",
+              "objdump_bytes": 500,
+              "binary_counts": {
+                "instructions": 125,
+                "vec_load": 2,
+                "fma_packed_128": 16,
+                "vec_store": 16
+              },
+              "asm_counts": {
+                "instructions": 125,
+                "vec_load": 2,
+                "fma_packed_128": 16,
+                "vec_store": 16
+              },
+              "mismatches": {},
+              "counts_match": true,
+              "instructions_s_vs_binary": [
+                125,
+                125
+              ],
+              "whole_file_asm": {
+                "instructions": 1270,
+                "vec_load": 3,
+                "vec_store": 17,
+                "fma_packed_128": 16,
+                "fp_scalar": 65,
+                "fma_scalar": 13
+              },
+              "hot_loop": {
+                "start": "0x10b3c",
+                "end": "0x10b98",
+                "branch": "b.ne",
+                "instructions": 23,
+                "bytes": 92,
+                "vector_fma": 16,
+                "scalar_fma": 0,
+                "fp_ops": 0,
+                "loops_found": 3,
+                "op_level_location_pct": 100.0,
+                "dwarf_lines": [
+                  {
+                    "line": 20,
+                    "instructions": 23,
+                    "op": "linalg.mmt4d"
+                  }
+                ],
+                "source_file": "configured_module_matmul_dispatch_2.mlir"
+              }
+            },
+            {
+              "symbol": "matmul_dispatch_3_unpack_f32",
+              "so_range": [
+                "0x10c18",
+                "0x10ccc"
+              ],
+              "dwarf_bytes": 180,
+              "in_so_dynsym": false,
+              "in_so_symtab": false,
+              "o_symbol_bytes": 180,
+              "o_symbol_bind": "LOCAL",
+              "nm_bytes": 180,
+              "size_checks_pass": true,
+              "objdump_tool": "llvm-objdump",
+              "objdump_bytes": 180,
+              "binary_counts": {
+                "instructions": 45
+              },
+              "asm_counts": {
+                "instructions": 45
+              },
+              "mismatches": {},
+              "counts_match": true,
+              "instructions_s_vs_binary": [
+                45,
+                45
+              ],
+              "whole_file_asm": {
+                "instructions": 1270,
+                "vec_load": 3,
+                "vec_store": 17,
+                "fma_packed_128": 16,
+                "fp_scalar": 65,
+                "fma_scalar": 13
+              },
+              "hot_loop": {
+                "start": "0x10c78",
+                "end": "0x10c8c",
+                "branch": "b.ne",
+                "instructions": 5,
+                "bytes": 20,
+                "vector_fma": 0,
+                "scalar_fma": 0,
+                "fp_ops": 0,
+                "loops_found": 4,
+                "op_level_location_pct": 100.0,
+                "dwarf_lines": [
+                  {
+                    "line": 15,
+                    "instructions": 5,
+                    "op": "linalg.unpack"
+                  }
+                ],
+                "source_file": "configured_module_matmul_dispatch_3.mlir"
+              }
+            }
+          ]
+        }
+      ],
+      "dispatch_count": 4,
+      "counts_match": 4,
+      "size_checks_pass": 4
+    },
+    {
+      "shape": "128x128x128",
+      "target": "x86_64",
+      "variant": "cross_vec",
+      "elves": [
+        {
+          "so": "module_matmul_dispatch_0_embedded_elf_x86_64.so",
+          "o_exists": true,
+          "elf": {
+            "class": "ELF64",
+            "type": "DYN (Shared object file)",
+            "machine": "Advanced Micro Devices X86-64",
+            "isa": "x86_64"
+          },
+          "so_sections": [
+            {
+              "name": ".dynsym",
+              "type": "DYNSYM",
+              "size": 48
+            },
+            {
+              "name": ".hash",
+              "type": "HASH",
+              "size": 24
+            },
+            {
+              "name": ".dynstr",
+              "type": "STRTAB",
+              "size": 35
+            },
+            {
+              "name": ".rela.dyn",
+              "type": "RELA",
+              "size": 288
+            },
+            {
+              "name": ".rodata",
+              "type": "PROGBITS",
+              "size": 272
+            },
+            {
+              "name": ".eh_frame",
+              "type": "PROGBITS",
+              "size": 92
+            },
+            {
+              "name": ".text",
+              "type": "PROGBITS",
+              "size": 1777
+            },
+            {
+              "name": ".data.rel.ro",
+              "type": "PROGBITS",
+              "size": 224
+            },
+            {
+              "name": ".dynamic",
+              "type": "DYNAMIC",
+              "size": 192
+            },
+            {
+              "name": ".relro_padding",
+              "type": "NOBITS",
+              "size": 656
+            },
+            {
+              "name": ".debug_abbrev",
+              "type": "PROGBITS",
+              "size": 57
+            },
+            {
+              "name": ".debug_info",
+              "type": "PROGBITS",
+              "size": 79
+            },
+            {
+              "name": ".debug_str",
+              "type": "PROGBITS",
+              "size": 179
+            },
+            {
+              "name": ".debug_pubnames",
+              "type": "PROGBITS",
+              "size": 63
+            },
+            {
+              "name": ".debug_pubtypes",
+              "type": "PROGBITS",
+              "size": 26
+            },
+            {
+              "name": ".debug_line",
+              "type": "PROGBITS",
+              "size": 154
+            },
+            {
+              "name": ".comment",
+              "type": "PROGBITS",
+              "size": 5
+            },
+            {
+              "name": ".symtab",
+              "type": "SYMTAB",
+              "size": 72
+            },
+            {
+              "name": ".shstrtab",
+              "type": "STRTAB",
+              "size": 210
+            },
+            {
+              "name": ".strtab",
+              "type": "STRTAB",
+              "size": 44
+            }
+          ],
+          "so_symbols": {
+            ".dynsym": [
+              "iree_hal_executable_library_query"
+            ],
+            ".symtab": [
+              "_DYNAMIC",
+              "iree_hal_executable_library_query"
+            ]
+          },
+          "dwarf_subprograms": [
+            {
+              "name": "matmul_dispatch_0_matmul_128x128x128_f32",
+              "low_pc": 5328,
+              "high_pc": 7083,
+              "bytes": 1755
+            }
+          ],
+          "dwarf_line_tables": 1,
+          "dwarf_line_rows": 18,
+          "o_header": {
+            "class": "ELF64",
+            "type": "REL (Relocatable file)",
+            "machine": "Advanced Micro Devices X86-64",
+            "isa": "x86_64"
+          },
+          "o_functions": 33,
+          "o_text_bytes": 5535,
+          "so_text_bytes": 1777,
+          "dispatches": [
+            {
+              "symbol": "matmul_dispatch_0_matmul_128x128x128_f32",
+              "so_range": [
+                "0x14d0",
+                "0x1bab"
+              ],
+              "dwarf_bytes": 1755,
+              "in_so_dynsym": false,
+              "in_so_symtab": false,
+              "o_symbol_bytes": 1755,
+              "o_symbol_bind": "LOCAL",
+              "nm_bytes": 1755,
+              "size_checks_pass": true,
+              "objdump_tool": "llvm-objdump",
+              "objdump_bytes": 1755,
+              "binary_counts": {
+                "instructions": 223,
+                "widest": 512,
+                "vec_load": 16,
+                "fma_packed_512": 128,
+                "vec_store": 8
+              },
+              "asm_counts": {
+                "instructions": 221,
+                "widest": 512,
+                "vec_load": 16,
+                "fma_packed_512": 128,
+                "vec_store": 8
+              },
+              "mismatches": {},
+              "counts_match": true,
+              "instructions_s_vs_binary": [
+                221,
+                223
+              ],
+              "whole_file_asm": {
+                "instructions": 1206,
+                "vec_load": 50,
+                "fma_packed_512": 128,
+                "vec_store": 19,
+                "fp_scalar": 71,
+                "vec_stack_access": 22,
+                "fma_scalar": 13
+              },
+              "hot_loop": {
+                "start": "0x1590",
+                "end": "0x1b35",
+                "branch": "jb",
+                "instructions": 148,
+                "bytes": 1445,
+                "vector_fma": 128,
+                "scalar_fma": 0,
+                "fp_ops": 0,
+                "loops_found": 3,
+                "op_level_location_pct": 13.5,
+                "dwarf_lines": [
+                  {
+                    "line": 1,
+                    "instructions": 128,
+                    "op": "(function-level location only)"
+                  },
+                  {
+                    "line": 18,
+                    "instructions": 20,
+                    "op": "linalg.matmul"
+                  }
+                ],
+                "source_file": "configured_module_matmul_dispatch_0.mlir"
+              }
+            }
+          ]
+        }
+      ],
+      "dispatch_count": 1,
+      "counts_match": 1,
+      "size_checks_pass": 1
+    },
+    {
+      "shape": "128x128x128",
+      "target": "riscv64",
+      "variant": "cross_vec",
+      "elves": [
+        {
+          "so": "module_matmul_dispatch_0_embedded_elf_riscv_64.so",
+          "o_exists": true,
+          "elf": {
+            "class": "ELF64",
+            "type": "DYN (Shared object file)",
+            "machine": "RISC-V",
+            "isa": "riscv64"
+          },
+          "so_sections": [
+            {
+              "name": ".dynsym",
+              "type": "DYNSYM",
+              "size": 48
+            },
+            {
+              "name": ".hash",
+              "type": "HASH",
+              "size": 24
+            },
+            {
+              "name": ".dynstr",
+              "type": "STRTAB",
+              "size": 35
+            },
+            {
+              "name": ".rela.dyn",
+              "type": "RELA",
+              "size": 288
+            },
+            {
+              "name": ".rodata",
+              "type": "PROGBITS",
+              "size": 272
+            },
+            {
+              "name": ".eh_frame",
+              "type": "PROGBITS",
+              "size": 120
+            },
+            {
+              "name": ".text",
+              "type": "PROGBITS",
+              "size": 608
+            },
+            {
+              "name": ".data.rel.ro",
+              "type": "PROGBITS",
+              "size": 224
+            },
+            {
+              "name": ".dynamic",
+              "type": "DYNAMIC",
+              "size": 192
+            },
+            {
+              "name": ".relro_padding",
+              "type": "NOBITS",
+              "size": 1760
+            },
+            {
+              "name": ".debug_abbrev",
+              "type": "PROGBITS",
+              "size": 57
+            },
+            {
+              "name": ".debug_info",
+              "type": "PROGBITS",
+              "size": 79
+            },
+            {
+              "name": ".debug_str",
+              "type": "PROGBITS",
+              "size": 180
+            },
+            {
+              "name": ".debug_pubnames",
+              "type": "PROGBITS",
+              "size": 63
+            },
+            {
+              "name": ".debug_pubtypes",
+              "type": "PROGBITS",
+              "size": 26
+            },
+            {
+              "name": ".riscv.attributes",
+              "type": "RISCV_ATTRIBUTES",
+              "size": 190
+            },
+            {
+              "name": ".debug_line",
+              "type": "PROGBITS",
+              "size": 192
+            },
+            {
+              "name": ".comment",
+              "type": "PROGBITS",
+              "size": 5
+            },
+            {
+              "name": ".symtab",
+              "type": "SYMTAB",
+              "size": 72
+            },
+            {
+              "name": ".shstrtab",
+              "type": "STRTAB",
+              "size": 228
+            },
+            {
+              "name": ".strtab",
+              "type": "STRTAB",
+              "size": 44
+            }
+          ],
+          "so_symbols": {
+            ".dynsym": [
+              "iree_hal_executable_library_query"
+            ],
+            ".symtab": [
+              "_DYNAMIC",
+              "iree_hal_executable_library_query"
+            ]
+          },
+          "dwarf_subprograms": [
+            {
+              "name": "matmul_dispatch_0_matmul_128x128x128_f32",
+              "low_pc": 5400,
+              "high_pc": 5988,
+              "bytes": 588
+            }
+          ],
+          "dwarf_line_tables": 1,
+          "dwarf_line_rows": 26,
+          "o_header": {
+            "class": "ELF64",
+            "type": "REL (Relocatable file)",
+            "machine": "RISC-V",
+            "isa": "riscv64"
+          },
+          "o_functions": 33,
+          "o_text_bytes": 4200,
+          "so_text_bytes": 608,
+          "dispatches": [
+            {
+              "symbol": "matmul_dispatch_0_matmul_128x128x128_f32",
+              "so_range": [
+                "0x1518",
+                "0x1764"
+              ],
+              "dwarf_bytes": 588,
+              "in_so_dynsym": false,
+              "in_so_symtab": false,
+              "o_symbol_bytes": 588,
+              "o_symbol_bind": "LOCAL",
+              "nm_bytes": 588,
+              "size_checks_pass": true,
+              "objdump_tool": "llvm-objdump",
+              "objdump_bytes": 588,
+              "binary_counts": {
+                "instructions": 188,
+                "vsetvl": 1,
+                "vec_load": 2,
+                "fma_vector": 9,
+                "vec_store": 9
+              },
+              "asm_counts": {
+                "instructions": 180,
+                "vsetvl": 1,
+                "vec_load": 2,
+                "fma_vector": 9,
+                "vec_store": 9
+              },
+              "mismatches": {},
+              "counts_match": true,
+              "instructions_s_vs_binary": [
+                180,
+                188
+              ],
+              "whole_file_asm": {
+                "instructions": 1335,
+                "vsetvl": 1,
+                "vec_load": 2,
+                "fma_vector": 9,
+                "vec_store": 9,
+                "fp_scalar": 76,
+                "fma_scalar": 13
+              },
+              "hot_loop": {
+                "start": "0x1612",
+                "end": "0x1658",
+                "branch": "bne",
+                "instructions": 18,
+                "bytes": 70,
+                "vector_fma": 7,
+                "scalar_fma": 0,
+                "fp_ops": 0,
+                "loops_found": 5,
+                "op_level_location_pct": 22.2,
+                "dwarf_lines": [
+                  {
+                    "line": 1,
+                    "instructions": 14,
+                    "op": "(function-level location only)"
+                  },
+                  {
+                    "line": 18,
+                    "instructions": 4,
+                    "op": "linalg.matmul"
+                  }
+                ],
+                "source_file": "configured_module_matmul_dispatch_0.mlir"
+              }
+            }
+          ]
+        }
+      ],
+      "dispatch_count": 1,
+      "counts_match": 1,
+      "size_checks_pass": 1
+    },
+    {
+      "shape": "512x512x512",
+      "target": "host",
+      "variant": "v1_generic_isa",
+      "elves": [
+        {
+          "so": "module_kernel_linked_embedded_elf_arm_64.so",
+          "o_exists": true,
+          "elf": {
+            "class": "ELF64",
+            "type": "DYN (Shared object file)",
+            "machine": "AArch64",
+            "isa": "aarch64"
+          },
+          "so_sections": [
+            {
+              "name": ".dynsym",
+              "type": "DYNSYM",
+              "size": 48
+            },
+            {
+              "name": ".hash",
+              "type": "HASH",
+              "size": 24
+            },
+            {
+              "name": ".dynstr",
+              "type": "STRTAB",
+              "size": 35
+            },
+            {
+              "name": ".rela.dyn",
+              "type": "RELA",
+              "size": 648
+            },
+            {
+              "name": ".rodata",
+              "type": "PROGBITS",
+              "size": 936
+            },
+            {
+              "name": ".eh_frame",
+              "type": "PROGBITS",
+              "size": 176
+            },
+            {
+              "name": ".text",
+              "type": "PROGBITS",
+              "size": 1032
+            },
+            {
+              "name": ".data.rel.ro",
+              "type": "PROGBITS",
+              "size": 384
+            },
+            {
+              "name": ".dynamic",
+              "type": "DYNAMIC",
+              "size": 192
+            },
+            {
+              "name": ".relro_padding",
+              "type": "NOBITS",
+              "size": 160
+            },
+            {
+              "name": ".debug_abbrev",
+              "type": "PROGBITS",
+              "size": 80
+            },
+            {
+              "name": ".debug_info",
+              "type": "PROGBITS",
+              "size": 295
+            },
+            {
+              "name": ".debug_str",
+              "type": "PROGBITS",
+              "size": 392
+            },
+            {
+              "name": ".debug_pubnames",
+              "type": "PROGBITS",
+              "size": 215
+            },
+            {
+              "name": ".debug_pubtypes",
+              "type": "PROGBITS",
+              "size": 80
+            },
+            {
+              "name": ".debug_line",
+              "type": "PROGBITS",
+              "size": 463
+            },
+            {
+              "name": ".comment",
+              "type": "PROGBITS",
+              "size": 5
+            },
+            {
+              "name": ".symtab",
+              "type": "SYMTAB",
+              "size": 72
+            },
+            {
+              "name": ".shstrtab",
+              "type": "STRTAB",
+              "size": 210
+            },
+            {
+              "name": ".strtab",
+              "type": "STRTAB",
+              "size": 44
+            }
+          ],
+          "so_symbols": {
+            ".dynsym": [
+              "iree_hal_executable_library_query"
+            ],
+            ".symtab": [
+              "_DYNAMIC",
+              "iree_hal_executable_library_query"
+            ]
+          },
+          "dwarf_subprograms": [
+            {
+              "name": "matmul_dispatch_0_pack_f32",
+              "low_pc": 67864,
+              "high_pc": 68012,
+              "bytes": 148
+            },
+            {
+              "name": "matmul_dispatch_1_pack_f32",
+              "low_pc": 68012,
+              "high_pc": 68140,
+              "bytes": 128
+            },
+            {
+              "name": "matmul_dispatch_2_mmt4d_64x64x512x8x8x1_f32",
+              "low_pc": 68140,
+              "high_pc": 68700,
+              "bytes": 560
+            },
+            {
+              "name": "matmul_dispatch_3_unpack_f32",
+              "low_pc": 68700,
+              "high_pc": 68876,
+              "bytes": 176
+            }
+          ],
+          "dwarf_line_tables": 4,
+          "dwarf_line_rows": 37,
+          "o_header": {
+            "class": "ELF64",
+            "type": "REL (Relocatable file)",
+            "machine": "AArch64",
+            "isa": "aarch64"
+          },
+          "o_functions": 36,
+          "o_text_bytes": 5120,
+          "so_text_bytes": 1032,
+          "dispatches": [
+            {
+              "symbol": "matmul_dispatch_0_pack_f32",
+              "so_range": [
+                "0x10918",
+                "0x109ac"
+              ],
+              "dwarf_bytes": 148,
+              "in_so_dynsym": false,
+              "in_so_symtab": false,
+              "o_symbol_bytes": 148,
+              "o_symbol_bind": "LOCAL",
+              "nm_bytes": 148,
+              "size_checks_pass": true,
+              "objdump_tool": "llvm-objdump",
+              "objdump_bytes": 148,
+              "binary_counts": {
+                "instructions": 37
+              },
+              "asm_counts": {
+                "instructions": 37
+              },
+              "mismatches": {},
+              "counts_match": true,
+              "instructions_s_vs_binary": [
+                37,
+                37
+              ],
+              "whole_file_asm": {
+                "instructions": 1281,
+                "vec_load": 3,
+                "vec_store": 17,
+                "fma_packed_128": 16,
+                "fp_scalar": 67,
+                "fma_scalar": 13
+              },
+              "hot_loop": {
+                "start": "0x10960",
+                "end": "0x10978",
+                "branch": "b.ne",
+                "instructions": 6,
+                "bytes": 24,
+                "vector_fma": 0,
+                "scalar_fma": 0,
+                "fp_ops": 0,
+                "loops_found": 3,
+                "op_level_location_pct": 100.0,
+                "dwarf_lines": [
+                  {
+                    "line": 14,
+                    "instructions": 6,
+                    "op": "linalg.pack"
+                  }
+                ],
+                "source_file": "configured_module_matmul_dispatch_0.mlir"
+              }
+            },
+            {
+              "symbol": "matmul_dispatch_1_pack_f32",
+              "so_range": [
+                "0x109ac",
+                "0x10a2c"
+              ],
+              "dwarf_bytes": 128,
+              "in_so_dynsym": false,
+              "in_so_symtab": false,
+              "o_symbol_bytes": 128,
+              "o_symbol_bind": "LOCAL",
+              "nm_bytes": 128,
+              "size_checks_pass": true,
+              "objdump_tool": "llvm-objdump",
+              "objdump_bytes": 128,
+              "binary_counts": {
+                "instructions": 32,
+                "vec_load": 1,
+                "vec_store": 1
+              },
+              "asm_counts": {
+                "instructions": 33,
+                "vec_load": 1,
+                "vec_store": 1
+              },
+              "mismatches": {},
+              "counts_match": true,
+              "instructions_s_vs_binary": [
+                33,
+                32
+              ],
+              "whole_file_asm": {
+                "instructions": 1281,
+                "vec_load": 3,
+                "vec_store": 17,
+                "fma_packed_128": 16,
+                "fp_scalar": 67,
+                "fma_scalar": 13
+              },
+              "hot_loop": {
+                "start": "0x109f0",
+                "end": "0x10a0c",
+                "branch": "b.ne",
+                "instructions": 7,
+                "bytes": 28,
+                "vector_fma": 0,
+                "scalar_fma": 0,
+                "fp_ops": 0,
+                "loops_found": 2,
+                "op_level_location_pct": 100.0,
+                "dwarf_lines": [
+                  {
+                    "line": 15,
+                    "instructions": 7,
+                    "op": "linalg.pack"
+                  }
+                ],
+                "source_file": "configured_module_matmul_dispatch_1.mlir"
+              }
+            },
+            {
+              "symbol": "matmul_dispatch_2_mmt4d_64x64x512x8x8x1_f32",
+              "so_range": [
+                "0x10a2c",
+                "0x10c5c"
+              ],
+              "dwarf_bytes": 560,
+              "in_so_dynsym": false,
+              "in_so_symtab": false,
+              "o_symbol_bytes": 560,
+              "o_symbol_bind": "LOCAL",
+              "nm_bytes": 560,
+              "size_checks_pass": true,
+              "objdump_tool": "llvm-objdump",
+              "objdump_bytes": 560,
+              "binary_counts": {
+                "instructions": 140,
+                "vec_load": 2,
+                "fma_packed_128": 16,
+                "vec_store": 16
+              },
+              "asm_counts": {
+                "instructions": 140,
+                "vec_load": 2,
+                "fma_packed_128": 16,
+                "vec_store": 16
+              },
+              "mismatches": {},
+              "counts_match": true,
+              "instructions_s_vs_binary": [
+                140,
+                140
+              ],
+              "whole_file_asm": {
+                "instructions": 1281,
+                "vec_load": 3,
+                "vec_store": 17,
+                "fma_packed_128": 16,
+                "fp_scalar": 67,
+                "fma_scalar": 13
+              },
+              "hot_loop": {
+                "start": "0x10b7c",
+                "end": "0x10bd8",
+                "branch": "b.ne",
+                "instructions": 23,
+                "bytes": 92,
+                "vector_fma": 16,
+                "scalar_fma": 0,
+                "fp_ops": 0,
+                "loops_found": 3,
+                "op_level_location_pct": 100.0,
+                "dwarf_lines": [
+                  {
+                    "line": 20,
+                    "instructions": 23,
+                    "op": "linalg.mmt4d"
+                  }
+                ],
+                "source_file": "configured_module_matmul_dispatch_2.mlir"
+              }
+            },
+            {
+              "symbol": "matmul_dispatch_3_unpack_f32",
+              "so_range": [
+                "0x10c5c",
+                "0x10d0c"
+              ],
+              "dwarf_bytes": 176,
+              "in_so_dynsym": false,
+              "in_so_symtab": false,
+              "o_symbol_bytes": 176,
+              "o_symbol_bind": "LOCAL",
+              "nm_bytes": 176,
+              "size_checks_pass": true,
+              "objdump_tool": "llvm-objdump",
+              "objdump_bytes": 176,
+              "binary_counts": {
+                "instructions": 44
+              },
+              "asm_counts": {
+                "instructions": 44
+              },
+              "mismatches": {},
+              "counts_match": true,
+              "instructions_s_vs_binary": [
+                44,
+                44
+              ],
+              "whole_file_asm": {
+                "instructions": 1281,
+                "vec_load": 3,
+                "vec_store": 17,
+                "fma_packed_128": 16,
+                "fp_scalar": 67,
+                "fma_scalar": 13
+              },
+              "hot_loop": {
+                "start": "0x10cb0",
+                "end": "0x10cc4",
+                "branch": "b.ne",
+                "instructions": 5,
+                "bytes": 20,
+                "vector_fma": 0,
+                "scalar_fma": 0,
+                "fp_ops": 0,
+                "loops_found": 4,
+                "op_level_location_pct": 100.0,
+                "dwarf_lines": [
+                  {
+                    "line": 15,
+                    "instructions": 5,
+                    "op": "linalg.unpack"
+                  }
+                ],
+                "source_file": "configured_module_matmul_dispatch_3.mlir"
+              }
+            }
+          ]
+        }
+      ],
+      "dispatch_count": 4,
+      "counts_match": 4,
+      "size_checks_pass": 4
+    },
+    {
+      "shape": "512x512x512",
+      "target": "host",
+      "variant": "vec_heuristic",
+      "elves": [
+        {
+          "so": "module_matmul_dispatch_0_embedded_elf_arm_64.so",
+          "o_exists": true,
+          "elf": {
+            "class": "ELF64",
+            "type": "DYN (Shared object file)",
+            "machine": "AArch64",
+            "isa": "aarch64"
+          },
+          "so_sections": [
+            {
+              "name": ".dynsym",
+              "type": "DYNSYM",
+              "size": 48
+            },
+            {
+              "name": ".hash",
+              "type": "HASH",
+              "size": 24
+            },
+            {
+              "name": ".dynstr",
+              "type": "STRTAB",
+              "size": 35
+            },
+            {
+              "name": ".rela.dyn",
+              "type": "RELA",
+              "size": 288
+            },
+            {
+              "name": ".rodata",
+              "type": "PROGBITS",
+              "size": 272
+            },
+            {
+              "name": ".eh_frame",
+              "type": "PROGBITS",
+              "size": 92
+            },
+            {
+              "name": ".text",
+              "type": "PROGBITS",
+              "size": 900
+            },
+            {
+              "name": ".data.rel.ro",
+              "type": "PROGBITS",
+              "size": 224
+            },
+            {
+              "name": ".dynamic",
+              "type": "DYNAMIC",
+              "size": 192
+            },
+            {
+              "name": ".relro_padding",
+              "type": "NOBITS",
+              "size": 1552
+            },
+            {
+              "name": ".debug_abbrev",
+              "type": "PROGBITS",
+              "size": 57
+            },
+            {
+              "name": ".debug_info",
+              "type": "PROGBITS",
+              "size": 79
+            },
+            {
+              "name": ".debug_str",
+              "type": "PROGBITS",
+              "size": 182
+            },
+            {
+              "name": ".debug_pubnames",
+              "type": "PROGBITS",
+              "size": 63
+            },
+            {
+              "name": ".debug_pubtypes",
+              "type": "PROGBITS",
+              "size": 26
+            },
+            {
+              "name": ".debug_line",
+              "type": "PROGBITS",
+              "size": 143
+            },
+            {
+              "name": ".comment",
+              "type": "PROGBITS",
+              "size": 5
+            },
+            {
+              "name": ".symtab",
+              "type": "SYMTAB",
+              "size": 72
+            },
+            {
+              "name": ".shstrtab",
+              "type": "STRTAB",
+              "size": 210
+            },
+            {
+              "name": ".strtab",
+              "type": "STRTAB",
+              "size": 44
+            }
+          ],
+          "so_symbols": {
+            ".dynsym": [
+              "iree_hal_executable_library_query"
+            ],
+            ".symtab": [
+              "_DYNAMIC",
+              "iree_hal_executable_library_query"
+            ]
+          },
+          "dwarf_subprograms": [
+            {
+              "name": "matmul_dispatch_0_matmul_512x512x512_f32",
+              "low_pc": 66764,
+              "high_pc": 67644,
+              "bytes": 880
+            }
+          ],
+          "dwarf_line_tables": 1,
+          "dwarf_line_rows": 14,
+          "o_header": {
+            "class": "ELF64",
+            "type": "REL (Relocatable file)",
+            "machine": "AArch64",
+            "isa": "aarch64"
+          },
+          "o_functions": 33,
+          "o_text_bytes": 5036,
+          "so_text_bytes": 900,
+          "dispatches": [
+            {
+              "symbol": "matmul_dispatch_0_matmul_512x512x512_f32",
+              "so_range": [
+                "0x104cc",
+                "0x1083c"
+              ],
+              "dwarf_bytes": 880,
+              "in_so_dynsym": false,
+              "in_so_symtab": false,
+              "o_symbol_bytes": 880,
+              "o_symbol_bind": "LOCAL",
+              "nm_bytes": 880,
+              "size_checks_pass": true,
+              "objdump_tool": "llvm-objdump",
+              "objdump_bytes": 880,
+              "binary_counts": {
+                "instructions": 220,
+                "vec_load": 7,
+                "fma_packed_128": 64,
+                "vec_store": 8
+              },
+              "asm_counts": {
+                "instructions": 219,
+                "vec_load": 7,
+                "fma_packed_128": 64,
+                "vec_store": 8
+              },
+              "mismatches": {},
+              "counts_match": true,
+              "instructions_s_vs_binary": [
+                219,
+                220
+              ],
+              "whole_file_asm": {
+                "instructions": 1258,
+                "vec_load": 7,
+                "fma_packed_128": 64,
+                "vec_store": 8,
+                "fp_scalar": 65,
+                "fma_scalar": 13
+              },
+              "hot_loop": {
+                "start": "0x105f4",
+                "end": "0x107b4",
+                "branch": "b.lo",
+                "instructions": 112,
+                "bytes": 448,
+                "vector_fma": 64,
+                "scalar_fma": 0,
+                "fp_ops": 0,
+                "loops_found": 3,
+                "op_level_location_pct": 14.3,
+                "dwarf_lines": [
+                  {
+                    "line": 1,
+                    "instructions": 96,
+                    "op": "(function-level location only)"
+                  },
+                  {
+                    "line": 18,
+                    "instructions": 16,
+                    "op": "linalg.matmul"
+                  }
+                ],
+                "source_file": "configured_module_matmul_dispatch_0.mlir"
+              }
+            }
+          ]
+        }
+      ],
+      "dispatch_count": 1,
+      "counts_match": 1,
+      "size_checks_pass": 1
+    },
+    {
+      "shape": "512x512x512",
+      "target": "host",
+      "variant": "packed_mmt4d_ukernel",
+      "elves": [
+        {
+          "so": "module_kernel_linked_embedded_elf_arm_64.so",
+          "o_exists": true,
+          "elf": {
+            "class": "ELF64",
+            "type": "DYN (Shared object file)",
+            "machine": "AArch64",
+            "isa": "aarch64"
+          },
+          "so_sections": [
+            {
+              "name": ".dynsym",
+              "type": "DYNSYM",
+              "size": 48
+            },
+            {
+              "name": ".hash",
+              "type": "HASH",
+              "size": 24
+            },
+            {
+              "name": ".dynstr",
+              "type": "STRTAB",
+              "size": 35
+            },
+            {
+              "name": ".rela.dyn",
+              "type": "RELA",
+              "size": 648
+            },
+            {
+              "name": ".rodata",
+              "type": "PROGBITS",
+              "size": 960
+            },
+            {
+              "name": ".eh_frame",
+              "type": "PROGBITS",
+              "size": 176
+            },
+            {
+              "name": ".text",
+              "type": "PROGBITS",
+              "size": 1036
+            },
+            {
+              "name": ".data.rel.ro",
+              "type": "PROGBITS",
+              "size": 384
+            },
+            {
+              "name": ".dynamic",
+              "type": "DYNAMIC",
+              "size": 192
+            },
+            {
+              "name": ".relro_padding",
+              "type": "NOBITS",
+              "size": 128
+            },
+            {
+              "name": ".debug_abbrev",
+              "type": "PROGBITS",
+              "size": 80
+            },
+            {
+              "name": ".debug_info",
+              "type": "PROGBITS",
+              "size": 295
+            },
+            {
+              "name": ".debug_str",
+              "type": "PROGBITS",
+              "size": 398
+            },
+            {
+              "name": ".debug_pubnames",
+              "type": "PROGBITS",
+              "size": 215
+            },
+            {
+              "name": ".debug_pubtypes",
+              "type": "PROGBITS",
+              "size": 80
+            },
+            {
+              "name": ".debug_line",
+              "type": "PROGBITS",
+              "size": 467
+            },
+            {
+              "name": ".comment",
+              "type": "PROGBITS",
+              "size": 5
+            },
+            {
+              "name": ".symtab",
+              "type": "SYMTAB",
+              "size": 72
+            },
+            {
+              "name": ".shstrtab",
+              "type": "STRTAB",
+              "size": 210
+            },
+            {
+              "name": ".strtab",
+              "type": "STRTAB",
+              "size": 44
+            }
+          ],
+          "so_symbols": {
+            ".dynsym": [
+              "iree_hal_executable_library_query"
+            ],
+            ".symtab": [
+              "_DYNAMIC",
+              "iree_hal_executable_library_query"
+            ]
+          },
+          "dwarf_subprograms": [
+            {
+              "name": "matmul_dispatch_0_pack_f32",
+              "low_pc": 67888,
+              "high_pc": 68036,
+              "bytes": 148
+            },
+            {
+              "name": "matmul_dispatch_1_pack_f32",
+              "low_pc": 68036,
+              "high_pc": 68164,
+              "bytes": 128
+            },
+            {
+              "name": "matmul_dispatch_2_mmt4d_64x64x512x8x8x1_f32",
+              "low_pc": 68164,
+              "high_pc": 68728,
+              "bytes": 564
+            },
+            {
+              "name": "matmul_dispatch_3_unpack_f32",
+              "low_pc": 68728,
+              "high_pc": 68904,
+              "bytes": 176
+            }
+          ],
+          "dwarf_line_tables": 4,
+          "dwarf_line_rows": 33,
+          "o_header": {
+            "class": "ELF64",
+            "type": "REL (Relocatable file)",
+            "machine": "AArch64",
+            "isa": "aarch64"
+          },
+          "o_functions": 36,
+          "o_text_bytes": 5172,
+          "so_text_bytes": 1036,
+          "dispatches": [
+            {
+              "symbol": "matmul_dispatch_0_pack_f32",
+              "so_range": [
+                "0x10930",
+                "0x109c4"
+              ],
+              "dwarf_bytes": 148,
+              "in_so_dynsym": false,
+              "in_so_symtab": false,
+              "o_symbol_bytes": 148,
+              "o_symbol_bind": "LOCAL",
+              "nm_bytes": 148,
+              "size_checks_pass": true,
+              "objdump_tool": "llvm-objdump",
+              "objdump_bytes": 148,
+              "binary_counts": {
+                "instructions": 37
+              },
+              "asm_counts": {
+                "instructions": 37
+              },
+              "mismatches": {},
+              "counts_match": true,
+              "instructions_s_vs_binary": [
+                37,
+                37
+              ],
+              "whole_file_asm": {
+                "instructions": 1294,
+                "vec_load": 3,
+                "vec_store": 17,
+                "fma_packed_128": 16,
+                "fp_scalar": 65,
+                "fma_scalar": 13
+              },
+              "hot_loop": {
+                "start": "0x10978",
+                "end": "0x10990",
+                "branch": "b.ne",
+                "instructions": 6,
+                "bytes": 24,
+                "vector_fma": 0,
+                "scalar_fma": 0,
+                "fp_ops": 0,
+                "loops_found": 3,
+                "op_level_location_pct": 100.0,
+                "dwarf_lines": [
+                  {
+                    "line": 14,
+                    "instructions": 6,
+                    "op": "linalg.pack"
+                  }
+                ],
+                "source_file": "configured_module_matmul_dispatch_0.mlir"
+              }
+            },
+            {
+              "symbol": "matmul_dispatch_1_pack_f32",
+              "so_range": [
+                "0x109c4",
+                "0x10a44"
+              ],
+              "dwarf_bytes": 128,
+              "in_so_dynsym": false,
+              "in_so_symtab": false,
+              "o_symbol_bytes": 128,
+              "o_symbol_bind": "LOCAL",
+              "nm_bytes": 128,
+              "size_checks_pass": true,
+              "objdump_tool": "llvm-objdump",
+              "objdump_bytes": 128,
+              "binary_counts": {
+                "instructions": 32,
+                "vec_load": 1,
+                "vec_store": 1
+              },
+              "asm_counts": {
+                "instructions": 33,
+                "vec_load": 1,
+                "vec_store": 1
+              },
+              "mismatches": {},
+              "counts_match": true,
+              "instructions_s_vs_binary": [
+                33,
+                32
+              ],
+              "whole_file_asm": {
+                "instructions": 1294,
+                "vec_load": 3,
+                "vec_store": 17,
+                "fma_packed_128": 16,
+                "fp_scalar": 65,
+                "fma_scalar": 13
+              },
+              "hot_loop": {
+                "start": "0x10a08",
+                "end": "0x10a24",
+                "branch": "b.ne",
+                "instructions": 7,
+                "bytes": 28,
+                "vector_fma": 0,
+                "scalar_fma": 0,
+                "fp_ops": 0,
+                "loops_found": 2,
+                "op_level_location_pct": 100.0,
+                "dwarf_lines": [
+                  {
+                    "line": 15,
+                    "instructions": 7,
+                    "op": "linalg.pack"
+                  }
+                ],
+                "source_file": "configured_module_matmul_dispatch_1.mlir"
+              }
+            },
+            {
+              "symbol": "matmul_dispatch_2_mmt4d_64x64x512x8x8x1_f32",
+              "so_range": [
+                "0x10a44",
+                "0x10c78"
+              ],
+              "dwarf_bytes": 564,
+              "in_so_dynsym": false,
+              "in_so_symtab": false,
+              "o_symbol_bytes": 564,
+              "o_symbol_bind": "LOCAL",
+              "nm_bytes": 564,
+              "size_checks_pass": true,
+              "objdump_tool": "llvm-objdump",
+              "objdump_bytes": 564,
+              "binary_counts": {
+                "instructions": 141,
+                "vec_load": 2,
+                "fma_packed_128": 16,
+                "vec_store": 16
+              },
+              "asm_counts": {
+                "instructions": 141,
+                "vec_load": 2,
+                "fma_packed_128": 16,
+                "vec_store": 16
+              },
+              "mismatches": {},
+              "counts_match": true,
+              "instructions_s_vs_binary": [
+                141,
+                141
+              ],
+              "whole_file_asm": {
+                "instructions": 1294,
+                "vec_load": 3,
+                "vec_store": 17,
+                "fma_packed_128": 16,
+                "fp_scalar": 65,
+                "fma_scalar": 13
+              },
+              "hot_loop": {
+                "start": "0x10b98",
+                "end": "0x10bf4",
+                "branch": "b.ne",
+                "instructions": 23,
+                "bytes": 92,
+                "vector_fma": 16,
+                "scalar_fma": 0,
+                "fp_ops": 0,
+                "loops_found": 3,
+                "op_level_location_pct": 100.0,
+                "dwarf_lines": [
+                  {
+                    "line": 20,
+                    "instructions": 23,
+                    "op": "linalg.mmt4d"
+                  }
+                ],
+                "source_file": "configured_module_matmul_dispatch_2.mlir"
+              }
+            },
+            {
+              "symbol": "matmul_dispatch_3_unpack_f32",
+              "so_range": [
+                "0x10c78",
+                "0x10d28"
+              ],
+              "dwarf_bytes": 176,
+              "in_so_dynsym": false,
+              "in_so_symtab": false,
+              "o_symbol_bytes": 176,
+              "o_symbol_bind": "LOCAL",
+              "nm_bytes": 176,
+              "size_checks_pass": true,
+              "objdump_tool": "llvm-objdump",
+              "objdump_bytes": 176,
+              "binary_counts": {
+                "instructions": 44
+              },
+              "asm_counts": {
+                "instructions": 44
+              },
+              "mismatches": {},
+              "counts_match": true,
+              "instructions_s_vs_binary": [
+                44,
+                44
+              ],
+              "whole_file_asm": {
+                "instructions": 1294,
+                "vec_load": 3,
+                "vec_store": 17,
+                "fma_packed_128": 16,
+                "fp_scalar": 65,
+                "fma_scalar": 13
+              },
+              "hot_loop": {
+                "start": "0x10ccc",
+                "end": "0x10ce0",
+                "branch": "b.ne",
+                "instructions": 5,
+                "bytes": 20,
+                "vector_fma": 0,
+                "scalar_fma": 0,
+                "fp_ops": 0,
+                "loops_found": 4,
+                "op_level_location_pct": 100.0,
+                "dwarf_lines": [
+                  {
+                    "line": 15,
+                    "instructions": 5,
+                    "op": "linalg.unpack"
+                  }
+                ],
+                "source_file": "configured_module_matmul_dispatch_3.mlir"
+              }
+            }
+          ]
+        }
+      ],
+      "dispatch_count": 4,
+      "counts_match": 4,
+      "size_checks_pass": 4
+    },
+    {
+      "shape": "512x512x512",
+      "target": "x86_64",
+      "variant": "cross_vec",
+      "elves": [
+        {
+          "so": "module_matmul_dispatch_0_embedded_elf_x86_64.so",
+          "o_exists": true,
+          "elf": {
+            "class": "ELF64",
+            "type": "DYN (Shared object file)",
+            "machine": "Advanced Micro Devices X86-64",
+            "isa": "x86_64"
+          },
+          "so_sections": [
+            {
+              "name": ".dynsym",
+              "type": "DYNSYM",
+              "size": 48
+            },
+            {
+              "name": ".hash",
+              "type": "HASH",
+              "size": 24
+            },
+            {
+              "name": ".dynstr",
+              "type": "STRTAB",
+              "size": 35
+            },
+            {
+              "name": ".rela.dyn",
+              "type": "RELA",
+              "size": 288
+            },
+            {
+              "name": ".rodata",
+              "type": "PROGBITS",
+              "size": 272
+            },
+            {
+              "name": ".eh_frame",
+              "type": "PROGBITS",
+              "size": 92
+            },
+            {
+              "name": ".text",
+              "type": "PROGBITS",
+              "size": 2033
+            },
+            {
+              "name": ".data.rel.ro",
+              "type": "PROGBITS",
+              "size": 224
+            },
+            {
+              "name": ".dynamic",
+              "type": "DYNAMIC",
+              "size": 192
+            },
+            {
+              "name": ".relro_padding",
+              "type": "NOBITS",
+              "size": 400
+            },
+            {
+              "name": ".debug_abbrev",
+              "type": "PROGBITS",
+              "size": 57
+            },
+            {
+              "name": ".debug_info",
+              "type": "PROGBITS",
+              "size": 79
+            },
+            {
+              "name": ".debug_str",
+              "type": "PROGBITS",
+              "size": 179
+            },
+            {
+              "name": ".debug_pubnames",
+              "type": "PROGBITS",
+              "size": 63
+            },
+            {
+              "name": ".debug_pubtypes",
+              "type": "PROGBITS",
+              "size": 26
+            },
+            {
+              "name": ".debug_line",
+              "type": "PROGBITS",
+              "size": 145
+            },
+            {
+              "name": ".comment",
+              "type": "PROGBITS",
+              "size": 5
+            },
+            {
+              "name": ".symtab",
+              "type": "SYMTAB",
+              "size": 72
+            },
+            {
+              "name": ".shstrtab",
+              "type": "STRTAB",
+              "size": 210
+            },
+            {
+              "name": ".strtab",
+              "type": "STRTAB",
+              "size": 44
+            }
+          ],
+          "so_symbols": {
+            ".dynsym": [
+              "iree_hal_executable_library_query"
+            ],
+            ".symtab": [
+              "_DYNAMIC",
+              "iree_hal_executable_library_query"
+            ]
+          },
+          "dwarf_subprograms": [
+            {
+              "name": "matmul_dispatch_0_matmul_512x512x512_f32",
+              "low_pc": 5328,
+              "high_pc": 7340,
+              "bytes": 2012
+            }
+          ],
+          "dwarf_line_tables": 1,
+          "dwarf_line_rows": 14,
+          "o_header": {
+            "class": "ELF64",
+            "type": "REL (Relocatable file)",
+            "machine": "Advanced Micro Devices X86-64",
+            "isa": "x86_64"
+          },
+          "o_functions": 33,
+          "o_text_bytes": 5792,
+          "so_text_bytes": 2033,
+          "dispatches": [
+            {
+              "symbol": "matmul_dispatch_0_matmul_512x512x512_f32",
+              "so_range": [
+                "0x14d0",
+                "0x1cac"
+              ],
+              "dwarf_bytes": 2012,
+              "in_so_dynsym": false,
+              "in_so_symtab": false,
+              "o_symbol_bytes": 2012,
+              "o_symbol_bind": "LOCAL",
+              "nm_bytes": 2012,
+              "size_checks_pass": true,
+              "objdump_tool": "llvm-objdump",
+              "objdump_bytes": 2012,
+              "binary_counts": {
+                "instructions": 268,
+                "widest": 512,
+                "vec_load": 16,
+                "fma_packed_512": 128,
+                "vec_store": 8
+              },
+              "asm_counts": {
+                "instructions": 265,
+                "widest": 512,
+                "vec_load": 16,
+                "fma_packed_512": 128,
+                "vec_store": 8
+              },
+              "mismatches": {},
+              "counts_match": true,
+              "instructions_s_vs_binary": [
+                265,
+                268
+              ],
+              "whole_file_asm": {
+                "instructions": 1250,
+                "vec_load": 50,
+                "fma_packed_512": 128,
+                "vec_store": 19,
+                "fp_scalar": 71,
+                "vec_stack_access": 22,
+                "fma_scalar": 13
+              },
+              "hot_loop": {
+                "start": "0x1640",
+                "end": "0x1c38",
+                "branch": "jb",
+                "instructions": 148,
+                "bytes": 1528,
+                "vector_fma": 128,
+                "scalar_fma": 0,
+                "fp_ops": 0,
+                "loops_found": 3,
+                "op_level_location_pct": 13.5,
+                "dwarf_lines": [
+                  {
+                    "line": 1,
+                    "instructions": 128,
+                    "op": "(function-level location only)"
+                  },
+                  {
+                    "line": 18,
+                    "instructions": 20,
+                    "op": "linalg.matmul"
+                  }
+                ],
+                "source_file": "configured_module_matmul_dispatch_0.mlir"
+              }
+            }
+          ]
+        }
+      ],
+      "dispatch_count": 1,
+      "counts_match": 1,
+      "size_checks_pass": 1
+    },
+    {
+      "shape": "512x512x512",
+      "target": "riscv64",
+      "variant": "cross_vec",
+      "elves": [
+        {
+          "so": "module_matmul_dispatch_0_embedded_elf_riscv_64.so",
+          "o_exists": true,
+          "elf": {
+            "class": "ELF64",
+            "type": "DYN (Shared object file)",
+            "machine": "RISC-V",
+            "isa": "riscv64"
+          },
+          "so_sections": [
+            {
+              "name": ".dynsym",
+              "type": "DYNSYM",
+              "size": 48
+            },
+            {
+              "name": ".hash",
+              "type": "HASH",
+              "size": 24
+            },
+            {
+              "name": ".dynstr",
+              "type": "STRTAB",
+              "size": 35
+            },
+            {
+              "name": ".rela.dyn",
+              "type": "RELA",
+              "size": 288
+            },
+            {
+              "name": ".rodata",
+              "type": "PROGBITS",
+              "size": 272
+            },
+            {
+              "name": ".eh_frame",
+              "type": "PROGBITS",
+              "size": 120
+            },
+            {
+              "name": ".text",
+              "type": "PROGBITS",
+              "size": 674
+            },
+            {
+              "name": ".data.rel.ro",
+              "type": "PROGBITS",
+              "size": 224
+            },
+            {
+              "name": ".dynamic",
+              "type": "DYNAMIC",
+              "size": 192
+            },
+            {
+              "name": ".relro_padding",
+              "type": "NOBITS",
+              "size": 1696
+            },
+            {
+              "name": ".debug_abbrev",
+              "type": "PROGBITS",
+              "size": 57
+            },
+            {
+              "name": ".debug_info",
+              "type": "PROGBITS",
+              "size": 79
+            },
+            {
+              "name": ".debug_str",
+              "type": "PROGBITS",
+              "size": 180
+            },
+            {
+              "name": ".debug_pubnames",
+              "type": "PROGBITS",
+              "size": 63
+            },
+            {
+              "name": ".debug_pubtypes",
+              "type": "PROGBITS",
+              "size": 26
+            },
+            {
+              "name": ".riscv.attributes",
+              "type": "RISCV_ATTRIBUTES",
+              "size": 190
+            },
+            {
+              "name": ".debug_line",
+              "type": "PROGBITS",
+              "size": 196
+            },
+            {
+              "name": ".comment",
+              "type": "PROGBITS",
+              "size": 5
+            },
+            {
+              "name": ".symtab",
+              "type": "SYMTAB",
+              "size": 72
+            },
+            {
+              "name": ".shstrtab",
+              "type": "STRTAB",
+              "size": 228
+            },
+            {
+              "name": ".strtab",
+              "type": "STRTAB",
+              "size": 44
+            }
+          ],
+          "so_symbols": {
+            ".dynsym": [
+              "iree_hal_executable_library_query"
+            ],
+            ".symtab": [
+              "_DYNAMIC",
+              "iree_hal_executable_library_query"
+            ]
+          },
+          "dwarf_subprograms": [
+            {
+              "name": "matmul_dispatch_0_matmul_512x512x512_f32",
+              "low_pc": 5400,
+              "high_pc": 6054,
+              "bytes": 654
+            }
+          ],
+          "dwarf_line_tables": 1,
+          "dwarf_line_rows": 26,
+          "o_header": {
+            "class": "ELF64",
+            "type": "REL (Relocatable file)",
+            "machine": "RISC-V",
+            "isa": "riscv64"
+          },
+          "o_functions": 33,
+          "o_text_bytes": 4266,
+          "so_text_bytes": 674,
+          "dispatches": [
+            {
+              "symbol": "matmul_dispatch_0_matmul_512x512x512_f32",
+              "so_range": [
+                "0x1518",
+                "0x17a6"
+              ],
+              "dwarf_bytes": 654,
+              "in_so_dynsym": false,
+              "in_so_symtab": false,
+              "o_symbol_bytes": 654,
+              "o_symbol_bind": "LOCAL",
+              "nm_bytes": 654,
+              "size_checks_pass": true,
+              "objdump_tool": "llvm-objdump",
+              "objdump_bytes": 654,
+              "binary_counts": {
+                "instructions": 205,
+                "vsetvl": 1,
+                "vec_load": 2,
+                "fma_vector": 8,
+                "vec_store": 8
+              },
+              "asm_counts": {
+                "instructions": 180,
+                "vsetvl": 1,
+                "vec_load": 2,
+                "fma_vector": 8,
+                "vec_store": 8
+              },
+              "mismatches": {},
+              "counts_match": true,
+              "instructions_s_vs_binary": [
+                180,
+                205
+              ],
+              "whole_file_asm": {
+                "instructions": 1335,
+                "vsetvl": 1,
+                "vec_load": 2,
+                "fma_vector": 8,
+                "vec_store": 8,
+                "fp_scalar": 76,
+                "fma_scalar": 13
+              },
+              "hot_loop": {
+                "start": "0x1658",
+                "end": "0x16b0",
+                "branch": "bne",
+                "instructions": 23,
+                "bytes": 88,
+                "vector_fma": 7,
+                "scalar_fma": 0,
+                "fp_ops": 0,
+                "loops_found": 5,
+                "op_level_location_pct": 39.1,
+                "dwarf_lines": [
+                  {
+                    "line": 1,
+                    "instructions": 14,
+                    "op": "(function-level location only)"
+                  },
+                  {
+                    "line": 18,
+                    "instructions": 9,
+                    "op": "linalg.matmul"
+                  }
+                ],
+                "source_file": "configured_module_matmul_dispatch_0.mlir"
+              }
+            }
+          ]
+        }
+      ],
+      "dispatch_count": 1,
+      "counts_match": 1,
+      "size_checks_pass": 1
+    }
+  ],
+  "riscv_harness": null,
+  "summary": {
+    "kernels": 10,
+    "kernels_ok": 10,
+    "dispatches": 22,
+    "counts_match": 22,
+    "size_checks_pass": 22,
+    "isas": [
+      "aarch64",
+      "riscv64",
+      "x86_64"
+    ]
+  }
+}

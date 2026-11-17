@@ -243,3 +243,61 @@ Results measured while throttled (re-run these): 128x128x128/v1_generic_isa, 128
 | 2026-09-26T02:36:23 | sweep 1x4096x4096 | after | 122.7 | 94.6 | 0.0 |
 | 2026-09-26T02:38:20 | counters 128x128x128 | after | 121.0 | 93.3 | 0.0 |
 | 2026-09-26T02:40:22 | counters 1024x1024x1024 | after | 120.8 | 93.2 | 0.0 |
+
+## Binary level: ELF, symbol tables, objdump and DWARF
+
+22 dispatch functions across aarch64, riscv64, x86_64. asm.py on the `.s` vs objdump on the ELF: FMA / vector / load / store / spill counts match in **22/22**. `.o` symbol size = DWARF `DW_TAG_subprogram` range in the linked `.so` in **22/22**.
+
+| ISA | Variant | Shape | Dispatch symbol | .o sym bytes | DWARF bytes | vector FMA | stack accesses | asm.py = objdump | in .so symtab |
+|---|---|---|---|---|---|---|---|---|---|
+| aarch64 | v1_generic_isa | 128x128x128 | matmul_dispatch_0_pack_f32 | 116 | 116 | 0 | 0 | yes | no |
+| aarch64 | v1_generic_isa | 128x128x128 | matmul_dispatch_1_pack_f32 | 128 | 128 | 0 | 0 | yes | no |
+| aarch64 | v1_generic_isa | 128x128x128 | matmul_dispatch_2_mmt4d_16x16x128x8x8x1_f32 | 500 | 500 | 16 | 0 | yes | no |
+| aarch64 | v1_generic_isa | 128x128x128 | matmul_dispatch_3_unpack_f32 | 180 | 180 | 0 | 0 | yes | no |
+| aarch64 | vec_heuristic | 128x128x128 | matmul_dispatch_0_matmul_128x128x128_f32 | 772 | 772 | 64 | 0 | yes | no |
+| aarch64 | packed_mmt4d_ukernel | 128x128x128 | matmul_dispatch_0_pack_f32 | 116 | 116 | 0 | 0 | yes | no |
+| aarch64 | packed_mmt4d_ukernel | 128x128x128 | matmul_dispatch_1_pack_f32 | 128 | 128 | 0 | 0 | yes | no |
+| aarch64 | packed_mmt4d_ukernel | 128x128x128 | matmul_dispatch_2_mmt4d_16x16x128x8x8x1_f32 | 500 | 500 | 16 | 0 | yes | no |
+| aarch64 | packed_mmt4d_ukernel | 128x128x128 | matmul_dispatch_3_unpack_f32 | 180 | 180 | 0 | 0 | yes | no |
+| x86_64 | cross_vec | 128x128x128 | matmul_dispatch_0_matmul_128x128x128_f32 | 1755 | 1755 | 128 | 0 | yes | no |
+| riscv64 | cross_vec | 128x128x128 | matmul_dispatch_0_matmul_128x128x128_f32 | 588 | 588 | 9 | 0 | yes | no |
+| aarch64 | v1_generic_isa | 512x512x512 | matmul_dispatch_0_pack_f32 | 148 | 148 | 0 | 0 | yes | no |
+| aarch64 | v1_generic_isa | 512x512x512 | matmul_dispatch_1_pack_f32 | 128 | 128 | 0 | 0 | yes | no |
+| aarch64 | v1_generic_isa | 512x512x512 | matmul_dispatch_2_mmt4d_64x64x512x8x8x1_f32 | 560 | 560 | 16 | 0 | yes | no |
+| aarch64 | v1_generic_isa | 512x512x512 | matmul_dispatch_3_unpack_f32 | 176 | 176 | 0 | 0 | yes | no |
+| aarch64 | vec_heuristic | 512x512x512 | matmul_dispatch_0_matmul_512x512x512_f32 | 880 | 880 | 64 | 0 | yes | no |
+| aarch64 | packed_mmt4d_ukernel | 512x512x512 | matmul_dispatch_0_pack_f32 | 148 | 148 | 0 | 0 | yes | no |
+| aarch64 | packed_mmt4d_ukernel | 512x512x512 | matmul_dispatch_1_pack_f32 | 128 | 128 | 0 | 0 | yes | no |
+| aarch64 | packed_mmt4d_ukernel | 512x512x512 | matmul_dispatch_2_mmt4d_64x64x512x8x8x1_f32 | 564 | 564 | 16 | 0 | yes | no |
+| aarch64 | packed_mmt4d_ukernel | 512x512x512 | matmul_dispatch_3_unpack_f32 | 176 | 176 | 0 | 0 | yes | no |
+| x86_64 | cross_vec | 512x512x512 | matmul_dispatch_0_matmul_512x512x512_f32 | 2012 | 2012 | 128 | 0 | yes | no |
+| riscv64 | cross_vec | 512x512x512 | matmul_dispatch_0_matmul_512x512x512_f32 | 654 | 654 | 8 | 0 | yes | no |
+
+Linked `.so` symbol tables keep only: `{'.dynsym': ['iree_hal_executable_library_query'], '.symtab': ['_DYNAMIC', 'iree_hal_executable_library_query']}`. The `.o` has 36 FUNC symbols (5032 bytes of `.text*`); after linking, `.text` is 944 bytes: unused runtime helpers are dropped.
+
+### Hottest loop, mapped back to MLIR through `.debug_line`
+
+| ISA | Variant | Shape | Dispatch | Address range | Insns | Vector FMA | Insns with an op-level line | Lines (insns) |
+|---|---|---|---|---|---|---|---|---|
+| aarch64 | v1_generic_isa | 128x128x128 | matmul_dispatch_0_pack_f32 | 0x10954-0x1096c | 6 | 0 | 100.0% | L14 linalg.pack (6) |
+| aarch64 | v1_generic_isa | 128x128x128 | matmul_dispatch_1_pack_f32 | 0x109dc-0x109f4 | 6 | 0 | 100.0% | L15 linalg.pack (6) |
+| aarch64 | v1_generic_isa | 128x128x128 | matmul_dispatch_2_mmt4d_16x16x128x8x8x1_f32 | 0x10b24-0x10b80 | 23 | 16 | 100.0% | L20 linalg.mmt4d (23) |
+| aarch64 | v1_generic_isa | 128x128x128 | matmul_dispatch_3_unpack_f32 | 0x10c60-0x10c74 | 5 | 0 | 100.0% | L15 linalg.unpack (5) |
+| aarch64 | vec_heuristic | 128x128x128 | matmul_dispatch_0_matmul_128x128x128_f32 | 0x10590-0x1074c | 111 | 64 | 13.5% | L1 (function-level location only) (96); L18 linalg.matmul (15) |
+| aarch64 | packed_mmt4d_ukernel | 128x128x128 | matmul_dispatch_0_pack_f32 | 0x1096c-0x10984 | 6 | 0 | 100.0% | L14 linalg.pack (6) |
+| aarch64 | packed_mmt4d_ukernel | 128x128x128 | matmul_dispatch_1_pack_f32 | 0x109f4-0x10a0c | 6 | 0 | 100.0% | L15 linalg.pack (6) |
+| aarch64 | packed_mmt4d_ukernel | 128x128x128 | matmul_dispatch_2_mmt4d_16x16x128x8x8x1_f32 | 0x10b3c-0x10b98 | 23 | 16 | 100.0% | L20 linalg.mmt4d (23) |
+| aarch64 | packed_mmt4d_ukernel | 128x128x128 | matmul_dispatch_3_unpack_f32 | 0x10c78-0x10c8c | 5 | 0 | 100.0% | L15 linalg.unpack (5) |
+| x86_64 | cross_vec | 128x128x128 | matmul_dispatch_0_matmul_128x128x128_f32 | 0x1590-0x1b35 | 148 | 128 | 13.5% | L1 (function-level location only) (128); L18 linalg.matmul (20) |
+| riscv64 | cross_vec | 128x128x128 | matmul_dispatch_0_matmul_128x128x128_f32 | 0x1612-0x1658 | 18 | 7 | 22.2% | L1 (function-level location only) (14); L18 linalg.matmul (4) |
+| aarch64 | v1_generic_isa | 512x512x512 | matmul_dispatch_0_pack_f32 | 0x10960-0x10978 | 6 | 0 | 100.0% | L14 linalg.pack (6) |
+| aarch64 | v1_generic_isa | 512x512x512 | matmul_dispatch_1_pack_f32 | 0x109f0-0x10a0c | 7 | 0 | 100.0% | L15 linalg.pack (7) |
+| aarch64 | v1_generic_isa | 512x512x512 | matmul_dispatch_2_mmt4d_64x64x512x8x8x1_f32 | 0x10b7c-0x10bd8 | 23 | 16 | 100.0% | L20 linalg.mmt4d (23) |
+| aarch64 | v1_generic_isa | 512x512x512 | matmul_dispatch_3_unpack_f32 | 0x10cb0-0x10cc4 | 5 | 0 | 100.0% | L15 linalg.unpack (5) |
+| aarch64 | vec_heuristic | 512x512x512 | matmul_dispatch_0_matmul_512x512x512_f32 | 0x105f4-0x107b4 | 112 | 64 | 14.3% | L1 (function-level location only) (96); L18 linalg.matmul (16) |
+| aarch64 | packed_mmt4d_ukernel | 512x512x512 | matmul_dispatch_0_pack_f32 | 0x10978-0x10990 | 6 | 0 | 100.0% | L14 linalg.pack (6) |
+| aarch64 | packed_mmt4d_ukernel | 512x512x512 | matmul_dispatch_1_pack_f32 | 0x10a08-0x10a24 | 7 | 0 | 100.0% | L15 linalg.pack (7) |
+| aarch64 | packed_mmt4d_ukernel | 512x512x512 | matmul_dispatch_2_mmt4d_64x64x512x8x8x1_f32 | 0x10b98-0x10bf4 | 23 | 16 | 100.0% | L20 linalg.mmt4d (23) |
+| aarch64 | packed_mmt4d_ukernel | 512x512x512 | matmul_dispatch_3_unpack_f32 | 0x10ccc-0x10ce0 | 5 | 0 | 100.0% | L15 linalg.unpack (5) |
+| x86_64 | cross_vec | 512x512x512 | matmul_dispatch_0_matmul_512x512x512_f32 | 0x1640-0x1c38 | 148 | 128 | 13.5% | L1 (function-level location only) (128); L18 linalg.matmul (20) |
+| riscv64 | cross_vec | 512x512x512 | matmul_dispatch_0_matmul_512x512x512_f32 | 0x1658-0x16b0 | 23 | 7 | 39.1% | L1 (function-level location only) (14); L18 linalg.matmul (9) |

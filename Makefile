@@ -2,8 +2,8 @@ PY ?= python3
 TUNE_SHAPES = --shape 128x128x128 --shape 512x512x512 --shape 1024x1024x1024 \
               --shape 128x768x3072 --shape 32x4096x4096 --shape 1x4096x4096
 
-.PHONY: c4-padding all peaks tune ablate sweep schedule counters ir riscv report clean mac mac-counters mac-selftest thermal c4-followup
-all: peaks tune ablate sweep schedule ir riscv report
+.PHONY: c4-padding all peaks tune ablate sweep schedule counters ir riscv elf report clean mac mac-counters mac-selftest thermal c4-followup
+all: peaks tune ablate sweep schedule ir riscv elf report
 peaks:    ; $(PY) -m mlirbench peaks
 tune:     ; $(PY) -m mlirbench tune $(TUNE_SHAPES)
 ablate:   ; $(PY) -m mlirbench ablate
@@ -12,6 +12,7 @@ schedule: ; $(PY) -m mlirbench schedule
 counters: ; $(PY) -m mlirbench counters
 ir:       ; $(PY) -m mlirbench ir
 riscv:    ; $(PY) -m mlirbench riscv
+elf:      ; $(PY) -m mlirbench elf
 report:   ; $(PY) -m mlirbench report
 thermal:  ; $(PY) -m mlirbench thermal
 clean:    ; rm -rf build
@@ -27,6 +28,7 @@ mac:
 	$(MAC) sweep --thermal wait
 	-$(MAC) schedule --thermal wait
 	$(MAC) ir
+	$(MAC) elf
 	$(MAC) report
 
 # kperf needs root; env/PATH are preserved so the same python + IREE tools are used,

@@ -12,6 +12,8 @@
   python -m mlirbench padding              # 960/1024/1088 bracket: capacity vs set conflicts
   python -m mlirbench ir [--shape ..] [--variant ..]
   python -m mlirbench riscv                 # RVV cross-compile + QEMU execution (Linux)
+  python -m mlirbench elf [--target host|x86_64|aarch64|riscv64]
+                                            # ELF sections, symbol tables, objdump vs asm.py, DWARF lines
   python -m mlirbench report                # plots + results/REPORT.md
   python -m mlirbench all
 
@@ -33,7 +35,7 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(prog="mlirbench", description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("cmd", choices=["peaks", "tune", "sweep", "ablate", "counters", "thermal",
-                                    "schedule", "padding", "ir", "riscv", "report", "all"])
+                                    "schedule", "padding", "ir", "riscv", "elf", "report", "all"])
     ap.add_argument("--shape", action="append", help="MxKxN, repeatable")
     ap.add_argument("--variant", action="append")
     ap.add_argument("--strategy", default="staged", choices=["staged", "grid"])
@@ -48,6 +50,8 @@ def main(argv=None) -> int:
     ap.add_argument("--list-events", action="store_true", help="counters: list this CPU's PMU events")
     ap.add_argument("--schedule", action="store_true",
                     help="counters: profile the hand-written schedule's kernels (after `schedule`)")
+    ap.add_argument("--target", action="append", choices=["host", "x86_64", "aarch64", "riscv64"],
+                    help="elf: which ELF targets to inspect (default: host + the other ISAs)")
     ap.add_argument("--counters", action="store_true",
                     help="tune: also collect lean hardware counters for every config (Linux perf / macOS kperf)")
     a = ap.parse_args(argv)
@@ -138,6 +142,24 @@ def main(argv=None) -> int:
                   f"exec={ex.get('status')} " + " ".join(
                       f"[{rr['qemu_cpu']}: {'SIGILL' if rr['signal'] else ('PASS' if rr['result'] and 'PASS' in rr['result'] else 'FAIL')}]"
                       for rr in ex.get("runs", [])))
+    if a.cmd in ("elf", "all"):
+        from .elfinspect import run_all as run_elf
+        r = run_elf(shapes, a.target, a.variant)
+        for k in r["kernels"]:
+            if "error" in k:
+                print(f"  {k['target']:<8} {k['variant']:<22} {k['shape']:<12} ERROR {k['error'][:120]}")
+                continue
+            for e in k["elves"]:
+                for d in e["dispatches"]:
+                    hl = d.get("hot_loop") or {}
+                    ln = ", ".join(f"L{x['line']} {x['op']} x{x['instructions']}" for x in hl.get("dwarf_lines", [])[:3])
+                    print(f"  {e['elf'].get('isa') or '?':<8} {k['variant']:<22} {k['shape']:<12} "
+                          f"{d['symbol'][:44]:<44} counts={'MATCH' if d.get('counts_match') else 'DIFF'} "
+                          f"size={'MATCH' if d.get('size_checks_pass') else 'DIFF'} "
+                          f"loop_fma={hl.get('vector_fma', 0)} -> {ln}")
+        sm = r["summary"]
+        print(f"elf: {sm['dispatches']} dispatches across {', '.join(sm['isas'])}; asm.py vs objdump counts match "
+              f"{sm['counts_match']}/{sm['dispatches']}; .o symbol = DWARF range {sm['size_checks_pass']}/{sm['dispatches']}")
     if a.cmd in ("report", "all"):
         from .report import build_report
         print(f"wrote {build_report()}")

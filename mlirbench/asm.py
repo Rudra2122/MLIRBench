@@ -86,10 +86,17 @@ def detect_isa(text: str) -> str:
     return "aarch64"
 
 
-def analyze_file(path: Path) -> dict:
-    text = path.read_text(errors="replace")
-    isa = detect_isa(text)
-    fn = {"x86_64": _classify_x86, "riscv64": _classify_riscv, "aarch64": _classify_aarch64}[isa]
+CLASSIFIERS = {"x86_64": _classify_x86, "riscv64": _classify_riscv, "aarch64": _classify_aarch64}
+
+
+def classify(mn: str, ops: str, isa: str, c: Counter) -> None:
+    """Classify one instruction into the counter (shared with elfinspect.py)."""
+    c["instructions"] += 1
+    CLASSIFIERS[isa](mn.lower(), ops, c)
+
+
+def analyze_text(text: str, isa: str | None = None) -> dict:
+    isa = isa or detect_isa(text)
     c: Counter = Counter()
     for raw in text.splitlines():
         line = raw.split("#")[0] if isa == "x86_64" else raw.split("//")[0]
@@ -97,11 +104,28 @@ def analyze_file(path: Path) -> dict:
         if not s or s.startswith(".") or s.endswith(":"):
             continue
         parts = s.split(None, 1)
-        mn, ops = parts[0].lower(), (parts[1] if len(parts) > 1 else "")
-        c["instructions"] += 1
-        fn(mn, ops, c)
+        classify(parts[0], parts[1] if len(parts) > 1 else "", isa, c)
     out = dict(c)
     out["isa"] = isa
+    return out
+
+
+def function_text(text: str, symbol: str) -> str:
+    """The lines of one function in a .s file: from `symbol:` to its .Lfunc_end/.size."""
+    out, inside = [], False
+    for line in text.splitlines():
+        s = line.strip()
+        if not inside:
+            inside = s == f"{symbol}:"
+            continue
+        if s.startswith(".Lfunc_end") or s.startswith(f".size\t{symbol},") or s.startswith(f".size {symbol},"):
+            break
+        out.append(line)
+    return "\n".join(out)
+
+
+def analyze_file(path: Path) -> dict:
+    out = analyze_text(path.read_text(errors="replace"))
     out["file"] = path.name
     return out
 
@@ -124,4 +148,16 @@ def analyze_dir(dump_dir: Path | None) -> dict:
     packed = sum(v for k, v in agg.items() if k.startswith(("fma_packed", "fma_vector")))
     agg["fma_vector_total"] = packed
     agg["vectorized"] = packed > 0
+    # The .s also holds runtime helpers (expf, powf, fmaf, f16 conversions) that the
+    # linker drops from the shipped .so; their stack accesses and scalar FP ops are
+    # not the dispatch's. Same counts restricted to the dispatch functions only
+    # (cross-checked against objdump of the ELF in elfinspect.py):
+    disp: Counter = Counter()
+    for f in files:
+        text = f.read_text(errors="replace")
+        for sym in re.findall(r"^(\w+_dispatch_\d+\w*):\s*$", text, re.M):
+            for k, v in analyze_text(function_text(text, sym), agg["isa"]).items():
+                if isinstance(v, int) and k != "widest":
+                    disp[k] += v
+    agg["dispatch_only"] = dict(disp)
     return agg
